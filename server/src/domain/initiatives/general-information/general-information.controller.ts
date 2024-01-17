@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { GeneralInformationService } from './general-information.service';
 import { CreateGeneralInformationDto } from './dto/create-general-information.dto';
 import { UpdateGeneralInformationDto } from './dto/update-general-information.dto';
 
-@Controller('general-information')
+@Controller()
 export class GeneralInformationController {
-  constructor(private readonly generalInformationService: GeneralInformationService) {}
+  constructor(
+    private readonly generalInformationService: GeneralInformationService,
+  ) {}
 
   @Post()
   create(@Body() createGeneralInformationDto: CreateGeneralInformationDto) {
@@ -23,8 +33,14 @@ export class GeneralInformationController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGeneralInformationDto: UpdateGeneralInformationDto) {
-    return this.generalInformationService.update(+id, updateGeneralInformationDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateGeneralInformationDto: UpdateGeneralInformationDto,
+  ) {
+    return this.generalInformationService.update(
+      +id,
+      updateGeneralInformationDto,
+    );
   }
 
   @Delete(':id')

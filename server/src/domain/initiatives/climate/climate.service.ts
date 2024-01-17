@@ -1,11 +1,24 @@
-import { Injectable } from '@nestjs/common';
+import {
+  HttpStatus,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { CreateClimateDto } from './dto/create-climate.dto';
 import { UpdateClimateDto } from './dto/update-climate.dto';
+import { ServiceResponseDto } from '../../shared/global-dto/service-response.dto';
+import { ENV } from '../../shared/utils/env.utils';
+import { ResponseUtils } from '../../shared/utils/response.utils';
 
 @Injectable()
 export class ClimateService {
-  create(createClimateDto: CreateClimateDto) {
-    return 'This action adds a new climate';
+  async create(
+    createClimateDto: CreateClimateDto,
+  ): Promise<ServiceResponseDto<string>> {
+    return ResponseUtils.format<string>({
+      message: 'Climate created successfully',
+      status: HttpStatus.CREATED,
+      data: 'Climate created successfully',
+    });
   }
 
   findAll() {

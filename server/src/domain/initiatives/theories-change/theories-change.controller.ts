@@ -1,9 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { TheoriesChangeService } from './theories-change.service';
 import { CreateTheoriesChangeDto } from './dto/create-theories-change.dto';
 import { UpdateTheoriesChangeDto } from './dto/update-theories-change.dto';
 
-@Controller('theories-change')
+@Controller()
 export class TheoriesChangeController {
   constructor(private readonly theoriesChangeService: TheoriesChangeService) {}
 
@@ -23,7 +31,10 @@ export class TheoriesChangeController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTheoriesChangeDto: UpdateTheoriesChangeDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateTheoriesChangeDto: UpdateTheoriesChangeDto,
+  ) {
     return this.theoriesChangeService.update(+id, updateTheoriesChangeDto);
   }
 

@@ -1,9 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { RiskAssessmentService } from './risk-assessment.service';
 import { CreateRiskAssessmentDto } from './dto/create-risk-assessment.dto';
 import { UpdateRiskAssessmentDto } from './dto/update-risk-assessment.dto';
 
-@Controller('risk-assessment')
+@Controller()
 export class RiskAssessmentController {
   constructor(private readonly riskAssessmentService: RiskAssessmentService) {}
 
@@ -23,7 +31,10 @@ export class RiskAssessmentController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRiskAssessmentDto: UpdateRiskAssessmentDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateRiskAssessmentDto: UpdateRiskAssessmentDto,
+  ) {
     return this.riskAssessmentService.update(+id, updateRiskAssessmentDto);
   }
 

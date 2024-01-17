@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { InnovationPortfolioService } from './innovation-portfolio.service';
 import { CreateInnovationPortfolioDto } from './dto/create-innovation-portfolio.dto';
 import { UpdateInnovationPortfolioDto } from './dto/update-innovation-portfolio.dto';
 
-@Controller('innovation-portfolio')
+@Controller()
 export class InnovationPortfolioController {
-  constructor(private readonly innovationPortfolioService: InnovationPortfolioService) {}
+  constructor(
+    private readonly innovationPortfolioService: InnovationPortfolioService,
+  ) {}
 
   @Post()
   create(@Body() createInnovationPortfolioDto: CreateInnovationPortfolioDto) {
@@ -23,8 +33,14 @@ export class InnovationPortfolioController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateInnovationPortfolioDto: UpdateInnovationPortfolioDto) {
-    return this.innovationPortfolioService.update(+id, updateInnovationPortfolioDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateInnovationPortfolioDto: UpdateInnovationPortfolioDto,
+  ) {
+    return this.innovationPortfolioService.update(
+      +id,
+      updateInnovationPortfolioDto,
+    );
   }
 
   @Delete(':id')

@@ -11,16 +11,4 @@ export class InitiativesService {
   findAll() {
     return `This action returns all initiatives`;
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} initiative`;
-  }
-
-  update(id: number, updateInitiativeDto: UpdateInitiativeDto) {
-    return `This action updates a #${id} initiative`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} initiative`;
-  }
 }

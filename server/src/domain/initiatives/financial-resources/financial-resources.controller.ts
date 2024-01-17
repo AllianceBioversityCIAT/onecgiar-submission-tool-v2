@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { FinancialResourcesService } from './financial-resources.service';
 import { CreateFinancialResourceDto } from './dto/create-financial-resource.dto';
 import { UpdateFinancialResourceDto } from './dto/update-financial-resource.dto';
 
-@Controller('financial-resources')
+@Controller()
 export class FinancialResourcesController {
-  constructor(private readonly financialResourcesService: FinancialResourcesService) {}
+  constructor(
+    private readonly financialResourcesService: FinancialResourcesService,
+  ) {}
 
   @Post()
   create(@Body() createFinancialResourceDto: CreateFinancialResourceDto) {
@@ -23,8 +33,14 @@ export class FinancialResourcesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFinancialResourceDto: UpdateFinancialResourceDto) {
-    return this.financialResourcesService.update(+id, updateFinancialResourceDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateFinancialResourceDto: UpdateFinancialResourceDto,
+  ) {
+    return this.financialResourcesService.update(
+      +id,
+      updateFinancialResourceDto,
+    );
   }
 
   @Delete(':id')

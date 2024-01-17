@@ -1,9 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { MeliaService } from './melia.service';
 import { CreateMeliaDto } from './dto/create-melia.dto';
 import { UpdateMeliaDto } from './dto/update-melia.dto';
 
-@Controller('melia')
+@Controller()
 export class MeliaController {
   constructor(private readonly meliaService: MeliaService) {}
 
