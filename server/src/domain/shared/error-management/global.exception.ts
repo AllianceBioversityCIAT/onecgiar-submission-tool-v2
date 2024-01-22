@@ -12,14 +12,14 @@ import { ServerResponseDto } from '../global-dto/server-response.dto';
 @Catch()
 export class GlobalExceptions implements ExceptionFilter {
   private readonly _logger: Logger = new Logger('System');
-  catch(exception: unknown, host: ArgumentsHost) {
+  catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const request = ctx.getRequest();
 
-    const status = HttpStatus.INTERNAL_SERVER_ERROR;
-    const message = (exception as InternalServerErrorException)?.name;
-    const error = (exception as InternalServerErrorException)?.message;
+    const status = exception?.status || HttpStatus.INTERNAL_SERVER_ERROR;
+    const message = exception?.name;
+    const error = exception?.message;
 
     const res: ServerResponseDto<unknown> = {
       message: message,

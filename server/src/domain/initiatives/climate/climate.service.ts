@@ -6,7 +6,6 @@ import {
 import { CreateClimateDto } from './dto/create-climate.dto';
 import { UpdateClimateDto } from './dto/update-climate.dto';
 import { ServiceResponseDto } from '../../shared/global-dto/service-response.dto';
-import { ENV } from '../../shared/utils/env.utils';
 import { ResponseUtils } from '../../shared/utils/response.utils';
 
 @Injectable()
