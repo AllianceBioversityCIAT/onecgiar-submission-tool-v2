@@ -9,7 +9,9 @@ describe('InnovationPortfolioService', () => {
       providers: [InnovationPortfolioService],
     }).compile();
 
-    service = module.get<InnovationPortfolioService>(InnovationPortfolioService);
+    service = module.get<InnovationPortfolioService>(
+      InnovationPortfolioService,
+    );
   });
 
   it('should be defined', () => {

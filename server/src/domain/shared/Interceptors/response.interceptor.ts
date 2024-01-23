@@ -65,8 +65,8 @@ export class ResponseInterceptor implements NestInterceptor {
       this._logger.warn(message);
       this._logger.warn(error);
     } else if (status >= HttpStatus.INTERNAL_SERVER_ERROR) {
-      this._logger.fatal(message);
-      this._logger.fatal(error);
+      this._logger.error(message);
+      this._logger.error(error);
     } else if (
       !ENV.IS_PRODUCTION &&
       ENV.SEE_ALL_LOGS &&

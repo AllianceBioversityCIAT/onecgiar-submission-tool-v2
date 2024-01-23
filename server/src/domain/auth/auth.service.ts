@@ -1,8 +1,4 @@
-import {
-  HttpStatus,
-  Injectable,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { CognitoProfileDto } from '../shared/global-dto/cognito-profile.dto';
 import { ServiceResponseDto } from '../shared/global-dto/service-response.dto';
 import { ResponseUtils } from '../shared/utils/response.utils';

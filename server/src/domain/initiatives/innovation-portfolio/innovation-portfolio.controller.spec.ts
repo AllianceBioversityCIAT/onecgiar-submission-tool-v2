@@ -11,7 +11,9 @@ describe('InnovationPortfolioController', () => {
       providers: [InnovationPortfolioService],
     }).compile();
 
-    controller = module.get<InnovationPortfolioController>(InnovationPortfolioController);
+    controller = module.get<InnovationPortfolioController>(
+      InnovationPortfolioController,
+    );
   });
 
   it('should be defined', () => {

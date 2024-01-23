@@ -1,4 +1,3 @@
-import { HttpStatus } from '@nestjs/common';
 import { ServiceResponseDto } from './service-response.dto';
 
 export class ServerResponseDto<T> extends ServiceResponseDto<T> {

@@ -6,7 +6,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { Request } from 'express';
 import { ENV } from '../utils/env.utils';
 

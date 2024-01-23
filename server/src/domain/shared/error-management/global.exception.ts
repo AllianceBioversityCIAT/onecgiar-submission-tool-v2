@@ -2,7 +2,6 @@ import {
   ExceptionFilter,
   Catch,
   ArgumentsHost,
-  HttpException,
   HttpStatus,
   InternalServerErrorException,
   Logger,
@@ -29,7 +28,7 @@ export class GlobalExceptions implements ExceptionFilter {
       path: request.url,
     };
 
-    this._logger.fatal((exception as InternalServerErrorException)?.stack);
+    this._logger.error((exception as InternalServerErrorException)?.stack);
 
     response.status(status).json(res);
   }

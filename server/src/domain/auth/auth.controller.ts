@@ -1,21 +1,6 @@
-import {
-  Body,
-  Controller,
-  HttpStatus,
-  Post,
-  Req,
-  Request,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import {
-  ApiBasicAuth,
-  ApiBody,
-  ApiDefaultResponse,
-  ApiParam,
-  ApiQuery,
-  ApiResponse,
-} from '@nestjs/swagger';
+import { ApiBasicAuth, ApiDefaultResponse } from '@nestjs/swagger';
 import { SearchRequest } from '../shared/decorators/search-request.decorator';
 import { ResponseUtils } from '../shared/utils/response.utils';
 import { CognitoProfileDto } from '../shared/global-dto/cognito-profile.dto';

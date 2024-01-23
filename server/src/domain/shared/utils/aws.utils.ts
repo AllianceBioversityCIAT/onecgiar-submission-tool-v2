@@ -1,11 +1,9 @@
 import {
-  CognitoBodyDto,
   CognitoConfigDto,
-  CognitoHeaderDto,
   ResponseCognitoDto,
 } from '../global-dto/cognito-config.dto';
 
-export class AWSutil<T> {
+export class AWSutil {
   public static cognito = {
     config: (config: CognitoConfigDto): ResponseCognitoDto => {
       return {

@@ -1,4 +1,9 @@
-import { Module, Res, Scope } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -12,6 +17,7 @@ import { ResponseInterceptor } from './domain/shared/Interceptors/response.inter
 import { GlobalExceptions } from './domain/shared/error-management/global.exception';
 import { AuthModule } from './domain/auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { JwtMiddleware } from './domain/shared/middlewares/jwr.middleware';
 
 @Module({
   imports: [
@@ -50,4 +56,17 @@ import { JwtModule } from '@nestjs/jwt';
     },
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(JwtMiddleware)
+      .exclude({
+        path: 'auth/aws',
+        method: RequestMethod.POST,
+      })
+      .forRoutes({
+        path: '*',
+        method: RequestMethod.ALL,
+      });
+  }
+}

@@ -15,6 +15,17 @@ import { FinancialResourcesModule } from './financial-resources/financial-resour
 @Module({
   controllers: [InitiativesController],
   providers: [InitiativesService],
-  imports: [GeneralInformationModule, ContextModule, TheoriesChangeModule, InnovationPortfolioModule, GenderModule, ClimateModule, MeliaModule, RiskAssessmentModule, PeopleCultureModule, FinancialResourcesModule],
+  imports: [
+    GeneralInformationModule,
+    ContextModule,
+    TheoriesChangeModule,
+    InnovationPortfolioModule,
+    GenderModule,
+    ClimateModule,
+    MeliaModule,
+    RiskAssessmentModule,
+    PeopleCultureModule,
+    FinancialResourcesModule,
+  ],
 })
 export class InitiativesModule {}

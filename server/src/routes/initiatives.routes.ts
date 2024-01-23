@@ -1,4 +1,4 @@
-import { RouteTree, Routes } from '@nestjs/core';
+import { Routes } from '@nestjs/core';
 import { ClimateModule } from '../domain/initiatives/climate/climate.module';
 import { InitiativesModule } from '../domain/initiatives/initiatives.module';
 import { ContextModule } from '../domain/initiatives/context/context.module';
