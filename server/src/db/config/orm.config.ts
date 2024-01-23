@@ -12,7 +12,7 @@ export const dataSourceOptions: DataSourceOptions = {
   entities: [],
   synchronize: false,
   migrationsRun: false,
-  logging: false,
+  logging: true,
   migrations: [`${__dirname}/../../db/migrations/**/*{.ts,.js}`],
   migrationsTableName: 'migrations',
   metadataTableName: 'orm_metadata',

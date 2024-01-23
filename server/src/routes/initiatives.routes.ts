@@ -1,15 +1,15 @@
 import { Routes } from '@nestjs/core';
-import { ClimateModule } from '../domain/initiatives/climate/climate.module';
-import { InitiativesModule } from '../domain/initiatives/initiatives.module';
-import { ContextModule } from '../domain/initiatives/context/context.module';
-import { FinancialResourcesModule } from '../domain/initiatives/financial-resources/financial-resources.module';
-import { GenderModule } from '../domain/initiatives/gender/gender.module';
-import { GeneralInformationModule } from '../domain/initiatives/general-information/general-information.module';
-import { InnovationPortfolioModule } from '../domain/initiatives/innovation-portfolio/innovation-portfolio.module';
-import { MeliaModule } from '../domain/initiatives/melia/melia.module';
-import { PeopleCultureModule } from '../domain/initiatives/people-culture/people-culture.module';
-import { RiskAssessmentModule } from '../domain/initiatives/risk-assessment/risk-assessment.module';
-import { TheoriesChangeModule } from '../domain/initiatives/theories-change/theories-change.module';
+import { ClimateModule } from '../domain/entities/climate/climate.module';
+import { EntityModule } from '../domain/entities/entity.module';
+import { ContextModule } from '../domain/entities/context/context.module';
+import { FinancialResourcesModule } from '../domain/entities/financial-resources/financial-resources.module';
+import { GenderModule } from '../domain/entities/gender/gender.module';
+import { GeneralInformationModule } from '../domain/entities/general-information/general-information.module';
+import { InnovationPortfolioModule } from '../domain/entities/innovation-portfolio/innovation-portfolio.module';
+import { MeliaModule } from '../domain/entities/melia/melia.module';
+import { RiskAssessmentModule } from '../domain/entities/risk-assessment/risk-assessment.module';
+import { TheoryOfChangeModule } from '../domain/entities/theory-of-change/theory-of-change.module';
+import { PeopleAndCultureModule } from '../domain/entities/people-and-culture/people-and-culture.module';
 
 const children: Routes = [
   {
@@ -41,23 +41,23 @@ const children: Routes = [
     module: MeliaModule,
   },
   {
-    path: 'people-culture',
-    module: PeopleCultureModule,
+    path: 'people-and-culture',
+    module: PeopleAndCultureModule,
   },
   {
     path: 'risk-assessment',
     module: RiskAssessmentModule,
   },
   {
-    path: 'theories-change',
-    module: TheoriesChangeModule,
+    path: 'theories-of-change',
+    module: TheoryOfChangeModule,
   },
 ];
 
-export const InitiativesRoustes: Routes = [
+export const EntityRoustes: Routes = [
   {
     path: 'initiatives',
-    module: InitiativesModule,
+    module: EntityModule,
     children: children,
   },
 ];

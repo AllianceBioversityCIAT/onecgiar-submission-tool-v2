@@ -1,3 +1,4 @@
+import { ClarisaModule } from './tools/clarisa/clarisa.module';
 import {
   MiddlewareConsumer,
   Module,
@@ -9,7 +10,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from './db/config/orm.config';
-import { InitiativesModule } from './domain/initiatives/initiatives.module';
+import { EntityModule } from './domain/entities/entity.module';
 import { APP_FILTER, APP_INTERCEPTOR, RouterModule } from '@nestjs/core';
 import { MainRoutes } from './routes/main.routes';
 import { LoggingInterceptor } from './domain/shared/Interceptors/logging.interceptor';
@@ -21,6 +22,7 @@ import { JwtMiddleware } from './domain/shared/middlewares/jwr.middleware';
 
 @Module({
   imports: [
+    ClarisaModule,
     RouterModule.register(MainRoutes),
     ConfigModule.forRoot({
       isGlobal: true,
@@ -36,7 +38,7 @@ import { JwtMiddleware } from './domain/shared/middlewares/jwr.middleware';
         signOptions: { expiresIn: configService.get<string>('JWT_EXPIRES_IN') },
       }),
     }),
-    InitiativesModule,
+    EntityModule,
     AuthModule,
   ],
   controllers: [AppController],
