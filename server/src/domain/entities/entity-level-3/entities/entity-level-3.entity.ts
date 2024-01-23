@@ -1,1 +1,55 @@
-export class EntityLevel3 {}
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { EntityLevel2 } from '../../entity-level-2/entities/entity-level-2.entity';
+
+@Entity('entities_level_3')
+export class EntityLevel3 {
+  @PrimaryGeneratedColumn({
+    type: 'bigint',
+    name: 'entities_level_3_id',
+    unsigned: true,
+  })
+  entities_level_3_id: number;
+
+  @Column({
+    type: 'text',
+    name: 'name',
+    nullable: true,
+  })
+  name!: string;
+
+  @Column({
+    type: 'text',
+    name: 'description',
+    nullable: true,
+  })
+  description!: string;
+
+  @Column({
+    type: 'text',
+    name: 'official_code',
+    nullable: true,
+  })
+  official_code!: string;
+
+  @Column({
+    type: 'bigint',
+    name: 'entities_level_2_id',
+    nullable: false,
+  })
+  entities_level_2_id: number;
+
+  //--- relations
+
+  @ManyToOne(
+    () => EntityLevel2,
+    (entity_level_2) => entity_level_2.entities_level_3,
+  )
+  @JoinColumn({ name: 'entities_level_2_id' })
+  entities_level_2!: EntityLevel2;
+}
