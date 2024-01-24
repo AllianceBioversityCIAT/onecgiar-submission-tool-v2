@@ -31,6 +31,13 @@ export const routes: Routes = [
           import(
             '../domain/initiatives/pages/initiatives-list/initiatives-list.component'
           ).then((c) => c.InitiativesListComponent),
+      },
+      {
+        path: 'initiative',
+        loadComponent: () =>
+          import(
+            '../domain/initiatives/pages/initiative/initiative.component'
+          ).then((c) => c.InitiativeComponent),
         children: [
           {
             path: '',
@@ -52,13 +59,6 @@ export const routes: Routes = [
               ).then((c) => c.ContextComponent),
           },
         ],
-      },
-      {
-        path: 'initiative',
-        loadComponent: () =>
-          import(
-            '../domain/initiatives/pages/initiative/initiative.component'
-          ).then((c) => c.InitiativeComponent),
       },
       {
         path: 'about',
