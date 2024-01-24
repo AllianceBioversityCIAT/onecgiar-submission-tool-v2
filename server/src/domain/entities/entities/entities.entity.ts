@@ -14,7 +14,6 @@ export class Entities {
   @PrimaryGeneratedColumn({
     type: 'bigint',
     name: 'entities_id',
-    unsigned: true,
   })
   entities_id: number;
 

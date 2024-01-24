@@ -14,7 +14,6 @@ export class EntityLevel2 {
   @PrimaryGeneratedColumn({
     type: 'bigint',
     name: 'entities_level_2_id',
-    unsigned: true,
   })
   entities_level_2_id: number;
 

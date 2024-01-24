@@ -6,7 +6,6 @@ export class ClarisaCgiarEntityType {
   @Column({
     type: 'bigint',
     name: 'code',
-    unsigned: true,
     primary: true,
   })
   code: number;

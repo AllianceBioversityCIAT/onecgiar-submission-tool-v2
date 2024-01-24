@@ -21,6 +21,7 @@ export const dataSourceOptions: DataSourceOptions = {
   metadataTableName: 'orm_metadata',
   extra: {
     namedPlaceholders: true,
+    charset: 'utf8mb4_unicode_ci',
   },
 };
 
