@@ -19,6 +19,6 @@ export class ClarisaCgiarEntityType {
 
   //--- relations
 
-  @OneToMany(() => Entities, (entities) => entities.entity_type)
-  entities!: Entities[];
+  @OneToMany(() => Entities, (entities) => entities.entity_type_obj)
+  entities_array!: Entities[];
 }

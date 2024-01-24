@@ -56,8 +56,8 @@ export class Entities {
 
   @ManyToOne(() => ClarisaCgiarEntityType, (entity_type) => entity_type.code)
   @JoinColumn({ name: 'entity_type_id' })
-  entity_type: ClarisaCgiarEntityType;
+  entity_type_obj: ClarisaCgiarEntityType;
 
-  @OneToMany(() => EntityLevel2, (entity_level_2) => entity_level_2.entities)
-  entities_level_2!: EntityLevel2[];
+  @OneToMany(() => EntityLevel2, (entity_level_2) => entity_level_2.entity_obj)
+  entity_level_2_array!: EntityLevel2[];
 }

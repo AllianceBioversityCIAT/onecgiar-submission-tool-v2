@@ -40,20 +40,20 @@ export class EntityLevel2 {
 
   @Column({
     type: 'bigint',
-    name: 'entities_id',
+    name: 'entity_id',
     nullable: false,
   })
-  entities_id: number;
+  entity_id: number;
 
   //--- relations
 
-  @ManyToOne(() => Entities, (entities) => entities.entities_level_2)
-  @JoinColumn({ name: 'entities_id' })
-  entities: Entities;
+  @ManyToOne(() => Entities, (entities) => entities.entity_level_2_array)
+  @JoinColumn({ name: 'entity_id' })
+  entity_obj: Entities;
 
   @OneToMany(
     () => EntityLevel3,
-    (entity_level_3) => entity_level_3.entities_level_2,
+    (entity_level_3) => entity_level_3.entity_level_2_obj,
   )
-  entities_level_3: EntityLevel3[];
+  entity_level_3_array: EntityLevel3[];
 }

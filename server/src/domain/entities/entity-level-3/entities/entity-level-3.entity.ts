@@ -38,17 +38,17 @@ export class EntityLevel3 {
 
   @Column({
     type: 'bigint',
-    name: 'entities_level_2_id',
+    name: 'entity_level_2_id',
     nullable: false,
   })
-  entities_level_2_id: number;
+  entity_level_2_id: number;
 
   //--- relations
 
   @ManyToOne(
     () => EntityLevel2,
-    (entity_level_2) => entity_level_2.entities_level_3,
+    (entity_level_2) => entity_level_2.entity_level_3_array,
   )
-  @JoinColumn({ name: 'entities_level_2_id' })
-  entities_level_2!: EntityLevel2;
+  @JoinColumn({ name: 'entity_level_2_id' })
+  entity_level_2_obj!: EntityLevel2;
 }
