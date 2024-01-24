@@ -8,7 +8,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   imports: [RouterModule, NavbarComponent],
   template: `
     <app-navbar></app-navbar>
-    <div class="text-primary">initiatives.component</div>
     <router-outlet />
   `,
   styles: `

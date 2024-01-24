@@ -1,6 +1,6 @@
 <div class="option">name: {{option.label}}</div>
 @for (itemOption of option.children; track $index) {
 <div class="sub_options" style="padding-left: 10px !important;">
-  <app-sidebar-option [option]="itemOption"></app-sidebar-option>
+  <app-sidebar-option [option]="itemOption" />
 </div>
 }
