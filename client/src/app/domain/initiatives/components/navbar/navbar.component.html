@@ -1,5 +1,11 @@
-<nav class="flex align-items-center justify-content-between p-3 w-full">
-  <p class="m-0 text-sm">OST Logo</p>
+<nav
+  class="flex align-items-center justify-content-between p-3 w-full bg-bluegray-900 text-white"
+>
+  <img
+    src="/assets/cgiar_logo.svg"
+    alt="CGIAR System Organization"
+    class="w-3rem text-primary"
+  />
 
   <div class="flex align-items-center justify-content-between gap-4">
     <div class="flex align-items-center border">
@@ -23,7 +29,7 @@
 </nav>
 
 <div
-  class="sticky top-0 px-2 py-2 flex gap-3 align-items-center w-full overflow-y-scroll border-bottom-1 border-gray-300 bg-white"
+  class="sticky top-0 px-2 py-2 flex gap-3 align-items-center w-full overflow-y-auto border-bottom-1 border-gray-300 bg-bluegray-900 text-white"
 >
   @for (navLink of navbarLinks; track navLink.name) {
     <p
