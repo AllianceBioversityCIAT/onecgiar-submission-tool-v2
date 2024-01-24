@@ -5,7 +5,11 @@ import { RouterModule } from '@angular/router';
   selector: 'app-initiatives',
   standalone: true,
   imports: [RouterModule],
-  templateUrl: './initiatives.component.html',
-  styleUrl: './initiatives.component.scss',
+  template: `<div>hello</div>`,
+  styles: `
+  div{
+    color: red;
+  }
+  `,
 })
 export class InitiativesComponent {}

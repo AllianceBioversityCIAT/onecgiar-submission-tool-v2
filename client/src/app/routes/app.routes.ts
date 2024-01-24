@@ -44,6 +44,13 @@ export const routes: Routes = [
                 '../domain/initiatives/pages/initiative/pages/overview/overview.component'
               ).then((c) => c.OverviewComponent),
           },
+          {
+            path: 'context',
+            loadComponent: () =>
+              import(
+                '../domain/initiatives/pages/initiative/pages/context/context.component'
+              ).then((c) => c.ContextComponent),
+          },
         ],
       },
       {
