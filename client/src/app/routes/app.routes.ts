@@ -11,4 +11,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('@auth/login/login.component').then((c) => c.LoginComponent),
   },
+  {
+    path: 'authentication/:awsToken',
+    loadComponent: () =>
+      import('@auth/authentication/authentication.component').then(
+        (c) => c.AuthenticationComponent,
+      ),
+  },
 ];
