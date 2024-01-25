@@ -1,1 +1,42 @@
-<p class="h-screen">about works!</p>
+<section class="flex flex-column py-7 px-5 sm:px-3">
+  <div class="flex flex-column align-items-center w-full py-6">
+    <h1 class="font-normal pb-5 text-center text-5xl md:text-6xl lg:text-7xl">
+      <span class="font-bold"> One CGIAR </span>
+      Submission Tool
+    </h1>
+    <p class="text-base text-center w-full md:w-9 lg:w-8 xl:w-6">
+      Unlock the power of collaborative innovation with our web-based platform
+      designed exclusively for CGIAR researchers and partners. The One CGIAR
+      Submission Tool is a cutting-edge solution crafted to streamline the
+      proposal submission process, ensuring seamless alignment with the CGIAR
+      mission and vision.
+    </p>
+  </div>
+
+  <div class="my-8 mx-auto w-full" style="max-width: 854px">
+    <div class="w-full mb-6">
+      <h2 class="text-3xl font-medium">Explore and experience</h2>
+      <h2 class="text-3xl font-semibold">One CGIAR Submission Tool</h2>
+    </div>
+
+    <div class="flex justify-content-between gap-3 flex-column">
+      <div class="flex flex-column border-1 border-round p-3 gap-2">
+        <h1 class="text-base">Effortless Proposal Submission</h1>
+
+        <p class="text-sm">
+          Submit your groundbreaking research proposals with ease, supported by
+          a user-friendly interface that simplifies the submission process.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        @for (feature of featuresData; track feature.title) {
+          <div class="flex flex-column border-1 border-round p-3 gap-2">
+            <h1 class="text-base">{{ feature.title }}</h1>
+            <p class="text-sm">{{ feature.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

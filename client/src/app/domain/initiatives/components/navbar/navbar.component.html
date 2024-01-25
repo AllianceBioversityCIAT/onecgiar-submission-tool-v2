@@ -1,5 +1,6 @@
 <nav
   class="flex align-items-center justify-content-between p-3 w-full bg-bluegray-900 text-white"
+  [ngClass]="{ 'sticky top-0': !isLogged }"
 >
   <img
     src="/assets/cgiar_logo.svg"
@@ -8,34 +9,42 @@
   />
 
   <div class="flex align-items-center justify-content-between gap-4">
-    <div class="flex align-items-center border">
-      <p-avatar
-        label="V"
-        styleClass="mr-2"
-        size="normal"
-        shape="circle"
-        [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"
-      ></p-avatar>
+    @if (isLogged) {
+      <div class="flex align-items-center border">
+        <p-avatar
+          label="V"
+          styleClass="mr-2"
+          size="normal"
+          shape="circle"
+          [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"
+        ></p-avatar>
 
-      <p class="m-0 text-sm">Prueba's name</p>
-    </div>
+        <p class="m-0 text-sm">Prueba's name</p>
+      </div>
+    }
 
     <div
-      class="text-sm py-2 px-3 m-0 border-round cursor-pointer bg-primary hover:bg-bluegray-100 hover:transition-colors hover:text-white"
+      class="text-sm py-2 px-3 m-0 border-round cursor-pointer bg-primary hover:bg-white hover:transition-colors hover:text-primary"
     >
-      Logout
+      @if (isLogged) {
+        Logout
+      } @else {
+        Login
+      }
     </div>
   </div>
 </nav>
 
-<div
-  class="sticky top-0 px-2 py-2 flex gap-3 align-items-center w-full overflow-y-auto border-bottom-1 border-gray-300 bg-bluegray-900 text-white"
->
-  @for (navLink of navbarLinks; track navLink.name) {
-    <p
-      class="text-sm p-2 m-0 border-round min-w-max cursor-pointer hover:bg-primary hover:transition-colors hover:text-white"
-    >
-      {{ navLink.name }}
-    </p>
-  }
-</div>
+@if (isLogged) {
+  <div
+    class="sticky top-0 px-2 py-2 flex gap-3 align-items-center w-full overflow-y-auto bg-bluegray-900 text-white"
+  >
+    @for (navLink of navbarLinks; track navLink.name) {
+      <p
+        class="text-sm p-2 m-0 border-round min-w-max cursor-pointer hover:bg-primary hover:transition-colors hover:text-white"
+      >
+        {{ navLink.name }}
+      </p>
+    }
+  </div>
+}

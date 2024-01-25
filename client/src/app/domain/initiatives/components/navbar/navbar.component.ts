@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
@@ -7,10 +8,11 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
   standalone: true,
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
-  imports: [AvatarModule, AvatarGroupModule],
+  imports: [AvatarModule, AvatarGroupModule, NgClass],
 })
 export class NavbarComponent {
   isNavbarHidden = false;
+  isLogged = true;
   navbarLinks = [
     {
       name: 'Initiatives',
@@ -26,6 +28,10 @@ export class NavbarComponent {
     },
     {
       name: 'Admin Panel',
+      url: '/about',
+    },
+    {
+      name: 'About',
       url: '/about',
     },
   ];
