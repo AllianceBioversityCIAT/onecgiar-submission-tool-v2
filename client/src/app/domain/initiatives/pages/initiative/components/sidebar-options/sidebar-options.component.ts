@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { SidebarOptionComponent } from '../sidebar-option/sidebar-option.component';
 
 @Component({
-  selector: 'app-sidebar-options',
+  selector: 'div[app-sidebar-options]',
   standalone: true,
   imports: [SidebarOptionComponent],
   templateUrl: './sidebar-options.component.html',

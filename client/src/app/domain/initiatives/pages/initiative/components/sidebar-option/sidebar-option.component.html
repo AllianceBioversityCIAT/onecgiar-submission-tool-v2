@@ -1,6 +1,7 @@
-<div class="text-white cursor-pointer">{{option.label}}</div>
-@for (itemOption of option.children; track $index) {
-<div class="sub_options" style="padding-left: 10px !important;">
-  <app-sidebar-option [option]="itemOption" />
+<div class="cursor-pointer bg-primary border-round-sm font-bold p-3 mb-2">{{option.label}}</div>
+<div class="flex flex-column pl-4">
+  @for (itemOption of option.children; track $index) {
+  <div app-sidebar-option [option]="itemOption">
+  </div>
+  }
 </div>
-}
