@@ -1,5 +1,16 @@
-<div class="cursor-pointer bg-primary border-round-sm font-bold p-3 mb-2">{{option.label}}</div>
-<div class="flex flex-column pl-4">
+<div class="
+  cursor-pointer text-white border-round-sm text-sm p-1 pl-2 mb-2
+  flex justify-content-between	align-items-center
+  transition-all transition-duration-500 hover:surface-700
+  ">
+  {{option.label}}
+  @if (option?.children?.length) {
+  <i class="material-icons-round">
+    expand_more
+  </i>
+  }
+</div>
+<div class="flex flex-column pl-2">
   @for (itemOption of option.children; track $index) {
   <div app-sidebar-option [option]="itemOption">
   </div>
