@@ -6,7 +6,7 @@ import { SidebarOptionComponent } from '../sidebar-option/sidebar-option.compone
   standalone: true,
   imports: [SidebarOptionComponent],
   templateUrl: './sidebar-options.component.html',
-  styleUrl: './sidebar-options.component.scss',
+  styles: ``,
 })
 export class SidebarOptionsComponent {
   @Input() options: any;

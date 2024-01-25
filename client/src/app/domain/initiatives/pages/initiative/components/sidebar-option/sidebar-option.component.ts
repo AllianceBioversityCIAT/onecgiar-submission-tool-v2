@@ -12,13 +12,13 @@ import { Component, Input } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './sidebar-option.component.html',
-  styleUrl: './sidebar-option.component.scss',
+  styles: ``,
   animations: [
     trigger('expand', [
       state('expand_more', style({ height: '*' })),
       state('expand_less', style({ height: '0' })),
-      transition('expand_less => expand_more', animate('.3s ease-in')),
-      transition('expand_more => expand_less', animate('.3s ease-out')),
+      transition('expand_less => expand_more', animate('.1s ease-in')),
+      transition('expand_more => expand_less', animate('.1s ease-out')),
     ]),
   ],
 })

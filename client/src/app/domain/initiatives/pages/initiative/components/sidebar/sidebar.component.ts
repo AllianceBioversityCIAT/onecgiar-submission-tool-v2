@@ -7,7 +7,7 @@ import { MenuModule } from 'primeng/menu';
   standalone: true,
   imports: [SidebarOptionsComponent, MenuModule],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss',
+  styles: ``,
 })
 export class SidebarComponent {
   options = [

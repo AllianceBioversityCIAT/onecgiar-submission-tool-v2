@@ -13,7 +13,7 @@
 
   }
 </div>
-<div #ref class="flex flex-column pl-2 suboptions"
+<div #ref class="flex flex-column pl-2 overflow-hidden"
   [@expand]="option?.children?.length ? (option?.expand?'expand_more':'expand_less') : null">
   @for (itemOption of option.children; track $index) {
   <div app-sidebar-option [option]="itemOption">
