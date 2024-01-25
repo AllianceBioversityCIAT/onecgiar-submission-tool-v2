@@ -9,15 +9,20 @@ export const dataSourceOptions: DataSourceOptions = {
   username: env.DB_USER_NAME,
   password: env.DB_USER_PASS,
   database: env.DB_NAME,
-  entities: [],
+  entities: [
+    `${__dirname}/../../domain/**/*.entity{.ts,.js}`,
+    `${__dirname}/../../tools/clarisa/**/*.entity{.ts,.js}`,
+  ],
   synchronize: false,
   migrationsRun: false,
+  bigNumberStrings: false,
   logging: false,
   migrations: [`${__dirname}/../../db/migrations/**/*{.ts,.js}`],
   migrationsTableName: 'migrations',
   metadataTableName: 'orm_metadata',
   extra: {
     namedPlaceholders: true,
+    charset: 'utf8mb4_unicode_ci',
   },
 };
 
