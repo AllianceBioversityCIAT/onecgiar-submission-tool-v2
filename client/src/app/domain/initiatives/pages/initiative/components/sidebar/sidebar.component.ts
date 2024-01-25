@@ -1,26 +1,35 @@
-import { Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Signal,
+  computed,
+  inject,
+} from '@angular/core';
 import { SidebarOptionsComponent } from '../sidebar-options/sidebar-options.component';
 import { MenuModule } from 'primeng/menu';
 import { Router } from '@angular/router';
+import { SidebarOption } from '../../../../../shared/interfaces/ui.interface';
+import { InitiativeService } from '../../services/initiative.service';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   imports: [SidebarOptionsComponent, MenuModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sidebar.component.html',
   styles: ``,
 })
 export class SidebarComponent {
   router = inject(Router);
-  options = [
+  initiativeSE = inject(InitiativeService);
+  options: Signal<SidebarOption[]> = computed(() => [
     {
       label: 'Overview',
-      route: 'overview',
+      route: this.initiativeSE.currentInitiativeId() + 'overview',
       inUnderConstruction: false,
     },
     {
       label: '2. Context',
-      route: 'context',
       children: [
         {
           label: '2.1 Challenge Statement',
@@ -71,5 +80,9 @@ export class SidebarComponent {
         },
       ],
     },
-  ];
+  ]);
+
+  chageee() {
+    this.initiativeSE.currentInitiativeId.set('2');
+  }
 }

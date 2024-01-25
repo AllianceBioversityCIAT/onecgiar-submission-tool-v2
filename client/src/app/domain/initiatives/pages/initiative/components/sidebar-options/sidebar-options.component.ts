@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Signal, computed, signal } from '@angular/core';
 import { SidebarOptionComponent } from '../sidebar-option/sidebar-option.component';
+import { SidebarOption } from '../../../../../shared/interfaces/ui.interface';
 
 @Component({
   selector: 'div[app-sidebar-options]',
@@ -9,5 +10,5 @@ import { SidebarOptionComponent } from '../sidebar-option/sidebar-option.compone
   styles: ``,
 })
 export class SidebarOptionsComponent {
-  @Input() options: any;
+  @Input() options: Signal<SidebarOption[]> = computed(() => []);
 }
