@@ -33,7 +33,7 @@ export const routes: Routes = [
           ).then((c) => c.InitiativesListComponent),
       },
       {
-        path: 'initiative',
+        path: 'initiative/:initiativeId',
         loadComponent: () =>
           import(
             '../domain/initiatives/pages/initiative/initiative.component'
