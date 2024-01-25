@@ -6,9 +6,10 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { EntityLevel2 } from '../../entity-level-2/entities/entity-level-2.entity';
+import { AuditableEntity } from '../../../shared/global-dto/auditable.entity';
 
 @Entity('entities_level_3')
-export class EntityLevel3 {
+export class EntityLevel3 extends AuditableEntity {
   @PrimaryGeneratedColumn({
     type: 'bigint',
     name: 'entities_level_3_id',

@@ -8,9 +8,10 @@ import {
 } from 'typeorm';
 import { ClarisaCgiarEntityType } from '../../../tools/clarisa/clarisa-cgiar-entity-types/entities/clarisa-cgiar-entity-type.entity';
 import { EntityLevel2 } from '../entity-level-2/entities/entity-level-2.entity';
+import { AuditableEntity } from '../../shared/global-dto/auditable.entity';
 
 @Entity('entities')
-export class Entities {
+export class Entities extends AuditableEntity {
   @PrimaryGeneratedColumn({
     type: 'bigint',
     name: 'entities_id',
