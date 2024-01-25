@@ -7,14 +7,15 @@ import {
 } from 'typeorm';
 import { EntityLevel2 } from '../../entity-level-2/entities/entity-level-2.entity';
 import { AuditableEntity } from '../../../shared/global-dto/auditable.entity';
+import { ClarisaCgiarSubEntityType } from '../../../../tools/clarisa/clarisa-cgiar-sub-entity-types/entities/clarisa-cgiar-sub-entity-type.entity';
 
 @Entity('entities_level_3')
 export class EntityLevel3 extends AuditableEntity {
   @PrimaryGeneratedColumn({
     type: 'bigint',
-    name: 'entities_level_3_id',
+    name: 'entity_level_3_id',
   })
-  entities_level_3_id: number;
+  entity_level_3_id: number;
 
   @Column({
     type: 'text',
@@ -44,7 +45,21 @@ export class EntityLevel3 extends AuditableEntity {
   })
   entity_level_2_id: number;
 
+  @Column({
+    type: 'bigint',
+    name: 'clarisa_cgiar_sub_entity_type_id',
+    nullable: false,
+  })
+  sub_entity_type_id: number;
+
   //--- relations
+
+  @ManyToOne(
+    () => ClarisaCgiarSubEntityType,
+    (sub_entity_type) => sub_entity_type.entities_level_3_array,
+  )
+  @JoinColumn({ name: 'clarisa_cgiar_sub_entity_type_id' })
+  sub_entity_type_obj: ClarisaCgiarSubEntityType;
 
   @ManyToOne(
     () => EntityLevel2,

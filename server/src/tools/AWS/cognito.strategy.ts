@@ -8,11 +8,11 @@ import {
 } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-custom';
-import { AWSutil } from '../domain/shared/utils/aws.utils';
+import { AWSutil } from '../../domain/shared/utils/aws.utils';
 import { firstValueFrom, map } from 'rxjs';
-import { ExceptionMessage } from '../domain/shared/enums/exception-message.enum';
-import { ResponseCognitoDto } from '../domain/shared/global-dto/cognito-config.dto';
-import { CognitoProfileDto } from '../domain/shared/global-dto/cognito-profile.dto';
+import { ExceptionMessage } from '../../domain/shared/enums/exception-message.enum';
+import { ResponseCognitoDto } from '../../domain/shared/global-dto/cognito-config.dto';
+import { CognitoProfileDto } from '../../domain/shared/global-dto/cognito-profile.dto';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()

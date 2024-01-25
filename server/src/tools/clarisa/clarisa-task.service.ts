@@ -1,9 +1,9 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
-import { Clarisa } from '../clarisa/clarisa.connection';
+import { Clarisa } from './clarisa.connection';
 import { ConfigService } from '@nestjs/config';
-import { ClarisaCgiarEntityType } from '../clarisa/clarisa-cgiar-entity-types/entities/clarisa-cgiar-entity-type.entity';
-import { DataSource, In, Repository } from 'typeorm';
+import { ClarisaCgiarEntityType } from './clarisa-cgiar-entity-types/entities/clarisa-cgiar-entity-type.entity';
+import { DataSource, Repository } from 'typeorm';
 import { ResultsSdgTargetRepository } from '../../db/repositories/clarisa-cgiar-entity-type.repository';
 
 @Injectable()
@@ -13,8 +13,7 @@ export class ClarisaTaskService {
   constructor(
     private readonly _http: HttpService,
     private readonly _configService: ConfigService,
-    private readonly dataSource: DataSource,
-
+    private dataSource: DataSource,
     private readonly _resultsSdgTarget: ResultsSdgTargetRepository,
   ) {
     this.clarisa = new Clarisa(this._http, {
@@ -31,34 +30,30 @@ export class ClarisaTaskService {
     };
   }
 
-  private cloneData(
-    path: string,
-    repository: Repository<any>,
-    Entity: Function,
-  ) {
+  private cloneData(path: string, Entity: Function) {
     const mss = this.ClarisaMessage(Entity);
     this._logger.log(mss.START);
     this.clarisa.get(path).then((res) => {
-      repository
-        .save(res)
-        .then(() => {
-          this._logger.log(mss.OK);
-        })
-        .catch((err) => {
-          this._logger.log(mss.ERROR);
-          this._logger.error(err);
-        })
-        .finally(() => {
-          this._logger.log(mss.FINALLY);
-        });
+      this.dataSource.transaction(async (manager) => {
+        manager
+          .getRepository(Entity)
+          .save(res)
+          .then(() => {
+            this._logger.log(mss.OK);
+          })
+          .catch((err) => {
+            this._logger.error(mss.ERROR);
+            this._logger.error(err);
+          })
+          .finally(() => {
+            this._logger.log(mss.FINALLY);
+          });
+      });
     });
   }
 
-  bootstrap() {
-    this.cloneData(
-      'cgiar-entity-types',
-      this._resultsSdgTarget,
-      ClarisaCgiarEntityType,
-    );
+  async bootstrap() {
+    this._logger.verbose(`Start saving data of ${ClarisaTaskService.name}`);
+    await this.cloneData('cgiar-entity-types', ClarisaCgiarEntityType);
   }
 }

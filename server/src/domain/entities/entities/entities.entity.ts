@@ -14,9 +14,9 @@ import { AuditableEntity } from '../../shared/global-dto/auditable.entity';
 export class Entities extends AuditableEntity {
   @PrimaryGeneratedColumn({
     type: 'bigint',
-    name: 'entities_id',
+    name: 'entity_id',
   })
-  entities_id: number;
+  entity_id: number;
 
   @Column({
     type: 'text',
@@ -48,15 +48,18 @@ export class Entities extends AuditableEntity {
 
   @Column({
     type: 'bigint',
-    name: 'entity_type_id',
+    name: 'clarisa_cgiar_entity_type_id',
     nullable: false,
   })
   entity_type_id: number;
 
   //--- relations
 
-  @ManyToOne(() => ClarisaCgiarEntityType, (entity_type) => entity_type.code)
-  @JoinColumn({ name: 'entity_type_id' })
+  @ManyToOne(
+    () => ClarisaCgiarEntityType,
+    (entity_type) => entity_type.entities_array,
+  )
+  @JoinColumn({ name: 'clarisa_cgiar_entity_type_id' })
   entity_type_obj: ClarisaCgiarEntityType;
 
   @OneToMany(() => EntityLevel2, (entity_level_2) => entity_level_2.entity_obj)

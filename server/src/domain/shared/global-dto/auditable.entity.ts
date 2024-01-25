@@ -5,6 +5,7 @@ export abstract class AuditableEntity {
     type: 'timestamp',
     name: 'created_at',
     nullable: false,
+    select: false,
   })
   created_at: Date;
 
@@ -12,6 +13,7 @@ export abstract class AuditableEntity {
     type: 'bigint',
     name: 'created_by',
     nullable: true,
+    select: false,
   })
   created_by: number;
 
@@ -19,6 +21,7 @@ export abstract class AuditableEntity {
     type: 'timestamp',
     name: 'updated_at',
     nullable: true,
+    select: false,
   })
   updated_at: Date;
 
@@ -26,6 +29,7 @@ export abstract class AuditableEntity {
     type: 'bigint',
     name: 'updated_by',
     nullable: true,
+    select: false,
   })
   updated_by: number;
 
@@ -34,6 +38,7 @@ export abstract class AuditableEntity {
     type: 'boolean',
     nullable: false,
     default: true,
+    select: false,
   })
   is_active: boolean;
 }

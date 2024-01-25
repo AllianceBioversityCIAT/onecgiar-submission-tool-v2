@@ -1,3 +1,4 @@
+import { CronJobModule } from './tools/cron-job/cron-job.module';
 import { ClarisaModule } from './tools/clarisa/clarisa.module';
 import {
   MiddlewareConsumer,
@@ -22,6 +23,7 @@ import { JwtMiddleware } from './domain/shared/middlewares/jwr.middleware';
 
 @Module({
   imports: [
+    CronJobModule,
     ClarisaModule,
     RouterModule.register(MainRoutes),
     ConfigModule.forRoot({
@@ -59,16 +61,15 @@ import { JwtMiddleware } from './domain/shared/middlewares/jwr.middleware';
   ],
 })
 export class AppModule implements NestModule {
+  //TODO: Implement when the user tables already exist.
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(JwtMiddleware)
-      .exclude({
-        path: 'auth/aws',
-        method: RequestMethod.POST,
-      })
-      .forRoutes({
+    consumer.apply(JwtMiddleware); /*.exclude({
+      path: 'auth/aws',
+      method: RequestMethod.POST,
+    });
+    .forRoutes({
         path: '*',
         method: RequestMethod.ALL,
-      });
+      })*/
   }
 }
