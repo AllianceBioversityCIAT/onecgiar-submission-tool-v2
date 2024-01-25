@@ -6,11 +6,12 @@ import {
   trigger,
 } from '@angular/animations';
 import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'div[app-sidebar-option]',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './sidebar-option.component.html',
   styles: ``,
   animations: [

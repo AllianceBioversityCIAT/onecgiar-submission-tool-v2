@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SidebarOptionsComponent } from '../sidebar-options/sidebar-options.component';
 import { MenuModule } from 'primeng/menu';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,96 +11,65 @@ import { MenuModule } from 'primeng/menu';
   styles: ``,
 })
 export class SidebarComponent {
+  router = inject(Router);
   options = [
     {
       label: 'Overview',
-      icon: 'home',
       route: 'overview',
       inUnderConstruction: false,
-      children: [
-        {
-          label: '1A',
-          icon: 'home',
-          route: 'overview',
-          inUnderConstruction: false,
-        },
-        {
-          label: '1B',
-          icon: 'home',
-          route: 'overview',
-          inUnderConstruction: false,
-          children: [
-            {
-              label: '1B.|',
-              icon: 'home',
-              route: 'overview',
-              inUnderConstruction: false,
-            },
-            {
-              label: '1B.||',
-              icon: 'home',
-              route: 'overview',
-              inUnderConstruction: false,
-            },
-          ],
-        },
-      ],
     },
     {
-      label: 'Context',
-      icon: 'home',
+      label: '2. Context',
       route: 'context',
       children: [
         {
-          label: '2A',
-          icon: 'home',
+          label: '2.1 Challenge Statement',
           route: 'overview',
-          inUnderConstruction: false,
         },
         {
-          label: '2B',
-          icon: 'home',
+          label: '2.2 Measurable three-year (End of Initiative) outcomes',
           route: 'overview',
-          inUnderConstruction: false,
+        },
+        {
+          label: '2.3 Comparative Advantage',
+          route: 'overview',
+          children: [
+            {
+              label: '2.3.1 Incentives',
+            },
+            {
+              label: '2.3.2 Human capital',
+            },
+            {
+              label: '2.3.3 Biophysical capital',
+            },
+            {
+              label: '2.3.4 Social capital',
+            },
+          ],
+        },
+        {
+          label: '2.4 Partnerships',
+          route: 'overview',
+        },
+        {
+          label:
+            '2.5 Learning from prior evaluations and Impact Assessments (IA)',
+          route: 'overview',
+        },
+        {
+          label: '2.6 Priority setting',
+          route: 'overview',
+        },
+        {
+          label: '2.7 Participatory design process',
+          route: 'overview',
+        },
+        {
+          label: '2.8 Portfolio Linkages',
+          route: 'overview',
         },
       ],
     },
   ];
-  items: any;
-  ngOnInit() {
-    this.items = [
-      {
-        label: 'Options',
-        items: [
-          {
-            label: '<span class="text-xl font-bold">Refresh</span>',
-            escape: false,
-            icon: 'pi pi-refresh',
-            iconClass: 'text-xl',
-          },
-          {
-            label: '<span class="text-xl font-bold">Delete</span>',
-            escape: false,
-            icon: 'pi pi-times',
-            iconClass: 'text-xl',
-          },
-        ],
-      },
-      {
-        label: 'Navigate',
-        items: [
-          {
-            label: 'Angular',
-            icon: 'pi pi-external-link',
-            url: 'http://angular.io',
-          },
-          {
-            label: 'Router',
-            icon: 'pi pi-upload',
-            routerLink: '/fileupload',
-          },
-        ],
-      },
-    ];
-  }
 }
