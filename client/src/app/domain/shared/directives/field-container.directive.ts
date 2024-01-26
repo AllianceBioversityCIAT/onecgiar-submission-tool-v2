@@ -15,6 +15,7 @@ import { IBDWordCounter } from 'ibdevkit';
 })
 export class FieldContainerDirective {
   @Input() label: string = '';
+  @Input() description: string = '';
   @Input() bodyValue: string = '';
   @Input() maxwords: number = 0;
   @Input() signalBody: WritableSignal<any> = signal('');
@@ -28,6 +29,7 @@ export class FieldContainerDirective {
   ) {}
 
   ngOnInit() {
+    this.description && this.addDescription();
     this.label && this.addLabel();
     this.maxwords && this.addWordsCounter();
     this.maxwords || this.numberOfWords.destroy();
@@ -35,6 +37,19 @@ export class FieldContainerDirective {
 
   ngAfterContentInit(): void {
     this.addStyles();
+  }
+
+  private addDescription() {
+    const descriptionElement = this.renderer.createElement('div');
+    this.renderer.addClass(descriptionElement, 'text-gray-700');
+    this.renderer.addClass(descriptionElement, 'text-sm');
+    this.renderer.addClass(descriptionElement, 'py-1');
+    descriptionElement.textContent = 'Description: ' + this.description;
+    this.renderer.insertBefore(
+      this.el.nativeElement,
+      descriptionElement,
+      this.el.nativeElement.firstChild,
+    );
   }
 
   private addLabel() {
@@ -69,7 +84,7 @@ export class FieldContainerDirective {
     wordsElement.textContent = `0/${this.maxwords}`;
     this.renderer.addClass(parentElement, 'flex');
     this.renderer.addClass(parentElement, 'justify-content-between');
-    this.renderer.addClass(parentElement, 'text-sm');
+    this.renderer.addClass(parentElement, 'text-xs');
     this.renderer.addClass(parentElement, 'pt-1');
     this.renderer.addClass(parentElement, 'px-2');
     this.renderer.addClass(parentElement, 'pb-2');
