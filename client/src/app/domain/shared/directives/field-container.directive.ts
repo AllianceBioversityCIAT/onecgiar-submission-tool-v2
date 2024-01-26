@@ -33,6 +33,10 @@ export class FieldContainerDirective {
     this.maxwords || this.numberOfWords.destroy();
   }
 
+  ngAfterContentInit(): void {
+    this.addStyles();
+  }
+
   private addLabel() {
     const labelElement = this.renderer.createElement('div');
     this.renderer.addClass(labelElement, 'label');
@@ -43,6 +47,17 @@ export class FieldContainerDirective {
       labelElement,
       this.el.nativeElement.firstChild,
     );
+  }
+
+  private addStyles() {
+    const addWidth = (className: string) => {
+      const element: HTMLElement =
+        this.el.nativeElement.querySelector(className);
+      element && (element.style.width = '100%');
+    };
+
+    addWidth('.p-inputtext');
+    addWidth('.p-dropdown');
   }
 
   private addWordsCounter() {
