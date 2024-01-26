@@ -10,9 +10,9 @@ export class EntityService {
   constructor(private readonly dataSource: DataSource) {}
 
   async findEntities(
-    type: string,
-    id: number,
-    officialCode: string,
+    type?: string,
+    id?: number,
+    officialCode?: string,
     active: number = 1,
   ) {
     const response = await this.dataSource.transaction(async (manager) => {
