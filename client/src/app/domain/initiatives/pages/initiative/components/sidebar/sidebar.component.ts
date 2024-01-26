@@ -87,13 +87,10 @@ export class SidebarComponent {
 
     // agrega el id de la iniciativa a las rutas al parametro route, pero si tine hijas pones el del padre y si tiene otro nivel haz lo mismo
     const addInitiativeId = (options: SidebarOption[], parentPath: string) => {
-      options.forEach((option) => {
-        if (option.route) {
-          option.route = `${parentPath}/${option.route}`;
-        }
-        if (option.children) {
-          addInitiativeId(option.children, option?.route ?? '');
-        }
+      options.forEach((option: SidebarOption) => {
+        const route = () => (option.route = `${parentPath}/${option.route}`);
+        option.route && route();
+        option.children && addInitiativeId(option.children, route() ?? '');
       });
     };
 
