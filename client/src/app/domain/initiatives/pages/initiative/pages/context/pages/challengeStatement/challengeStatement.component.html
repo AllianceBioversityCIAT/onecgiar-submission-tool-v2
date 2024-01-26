@@ -1,0 +1,51 @@
+<div
+  class="border-1 border-round-xl"
+  style="background-color: #f7f8f9; border-color: #f7f8f9"
+>
+  <div
+    class="bg-primary px-4 py-3 text-base border-round-xl border-noround-bottom"
+  >
+    Breadcrumb
+  </div>
+
+  <h1
+    class="text-2xl font-semibold px-4 py-3 bg-primary w-max border-round-xl border-noround-top"
+    style="border-bottom-left-radius: 0 !important"
+  >
+    Challenge statement
+  </h1>
+
+  <div class="p-5">
+    <div>
+      <h1 class="text-lg font-semibold mb-2">Challenge statement:</h1>
+      <div class="flex gap-2 mb-3">
+        <p class="text-base font-semibold">Description:</p>
+        <p class="text-base font-medium">
+          Update the detailed challenge statement, expanding on the research
+          challenge provided in the pre-concept.
+        </p>
+      </div>
+
+      <p-editor [(ngModel)]="inputText" [style]="{ height: '320px' }">
+        <ng-template pTemplate="header">
+          <span class="ql-formats">
+            <button type="button" class="ql-bold" aria-label="Bold"></button>
+            <button
+              type="button"
+              class="ql-italic"
+              aria-label="Italic"
+            ></button>
+            <button
+              type="button"
+              class="ql-underline"
+              aria-label="Underline"
+            ></button>
+            <button type="button" class="ql-link" aria-label="Link"></button>
+          </span>
+        </ng-template>
+      </p-editor>
+    </div>
+
+    <p-button label="Submit" (onClick)="handleSubmit()"></p-button>
+  </div>
+</div>

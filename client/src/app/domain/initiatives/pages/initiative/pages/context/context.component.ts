@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { ChallengeStatementComponent } from './pages/challengeStatement/challengeStatement.component';
 
 @Component({
   selector: 'app-context',
   standalone: true,
-  imports: [],
   templateUrl: './context.component.html',
-  styleUrl: './context.component.scss'
+  styleUrl: './context.component.scss',
+  imports: [ChallengeStatementComponent],
 })
-export class ContextComponent {
-
-}
+export class ContextComponent {}
