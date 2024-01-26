@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../../shared/services/api.service';
 
 @Component({
   selector: 'app-authentication',
@@ -7,12 +8,20 @@ import { ActivatedRoute } from '@angular/router';
   imports: [],
   templateUrl: './authentication.component.html',
   styleUrl: './authentication.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthenticationComponent {
-  private activatedRoute = inject(ActivatedRoute);
+  activatedRoute = inject(ActivatedRoute);
+  api = inject(ApiService);
 
-  constructor() {
+  ngOnInit(): void {
     const awsToken = this.activatedRoute.snapshot.paramMap.get('awsToken');
     console.log(awsToken);
+    this.getExample();
+  }
+
+  async getExample() {
+    const response = await this.api.getExample();
+    console.log(response);
   }
 }
