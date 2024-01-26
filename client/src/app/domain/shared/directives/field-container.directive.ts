@@ -39,7 +39,8 @@ export class FieldContainerDirective {
 
   private addLabel() {
     const labelElement = this.renderer.createElement('div');
-    this.renderer.addClass(labelElement, 'label');
+    this.renderer.addClass(labelElement, 'font-semibold');
+    this.renderer.addClass(labelElement, 'text-gray-800');
     labelElement.textContent = this.label;
 
     this.renderer.insertBefore(
@@ -51,8 +52,7 @@ export class FieldContainerDirective {
 
   private addStyles() {
     const addWidth = (className: string) => {
-      const element: HTMLElement =
-        this.el.nativeElement.querySelector(className);
+      const element: HTMLElement = this.el.nativeElement.querySelector(className);
       element && (element.style.width = '100%');
     };
 
@@ -69,7 +69,12 @@ export class FieldContainerDirective {
     wordsElement.textContent = `0/${this.maxwords}`;
     this.renderer.addClass(parentElement, 'flex');
     this.renderer.addClass(parentElement, 'justify-content-between');
-    this.renderer.addClass(wordsElement, 'words');
+    this.renderer.addClass(parentElement, 'text-sm');
+    this.renderer.addClass(parentElement, 'pt-1');
+    this.renderer.addClass(parentElement, 'px-2');
+    this.renderer.addClass(parentElement, 'pb-2');
+    this.renderer.addClass(wordsElement, 'text-gray-700');
+    this.renderer.addClass(maxWordsElement, 'text-gray-700');
     this.renderer.appendChild(parentElement, maxWordsElement);
     this.renderer.appendChild(parentElement, wordsElement);
 

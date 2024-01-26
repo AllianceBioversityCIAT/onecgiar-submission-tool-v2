@@ -36,11 +36,17 @@ export class SidebarComponent {
         children: [
           {
             label: '2.1 Challenge Statement',
-            route: 'ChallengeStatement',
+            route: 'challenge-statement',
           },
           {
             label: '2.2 Measurable three-year (End of Initiative) outcomes',
             route: 'overview',
+            children: [
+              {
+                label: '2.2.1 The P25 Initiative model',
+                route: 'overview',
+              },
+            ],
           },
           {
             label: '2.3 Comparative Advantage',
@@ -88,9 +94,14 @@ export class SidebarComponent {
     // agrega el id de la iniciativa a las rutas al parametro route, pero si tine hijas pones el del padre y si tiene otro nivel haz lo mismo
     const addInitiativeId = (options: SidebarOption[], parentPath: string) => {
       options.forEach((option: SidebarOption) => {
-        const route = () => (option.route = `${parentPath}/${option.route}`);
-        option.route && route();
-        option.children && addInitiativeId(option.children, route() ?? '');
+        const route = () => {
+          if (option.route) {
+            return `${parentPath}/${option.route}`;
+          }
+          return parentPath;
+        };
+        option.route = route();
+        option.children && addInitiativeId(option.children, option.route);
       });
     };
 

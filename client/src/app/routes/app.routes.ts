@@ -57,6 +57,20 @@ export const routes: Routes = [
               import(
                 '../domain/initiatives/pages/initiative/pages/context/context.component'
               ).then((c) => c.ContextComponent),
+            children: [
+              {
+                path: '',
+                redirectTo: 'challenge-statement',
+                pathMatch: 'full',
+              },
+              {
+                path: 'challenge-statement',
+                loadComponent: () =>
+                  import(
+                    '../domain/initiatives/pages/initiative/pages/context/pages/challengeStatement/challengeStatement.component'
+                  ).then((c) => c.ChallengeStatementComponent),
+              },
+            ],
           },
         ],
       },
