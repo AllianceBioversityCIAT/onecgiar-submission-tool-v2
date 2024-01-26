@@ -1,8 +1,15 @@
 <div class="p-4 flex flex-column gap-3">
   <div fieldContainer label="Short name">
-    <input type="text" pInputText [(ngModel)]="valueExample" />
+    <input type="text" pInputText [(ngModel)]="body().value1" (ngModelChange)="updateSignal($event,'value1')" />
   </div>
-  <div fieldContainer label="Short Initiative name" [maxwords]="100">
-    <input type="text" pInputText [(ngModel)]="valueExample" />
+
+  <div fieldContainer label="Short Initiative name" [maxwords]="100" [signalBody]="this.body" bodyValue="value2">
+    <input type="text" pInputText [(ngModel)]="body().value2" (ngModelChange)="updateSignal($event,'value2')" />
   </div>
+
+  <div fieldContainer label="Short Initiative name">
+    <p-dropdown [options]="cities()" [(ngModel)]="body().city" optionLabel="name" [showClear]="true"
+      placeholder="Select a City"></p-dropdown>
+  </div>
+
 </div>

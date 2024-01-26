@@ -1,4 +1,13 @@
-import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  Renderer2,
+  WritableSignal,
+  effect,
+  signal,
+} from '@angular/core';
+import { IBDWordCounter } from 'ibdevkit';
 
 @Directive({
   selector: '[fieldContainer]',
@@ -6,7 +15,12 @@ import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 })
 export class FieldContainerDirective {
   @Input() label: string = '';
+  @Input() bodyValue: string = '';
   @Input() maxwords: number = 0;
+  @Input() signalBody: WritableSignal<any> = signal('');
+  numberOfWords = effect(() => {
+    this.updateLabel(this.signalBody()[this.bodyValue]);
+  });
 
   constructor(
     private el: ElementRef,
@@ -15,7 +29,8 @@ export class FieldContainerDirective {
 
   ngOnInit() {
     this.label && this.addLabel();
-    this.addWordsCounter();
+    this.maxwords && this.addWordsCounter();
+    this.maxwords || this.numberOfWords.destroy();
   }
 
   private addLabel() {
@@ -39,12 +54,18 @@ export class FieldContainerDirective {
     wordsElement.textContent = `0/${this.maxwords}`;
     this.renderer.addClass(parentElement, 'flex');
     this.renderer.addClass(parentElement, 'justify-content-between');
-    this.renderer.addClass(maxWordsElement, 'max-words');
     this.renderer.addClass(wordsElement, 'words');
     this.renderer.appendChild(parentElement, maxWordsElement);
     this.renderer.appendChild(parentElement, wordsElement);
 
     //insertar al final del elemento
     this.renderer.appendChild(this.el.nativeElement, parentElement);
+  }
+
+  private updateLabel(text: string) {
+    const labelElement = this.el.nativeElement.querySelector('.words');
+    if (labelElement) {
+      labelElement.textContent = `${IBDWordCounter(text)}/${this.maxwords}`;
+    }
   }
 }
