@@ -18,6 +18,9 @@ export class AuthenticationComponent {
     const awsToken = this.activatedRoute.snapshot.paramMap.get('awsToken');
     console.log(awsToken);
     this.getExample();
+    setTimeout(() => {
+      console.log('hello');
+    }, 3000);
   }
 
   async getExample() {
