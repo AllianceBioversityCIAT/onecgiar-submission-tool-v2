@@ -99,8 +99,6 @@ export class SidebarComponent {
       `initiative/${this.initiativeSE.currentInitiativeId()}`,
     );
 
-    console.log(options);
-
     return options;
   });
 }
