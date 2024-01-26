@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 
@@ -8,7 +9,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
   standalone: true,
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
-  imports: [AvatarModule, AvatarGroupModule, NgClass],
+  imports: [AvatarModule, AvatarGroupModule, NgClass, RouterLink],
 })
 export class NavbarComponent {
   isNavbarHidden = false;
@@ -16,19 +17,19 @@ export class NavbarComponent {
   navbarLinks = [
     {
       name: 'Initiatives',
-      url: '/about',
+      url: '/home',
     },
     {
       name: 'Bussiness Intelligence Dashboard',
-      url: '/about',
+      url: '/',
     },
     {
       name: 'FAQ',
-      url: '/about',
+      url: '/',
     },
     {
       name: 'Admin Panel',
-      url: '/about',
+      url: '/',
     },
     {
       name: 'About',

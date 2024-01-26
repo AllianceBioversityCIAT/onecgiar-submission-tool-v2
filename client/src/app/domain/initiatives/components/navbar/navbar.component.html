@@ -5,7 +5,8 @@
   <img
     src="/assets/cgiar_logo.svg"
     alt="CGIAR System Organization"
-    class="w-3rem text-primary"
+    class="w-3rem text-primary cursor-pointer"
+    [routerLink]="['/']"
   />
 
   <div class="flex align-items-center justify-content-between gap-4">
@@ -42,6 +43,7 @@
     @for (navLink of navbarLinks; track navLink.name) {
       <p
         class="text-sm p-2 m-0 border-round min-w-max cursor-pointer hover:bg-primary hover:transition-colors hover:text-white"
+        [routerLink]="[navLink.url]"
       >
         {{ navLink.name }}
       </p>

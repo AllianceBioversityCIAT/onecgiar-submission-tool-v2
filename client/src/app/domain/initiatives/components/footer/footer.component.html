@@ -10,12 +10,16 @@
     class="flex flex-column align-items-centerc justify-content-center gap-2"
   >
     <div class="flex align-items-center justify-content-center gap-3">
+      <p class="no-underline text-base text-white font-bold">Contact Us</p>
       @for (footerLink of footerLinks; track footerLink.label) {
         <a
-          href="{{ footerLink.link }}"
+          [href]="footerLink.link"
           class="no-underline text-base text-white font-bold"
-          >{{ footerLink.label }}</a
+          rel="noopener noreferrer"
+          target="_blank"
         >
+          {{ footerLink.label }}
+        </a>
       }
     </div>
 
