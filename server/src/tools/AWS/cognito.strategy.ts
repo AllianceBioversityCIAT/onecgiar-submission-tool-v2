@@ -24,7 +24,20 @@ export class CognitoStrategy extends PassportStrategy(Strategy, 'cognito') {
     super();
   }
 
-  async validate(@Req() { body: { code } = undefined }: Request) {
+  async validate(@Req() req: Request) {
+    const { authorization } = req.headers;
+    console.log(req.headers);
+    if (typeof authorization !== 'string') {
+      throw new UnauthorizedException();
+    }
+
+    const parts = authorization.split(' ');
+    if (parts.length !== 2 || parts[0] !== 'Bearer') {
+      throw new UnauthorizedException();
+    }
+
+    const code = parts[1];
+
     const config = AWSutil.cognito.config({
       client_id: this._configService.get<string>('COGNITO_CLIENT_ID'),
       client_secret: this._configService.get<string>('COGNITO_CLIENT_SECRET'),

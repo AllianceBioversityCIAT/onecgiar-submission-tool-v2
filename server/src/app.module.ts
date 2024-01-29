@@ -1,11 +1,6 @@
 import { CronJobModule } from './tools/cron-job/cron-job.module';
 import { ClarisaModule } from './tools/clarisa/clarisa.module';
-import {
-  MiddlewareConsumer,
-  Module,
-  NestModule,
-  RequestMethod,
-} from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -18,7 +13,6 @@ import { LoggingInterceptor } from './domain/shared/Interceptors/logging.interce
 import { ResponseInterceptor } from './domain/shared/Interceptors/response.interceptor';
 import { GlobalExceptions } from './domain/shared/error-management/global.exception';
 import { AuthModule } from './domain/auth/auth.module';
-import { JwtModule } from '@nestjs/jwt';
 import { JwtMiddleware } from './domain/shared/middlewares/jwr.middleware';
 
 @Module({
@@ -27,18 +21,11 @@ import { JwtMiddleware } from './domain/shared/middlewares/jwr.middleware';
     ClarisaModule,
     RouterModule.register(MainRoutes),
     ConfigModule.forRoot({
+      envFilePath: '.env',
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
       ...dataSourceOptions,
-    }),
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET_KEY'),
-        signOptions: { expiresIn: configService.get<string>('JWT_EXPIRES_IN') },
-      }),
     }),
     EntityModule,
     AuthModule,

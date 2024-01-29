@@ -56,7 +56,7 @@ const children: Routes = [
 
 export const EntityRoustes: Routes = [
   {
-    path: 'initiatives',
+    path: 'entity',
     module: EntityModule,
     children: children,
   },
