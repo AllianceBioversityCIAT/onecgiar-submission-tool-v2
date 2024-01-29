@@ -26,7 +26,6 @@ export class Clarisa {
         }),
       ),
     ).catch((err) => {
-      console.log(err);
       throw new BadRequestException(err);
     });
   }

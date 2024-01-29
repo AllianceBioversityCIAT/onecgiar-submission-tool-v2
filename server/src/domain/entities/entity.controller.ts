@@ -14,7 +14,6 @@ export class EntityController {
     @Query('official-code') officialCode: string,
     @Query('active') active: string = '1',
   ) {
-    console.log(officialCode);
     return this.initiativesService.findEntities(
       type,
       +id,

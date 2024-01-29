@@ -26,7 +26,6 @@ export class CognitoStrategy extends PassportStrategy(Strategy, 'cognito') {
 
   async validate(@Req() req: Request) {
     const { authorization } = req.headers;
-    console.log(req.headers);
     if (typeof authorization !== 'string') {
       throw new UnauthorizedException();
     }
