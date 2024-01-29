@@ -27,6 +27,13 @@ export class Entities extends AuditableEntity {
 
   @Column({
     type: 'text',
+    name: 'short_name',
+    nullable: true,
+  })
+  short_name!: string;
+
+  @Column({
+    type: 'text',
     name: 'description',
     nullable: true,
   })
