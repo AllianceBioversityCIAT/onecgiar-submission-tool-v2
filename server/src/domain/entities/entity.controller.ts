@@ -1,6 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { EntityService } from './entity.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Entity')
 @Controller()
 export class EntityController {
   constructor(private readonly initiativesService: EntityService) {}

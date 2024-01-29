@@ -20,12 +20,12 @@ export class JwtMiddleware implements NestMiddleware {
     @Res() _res: Response,
     @Next() next: NextFunction,
   ) {
-    const { Authorization } = req.headers;
-    if (typeof Authorization !== 'string') {
+    const { authorization } = req.headers;
+    if (typeof authorization !== 'string') {
       throw new UnauthorizedException(ExceptionMessage.JWT_NOT_FOUND);
     }
 
-    const parts = Authorization.split(' ');
+    const parts = authorization.split(' ');
     if (parts.length !== 2 || parts[0] !== 'Bearer') {
       throw new UnauthorizedException(ExceptionMessage.JWT_NOT_FOUND);
     }
