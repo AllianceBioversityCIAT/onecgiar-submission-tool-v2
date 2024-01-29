@@ -39,12 +39,30 @@ export class FieldContainerDirective {
     this.addStyles();
   }
 
+  private addLabel() {
+    const labelElement = this.renderer.createElement('div');
+    labelElement.textContent = this.label;
+
+    this.renderer.addClass(labelElement, 'text-lg');
+    this.renderer.addClass(labelElement, 'font-semibold');
+    this.renderer.addClass(labelElement, 'text-gray-800');
+    this.renderer.addClass(labelElement, 'mb-1');
+
+    this.renderer.insertBefore(
+      this.el.nativeElement,
+      labelElement,
+      this.el.nativeElement.firstChild,
+    );
+  }
+
   private addDescription() {
     const descriptionElement = this.renderer.createElement('div');
-    this.renderer.addClass(descriptionElement, 'text-gray-700');
+    descriptionElement.textContent = `Description: ${this.description}`;
+
     this.renderer.addClass(descriptionElement, 'text-sm');
-    this.renderer.addClass(descriptionElement, 'py-1');
-    descriptionElement.textContent = 'Description: ' + this.description;
+    this.renderer.addClass(descriptionElement, 'font-medium');
+    this.renderer.addClass(descriptionElement, 'text-gray-700');
+    this.renderer.addClass(descriptionElement, 'mb-2');
     this.renderer.insertBefore(
       this.el.nativeElement,
       descriptionElement,
@@ -52,17 +70,28 @@ export class FieldContainerDirective {
     );
   }
 
-  private addLabel() {
-    const labelElement = this.renderer.createElement('div');
-    this.renderer.addClass(labelElement, 'font-semibold');
-    this.renderer.addClass(labelElement, 'text-gray-800');
-    labelElement.textContent = this.label;
+  private addWordsCounter() {
+    const parentElement = this.renderer.createElement('div');
+    const maxWordsElement = this.renderer.createElement('div');
+    const wordsElement = this.renderer.createElement('div');
 
-    this.renderer.insertBefore(
-      this.el.nativeElement,
-      labelElement,
-      this.el.nativeElement.firstChild,
-    );
+    maxWordsElement.textContent = `Max ${this.maxwords} words`;
+    wordsElement.textContent = `0/${this.maxwords}`;
+
+    this.renderer.addClass(parentElement, 'flex');
+    this.renderer.addClass(parentElement, 'align-items-center');
+    this.renderer.addClass(parentElement, 'justify-content-between');
+    this.renderer.addClass(parentElement, 'text-sm');
+    this.renderer.addClass(parentElement, 'font-medium');
+    this.renderer.addClass(parentElement, 'mt-1');
+    this.renderer.addClass(parentElement, 'pt-1');
+    this.renderer.addClass(parentElement, 'px-2');
+    this.renderer.addClass(parentElement, 'pb-2');
+    this.renderer.addClass(parentElement, 'text-gray-700');
+
+    this.renderer.appendChild(parentElement, maxWordsElement);
+    this.renderer.appendChild(parentElement, wordsElement);
+    this.renderer.appendChild(this.el.nativeElement, parentElement);
   }
 
   private addStyles() {
@@ -73,28 +102,6 @@ export class FieldContainerDirective {
 
     addWidth('.p-inputtext');
     addWidth('.p-dropdown');
-  }
-
-  private addWordsCounter() {
-    // debe ser un div dentro dos div uno que diga max {{words.length}} words y al toro lado {{}}/{{maxwords}}
-    const parentElement = this.renderer.createElement('div');
-    const maxWordsElement = this.renderer.createElement('div');
-    const wordsElement = this.renderer.createElement('div');
-    maxWordsElement.textContent = `Max ${this.maxwords} words`;
-    wordsElement.textContent = `0/${this.maxwords}`;
-    this.renderer.addClass(parentElement, 'flex');
-    this.renderer.addClass(parentElement, 'justify-content-between');
-    this.renderer.addClass(parentElement, 'text-xs');
-    this.renderer.addClass(parentElement, 'pt-1');
-    this.renderer.addClass(parentElement, 'px-2');
-    this.renderer.addClass(parentElement, 'pb-2');
-    this.renderer.addClass(wordsElement, 'text-gray-700');
-    this.renderer.addClass(maxWordsElement, 'text-gray-700');
-    this.renderer.appendChild(parentElement, maxWordsElement);
-    this.renderer.appendChild(parentElement, wordsElement);
-
-    //insertar al final del elemento
-    this.renderer.appendChild(this.el.nativeElement, parentElement);
   }
 
   private updateLabel(text: string) {

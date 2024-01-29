@@ -1,14 +1,5 @@
 <div class="p-5">
-  <div>
-    <h1 class="text-lg font-semibold mb-2">Challenge statement:</h1>
-    <div class="flex gap-2 mb-3">
-      <p class="text-base font-semibold">Description:</p>
-      <p class="text-base font-medium">
-        Update the detailed challenge statement, expanding on the research
-        challenge provided in the pre-concept.
-      </p>
-    </div>
-
+  <div fieldContainer label="Short Initiative name" description="desc example" [maxwords]="500">
     <p-editor [(ngModel)]="inputText" [style]="{ height: '320px' }">
       <ng-template pTemplate="header">
         <span class="ql-formats">

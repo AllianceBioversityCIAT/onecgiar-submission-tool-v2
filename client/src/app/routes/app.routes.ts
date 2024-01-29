@@ -3,8 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'login/:awsToken',
-    loadComponent: () =>
-      import('@auth/login/login.component').then((c) => c.LoginComponent),
+    loadComponent: () => import('@auth/login/login.component').then((c) => c.LoginComponent),
   },
   {
     path: 'authentication/:awsToken',
@@ -16,9 +15,7 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('../domain/initiatives/initiatives.component').then(
-        (m) => m.InitiativesComponent,
-      ),
+      import('../domain/initiatives/initiatives.component').then((m) => m.InitiativesComponent),
     children: [
       {
         path: '',
@@ -28,16 +25,16 @@ export const routes: Routes = [
       {
         path: 'home',
         loadComponent: () =>
-          import(
-            '../domain/initiatives/pages/initiatives-list/initiatives-list.component'
-          ).then((c) => c.InitiativesListComponent),
+          import('../domain/initiatives/pages/initiatives-list/initiatives-list.component').then(
+            (c) => c.InitiativesListComponent,
+          ),
       },
       {
         path: 'initiative/:initiativeId',
         loadComponent: () =>
-          import(
-            '../domain/initiatives/pages/initiative/initiative.component'
-          ).then((c) => c.InitiativeComponent),
+          import('../domain/initiatives/pages/initiative/initiative.component').then(
+            (c) => c.InitiativeComponent,
+          ),
         children: [
           {
             path: '',
@@ -54,9 +51,9 @@ export const routes: Routes = [
           {
             path: 'context',
             loadComponent: () =>
-              import(
-                '../domain/initiatives/pages/initiative/pages/context/context.component'
-              ).then((c) => c.ContextComponent),
+              import('../domain/initiatives/pages/initiative/pages/context/context.component').then(
+                (c) => c.ContextComponent,
+              ),
             children: [
               {
                 path: '',
@@ -67,7 +64,7 @@ export const routes: Routes = [
                 path: 'challenge-statement',
                 loadComponent: () =>
                   import(
-                    '../domain/initiatives/pages/initiative/pages/context/pages/challengeStatement/challengeStatement.component'
+                    '../domain/initiatives/pages/initiative/pages/context/pages/challenge-statement/challenge-statement.component'
                   ).then((c) => c.ChallengeStatementComponent),
               },
             ],
@@ -77,9 +74,7 @@ export const routes: Routes = [
       {
         path: 'about',
         loadComponent: () =>
-          import('../domain/initiatives/pages/about/about.component').then(
-            (c) => c.AboutComponent,
-          ),
+          import('../domain/initiatives/pages/about/about.component').then((c) => c.AboutComponent),
       },
     ],
   },

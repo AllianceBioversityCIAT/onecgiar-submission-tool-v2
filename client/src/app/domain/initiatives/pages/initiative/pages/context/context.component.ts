@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ChallengeStatementComponent } from './pages/challengeStatement/challengeStatement.component';
+import { ChallengeStatementComponent } from './pages/challenge-statement/challenge-statement.component';
 import { RouterModule } from '@angular/router';
 
 @Component({
