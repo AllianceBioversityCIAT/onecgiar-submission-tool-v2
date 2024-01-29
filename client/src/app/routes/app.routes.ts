@@ -67,6 +67,55 @@ export const routes: Routes = [
                     '../domain/initiatives/pages/initiative/pages/context/pages/challenge-statement/challenge-statement.component'
                   ).then((c) => c.ChallengeStatementComponent),
               },
+              {
+                path: 'measurable-objectives',
+                loadComponent: () =>
+                  import(
+                    '../domain/initiatives/pages/initiative/pages/context/pages/measurable-objectives/measurable-objectives.component'
+                  ).then((c) => c.MeasurableObjectivesComponent),
+              },
+              {
+                path: 'comparative-advantage',
+                loadComponent: () =>
+                  import(
+                    '../domain/initiatives/pages/initiative/pages/context/pages/comparative-advantage/comparative-advantage.component'
+                  ).then((c) => c.ComparativeAdvantageComponent),
+              },
+              {
+                path: 'partnerships',
+                loadComponent: () =>
+                  import(
+                    '../domain/initiatives/pages/initiative/pages/context/pages/partnerships/partnerships.component'
+                  ).then((c) => c.PartnershipsComponent),
+              },
+              {
+                path: 'learning-fpe-and-ia',
+                loadComponent: () =>
+                  import(
+                    '../domain/initiatives/pages/initiative/pages/context/pages/learning-fpe-and-ia/learning-fpe-and-ia.component'
+                  ).then((c) => c.LearningFpeAndIaComponent),
+              },
+              {
+                path: 'priority-setting',
+                loadComponent: () =>
+                  import(
+                    '../domain/initiatives/pages/initiative/pages/context/pages/priority-setting/priority-setting.component'
+                  ).then((c) => c.PrioritySettingComponent),
+              },
+              {
+                path: 'participatory-design-process',
+                loadComponent: () =>
+                  import(
+                    '../domain/initiatives/pages/initiative/pages/context/pages/participatory-design-process/participatory-design-process.component'
+                  ).then((c) => c.ParticipatoryDesignProcessComponent),
+              },
+              {
+                path: 'portfolio-linkages',
+                loadComponent: () =>
+                  import(
+                    '../domain/initiatives/pages/initiative/pages/context/pages/portfolio-linkages/portfolio-linkages.component'
+                  ).then((c) => c.PortfolioLinkagesComponent),
+              },
             ],
           },
         ],

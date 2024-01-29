@@ -1,10 +1,10 @@
 <div class="p-5">
   <div
     fieldContainer
-    label="Challenge statement:"
-    description="Update the detailed challenge statement, expanding on the research challenge provided in the pre-concept"
+    label="Priority Setting:"
+    description="Provide results from, and method used, to set priority science (research questions, methods), innovations, activities, geographies, systems, crops or other choices relevant to the Initiative."
     [maxwords]="500">
-    <p-editor [(ngModel)]="inputText" [style]="{ height: '320px' }">
+    <p-editor [style]="{ height: '320px' }">
       <ng-template pTemplate="header">
         <span class="ql-formats">
           <button type="button" class="ql-bold" aria-label="Bold"></button>
@@ -15,6 +15,4 @@
       </ng-template>
     </p-editor>
   </div>
-
-  <p-button label="Submit" (onClick)="handleSubmit()"></p-button>
 </div>

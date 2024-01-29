@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Signal,
-  computed,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Signal, computed, inject } from '@angular/core';
 import { SidebarOptionsComponent } from '../sidebar-options/sidebar-options.component';
 import { MenuModule } from 'primeng/menu';
 import { Router } from '@angular/router';
@@ -40,52 +34,51 @@ export class SidebarComponent {
           },
           {
             label: '2.2 Measurable three-year (End of Initiative) outcomes',
-            route: 'overview',
-            children: [
-              {
-                label: '2.2.1 The P25 Initiative model',
-                route: 'overview',
-              },
-            ],
+            route: 'measurable-objectives',
+            // children: [
+            //   {
+            //     label: '2.2.1 The P25 Initiative model',
+            //     route: 'overview',
+            //   },
+            // ],
           },
           {
             label: '2.3 Comparative Advantage',
-            route: 'overview',
-            children: [
-              {
-                label: '2.3.1 Incentives',
-              },
-              {
-                label: '2.3.2 Human capital',
-              },
-              {
-                label: '2.3.3 Biophysical capital',
-              },
-              {
-                label: '2.3.4 Social capital',
-              },
-            ],
+            route: 'comparative-advantage',
+            // children: [
+            //   {
+            //     label: '2.3.1 Incentives',
+            //   },
+            //   {
+            //     label: '2.3.2 Human capital',
+            //   },
+            //   {
+            //     label: '2.3.3 Biophysical capital',
+            //   },
+            //   {
+            //     label: '2.3.4 Social capital',
+            //   },
+            // ],
           },
           {
             label: '2.4 Partnerships',
-            route: 'overview',
+            route: 'partnerships',
           },
           {
-            label:
-              '2.5 Learning from prior evaluations and Impact Assessments (IA)',
-            route: 'overview',
+            label: '2.5 Learning from prior evaluations and Impact Assessments (IA)',
+            route: 'learning-fpe-and-ia',
           },
           {
             label: '2.6 Priority setting',
-            route: 'overview',
+            route: 'priority-setting',
           },
           {
             label: '2.7 Participatory design process',
-            route: 'overview',
+            route: 'participatory-design-process',
           },
           {
             label: '2.8 Portfolio Linkages',
-            route: 'overview',
+            route: 'portfolio-linkages',
           },
         ],
       },
@@ -105,10 +98,7 @@ export class SidebarComponent {
       });
     };
 
-    addInitiativeId(
-      options,
-      `initiative/${this.initiativeSE.currentInitiativeId()}`,
-    );
+    addInitiativeId(options, `initiative/${this.initiativeSE.currentInitiativeId()}`);
 
     return options;
   });

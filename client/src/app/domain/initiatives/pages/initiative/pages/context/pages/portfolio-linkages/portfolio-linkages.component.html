@@ -1,10 +1,6 @@
 <div class="p-5">
-  <div
-    fieldContainer
-    label="Challenge statement:"
-    description="Update the detailed challenge statement, expanding on the research challenge provided in the pre-concept"
-    [maxwords]="500">
-    <p-editor [(ngModel)]="inputText" [style]="{ height: '320px' }">
+  <div fieldContainer label="Portfolio Linkages:" description="desc example" [maxwords]="500">
+    <p-editor [style]="{ height: '320px' }">
       <ng-template pTemplate="header">
         <span class="ql-formats">
           <button type="button" class="ql-bold" aria-label="Bold"></button>
@@ -16,5 +12,5 @@
     </p-editor>
   </div>
 
-  <p-button label="Submit" (onClick)="handleSubmit()"></p-button>
+  <h1>Table</h1>
 </div>
