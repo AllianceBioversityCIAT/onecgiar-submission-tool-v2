@@ -32,6 +32,9 @@ export class Role extends AuditableEntity {
   priority: number;
 
   // relations
-  @OneToMany(() => UserRoleEntity, (user_role_entity) => user_role_entity.role)
+  @OneToMany(
+    () => UserRoleEntity,
+    (user_role_entity) => user_role_entity.role_obj,
+  )
   user_role_entity_array: UserRoleEntity[];
 }

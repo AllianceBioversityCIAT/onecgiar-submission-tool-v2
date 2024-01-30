@@ -1,4 +1,5 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
+import { EntityCenter } from '../../../../domain/entities/entity-centers/entities/entity-center.entity';
 
 @Entity('clarisa_cgiar_entities')
 export class ClarisaCgiarEntity {
@@ -23,4 +24,12 @@ export class ClarisaCgiarEntity {
     nullable: true,
   })
   acronym: string;
+
+  //--- relations
+  s;
+  @OneToMany(
+    () => EntityCenter,
+    (entity_center) => entity_center.clarisa_entity_obj,
+  )
+  entity_center_array: EntityCenter[];
 }

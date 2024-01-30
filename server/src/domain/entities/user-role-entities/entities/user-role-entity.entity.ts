@@ -43,13 +43,13 @@ export class UserRoleEntity extends AuditableEntity {
 
   @ManyToOne(() => User, (user) => user.user_role_entity_array)
   @JoinColumn({ name: 'user_id' })
-  user: User;
+  user_obj: User;
 
   @ManyToOne(() => Role, (role) => role.user_role_entity_array)
   @JoinColumn({ name: 'role_id' })
-  role: Role;
+  role_obj: Role;
 
   @ManyToOne(() => Entities, (Entities) => Entities.user_role_entity_array)
   @JoinColumn({ name: 'entity_id' })
-  entity: Entities;
+  entity_obj: Entities;
 }

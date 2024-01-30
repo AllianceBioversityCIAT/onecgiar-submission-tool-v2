@@ -16,6 +16,7 @@ import { TheoryOfChangeModule } from './theory-of-change/theory-of-change.module
 import { UserRoleEntitiesModule } from './user-role-entities/user-role-entities.module';
 import { EntityCentersModule } from './entity-centers/entity-centers.module';
 import { EntityImpactAreasModule } from './entity-impact-areas/entity-impact-areas.module';
+import { EntityDiagramImagesModule } from './entity-diagram-images/entity-diagram-images.module';
 
 @Module({
   controllers: [EntityController],
@@ -36,6 +37,7 @@ import { EntityImpactAreasModule } from './entity-impact-areas/entity-impact-are
     UserRoleEntitiesModule,
     EntityCentersModule,
     EntityImpactAreasModule,
+    EntityDiagramImagesModule,
   ],
 })
 export class EntityModule {}
