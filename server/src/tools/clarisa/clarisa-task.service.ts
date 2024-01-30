@@ -5,6 +5,11 @@ import { ConfigService } from '@nestjs/config';
 import { ClarisaCgiarEntityType } from './clarisa-cgiar-entity-types/entities/clarisa-cgiar-entity-type.entity';
 import { DataSource, Repository } from 'typeorm';
 import { ResultsSdgTargetRepository } from '../../db/repositories/clarisa-cgiar-entity-type.repository';
+import { ClarisaActionArea } from './clarisa-action-areas/entities/clarisa-action-area.entity';
+import { ClarisaCountry } from './clarisa-countries/entities/clarisa-country.entity';
+import { ClarisaRegion } from './clarisa-regions/entities/clarisa-region.entity';
+import { ClarisaCgiarEntity } from './clarisa-cgiar-entities/entities/clarisa-cgiar-entity.entity';
+import { ClarisaImpactArea } from './clarisa-impact-areas/entities/clarisa-impact-area.entity';
 
 @Injectable()
 export class ClarisaTaskService {
@@ -54,6 +59,12 @@ export class ClarisaTaskService {
 
   async bootstrap() {
     this._logger.verbose(`Start saving data of ${ClarisaTaskService.name}`);
+
     await this.cloneData('cgiar-entity-types', ClarisaCgiarEntityType);
+    await this.cloneData('action-areas', ClarisaActionArea);
+    await this.cloneData('countries', ClarisaCountry);
+    await this.cloneData('un-regions', ClarisaRegion);
+    await this.cloneData('cgiar-entities', ClarisaCgiarEntity);
+    await this.cloneData('impact-areas', ClarisaImpactArea);
   }
 }

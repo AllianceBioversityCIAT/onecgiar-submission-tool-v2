@@ -9,6 +9,7 @@ import {
 import { ClarisaCgiarEntityType } from '../../../tools/clarisa/clarisa-cgiar-entity-types/entities/clarisa-cgiar-entity-type.entity';
 import { EntityLevel2 } from '../entity-level-2/entities/entity-level-2.entity';
 import { AuditableEntity } from '../../shared/global-dto/auditable.entity';
+import { UserRoleEntity } from '../user-role-entities/entities/user-role-entity.entity';
 
 @Entity('entities')
 export class Entities extends AuditableEntity {
@@ -67,8 +68,11 @@ export class Entities extends AuditableEntity {
     (entity_type) => entity_type.entities_array,
   )
   @JoinColumn({ name: 'clarisa_cgiar_entity_type_id' })
-  entity_type_obj: ClarisaCgiarEntityType;
+  entity_type_obj!: ClarisaCgiarEntityType;
 
   @OneToMany(() => EntityLevel2, (entity_level_2) => entity_level_2.entity_obj)
   entity_level_2_array!: EntityLevel2[];
+
+  @OneToMany(() => UserRoleEntity, (UserRoleEntity) => UserRoleEntity.entity)
+  user_role_entity_array!: UserRoleEntity[];
 }

@@ -5,9 +5,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { HttpModule } from '@nestjs/axios';
 import { AuthService } from './auth.service';
 import { UsersModule } from './users/users.module';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
-  imports: [JwtModule, HttpModule, UsersModule],
+  imports: [JwtModule, HttpModule, UsersModule, RolesModule],
   controllers: [AuthController],
   providers: [CognitoStrategy, AuthService],
   exports: [],

@@ -2,37 +2,36 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { AuditableEntity } from '../../../shared/global-dto/auditable.entity';
 import { UserRoleEntity } from '../../../entities/user-role-entities/entities/user-role-entity.entity';
 
-@Entity('users')
-export class User extends AuditableEntity {
+@Entity('roles')
+export class Role extends AuditableEntity {
   @PrimaryGeneratedColumn({
-    name: 'user_id',
+    name: 'role_id',
     type: 'bigint',
   })
-  user_id: number;
+  role_id: number;
 
   @Column({
-    name: 'first_name',
+    name: 'role_name',
     type: 'text',
     nullable: false,
   })
-  first_name: string;
+  role_name: string;
 
   @Column({
-    name: 'last_name',
+    name: 'role_description',
     type: 'text',
-    nullable: false,
+    nullable: true,
   })
-  last_name: string;
+  role_description: string;
 
   @Column({
-    name: 'email',
-    type: 'text',
+    name: 'priority',
+    type: 'int',
     nullable: false,
   })
-  email: string;
+  priority: number;
 
   // relations
-
-  @OneToMany(() => UserRoleEntity, (user_role_entity) => user_role_entity.user)
+  @OneToMany(() => UserRoleEntity, (user_role_entity) => user_role_entity.role)
   user_role_entity_array: UserRoleEntity[];
 }

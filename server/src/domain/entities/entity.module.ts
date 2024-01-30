@@ -13,6 +13,7 @@ import { EntityLevel2Module } from './entity-level-2/entity-level-2.module';
 import { EntityLevel3Module } from './entity-level-3/entity-level-3.module';
 import { PeopleAndCultureModule } from './people-and-culture/people-and-culture.module';
 import { TheoryOfChangeModule } from './theory-of-change/theory-of-change.module';
+import { UserRoleEntitiesModule } from './user-role-entities/user-role-entities.module';
 
 @Module({
   controllers: [EntityController],
@@ -30,6 +31,7 @@ import { TheoryOfChangeModule } from './theory-of-change/theory-of-change.module
     EntityLevel3Module,
     PeopleAndCultureModule,
     TheoryOfChangeModule,
+    UserRoleEntitiesModule,
   ],
 })
 export class EntityModule {}
