@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { CurrencyPipe, DatePipe, NgClass } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { RouterLink } from '@angular/router';
 
 export interface IInitiative {
   acronym: string;
@@ -45,6 +46,7 @@ export interface IInitiative {
     DatePipe,
     ButtonModule,
     InputTextModule,
+    RouterLink
   ],
   providers: [InitiativesService],
   templateUrl: './initiatives-list.component.html',

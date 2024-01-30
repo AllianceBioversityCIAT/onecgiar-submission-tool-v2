@@ -94,7 +94,7 @@
     </ng-template>
 
     <ng-template pTemplate="body" let-initiative>
-      <tr>
+      <tr routerLink="/initiative/{{ initiative.id }}/overview">
         <td>
           {{ initiative.official_code }}
         </td>
