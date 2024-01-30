@@ -14,6 +14,8 @@ import { EntityLevel3Module } from './entity-level-3/entity-level-3.module';
 import { PeopleAndCultureModule } from './people-and-culture/people-and-culture.module';
 import { TheoryOfChangeModule } from './theory-of-change/theory-of-change.module';
 import { UserRoleEntitiesModule } from './user-role-entities/user-role-entities.module';
+import { EntityCentersModule } from './entity-centers/entity-centers.module';
+import { EntityImpactAreasModule } from './entity-impact-areas/entity-impact-areas.module';
 
 @Module({
   controllers: [EntityController],
@@ -32,6 +34,8 @@ import { UserRoleEntitiesModule } from './user-role-entities/user-role-entities.
     PeopleAndCultureModule,
     TheoryOfChangeModule,
     UserRoleEntitiesModule,
+    EntityCentersModule,
+    EntityImpactAreasModule,
   ],
 })
 export class EntityModule {}

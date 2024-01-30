@@ -6,31 +6,36 @@ import { ClarisaCgiarSubEntityTypesModule } from '../tools/clarisa/clarisa-cgiar
 import { ClarisaCountriesModule } from '../tools/clarisa/clarisa-countries/clarisa-countries.module';
 import { ClarisaRegionsModule } from '../tools/clarisa/clarisa-regions/clarisa-regions.module';
 import { ClarisaCgiarEntitiesModule } from '../tools/clarisa/clarisa-cgiar-entities/clarisa-cgiar-entities.module';
+import { ClarisaImpactAreasModule } from '../tools/clarisa/clarisa-impact-areas/clarisa-impact-areas.module';
 
 const children: Routes = [
   {
-    path: 'clarisa-action-areas',
+    path: 'action-areas',
     module: ClarisaActionAreasModule,
   },
   {
-    path: 'clarisa-cgiar-entity-types',
+    path: 'cgiar-entity-types',
     module: ClarisaCgiarEntityTypesModule,
   },
   {
-    path: 'clarisa-cgiar-sub-entity-types',
+    path: 'cgiar-sub-entity-types',
     module: ClarisaCgiarSubEntityTypesModule,
   },
   {
-    path: 'clarisa-countries',
+    path: 'countries',
     module: ClarisaCountriesModule,
   },
   {
-    path: 'clarisa-regions',
+    path: 'regions',
     module: ClarisaRegionsModule,
   },
   {
-    path: 'clarisa-cgiar-entities',
+    path: 'cgiar-entities',
     module: ClarisaCgiarEntitiesModule,
+  },
+  {
+    path: 'impact-areas',
+    module: ClarisaImpactAreasModule,
   },
 ];
 
