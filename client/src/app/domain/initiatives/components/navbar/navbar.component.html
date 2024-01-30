@@ -1,13 +1,11 @@
 <nav
   class="flex align-items-center justify-content-between p-3 w-full bg-bluegray-900 text-white"
-  [ngClass]="{ 'sticky top-0': !isLogged }"
->
+  [ngClass]="{ 'sticky top-0': !isLogged }">
   <img
     src="/assets/cgiar_logo.svg"
     alt="CGIAR System Organization"
     class="w-3rem text-primary cursor-pointer"
-    [routerLink]="['/']"
-  />
+    routerLink="/home" />
 
   <div class="flex align-items-center justify-content-between gap-4">
     @if (isLogged) {
@@ -17,16 +15,14 @@
           styleClass="mr-2"
           size="normal"
           shape="circle"
-          [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"
-        ></p-avatar>
+          [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"></p-avatar>
 
         <p class="m-0 text-sm">Prueba's name</p>
       </div>
     }
 
     <div
-      class="text-sm py-2 px-3 m-0 border-round cursor-pointer bg-primary hover:bg-white hover:transition-colors hover:text-primary"
-    >
+      class="text-sm py-2 px-3 m-0 border-round cursor-pointer bg-primary hover:bg-white hover:transition-colors hover:text-primary">
       @if (isLogged) {
         Logout
       } @else {
@@ -38,15 +34,24 @@
 
 @if (isLogged) {
   <div
-    class="sticky top-0 px-2 py-2 flex gap-3 align-items-center w-full overflow-y-auto bg-bluegray-900 text-white z-5"
-  >
+    class="sticky top-0 px-2 py-2 flex gap-3 align-items-center w-full overflow-y-auto bg-bluegray-900 text-white z-5">
     @for (navLink of navbarLinks; track navLink.name) {
-      <p
-        class="text-sm p-2 m-0 border-round min-w-max cursor-pointer hover:bg-primary hover:transition-colors hover:text-white"
-        [routerLink]="[navLink.url]"
-      >
-        {{ navLink.name }}
-      </p>
+      @if (navLink.name === 'FAQ') {
+        <a
+          class="text-sm p-2 m-0 border-round min-w-max cursor-pointer text-white no-underline hover:bg-primary hover:transition-colors"
+          href="{{ navLink.url }}"
+          target="_blank"
+          rel="noopener noreferrer">
+          {{ navLink.name }}
+        </a>
+      } @else {
+        <p
+          class="text-sm p-2 m-0 border-round min-w-max cursor-pointer hover:bg-primary hover:transition-colors hover:text-white"
+          [routerLink]="[navLink.url]"
+          routerLinkActive="bg-primary">
+          {{ navLink.name }}
+        </p>
+      }
     }
   </div>
 }

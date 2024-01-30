@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 
@@ -9,10 +9,9 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
   standalone: true,
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
-  imports: [AvatarModule, AvatarGroupModule, NgClass, RouterLink],
+  imports: [AvatarModule, AvatarGroupModule, NgClass, RouterLink, RouterLinkActive],
 })
 export class NavbarComponent {
-  isNavbarHidden = false;
   isLogged = true;
   navbarLinks = [
     {
@@ -21,15 +20,15 @@ export class NavbarComponent {
     },
     {
       name: 'Bussiness Intelligence Dashboard',
-      url: '/',
+      url: '/bussiness',
     },
     {
       name: 'FAQ',
-      url: '/',
+      url: 'https://cgiar-prms.notion.site/732dccbbf1aa497998e1014b6f0ff23d?v=353021775b8441499a6c20cad279da24',
     },
     {
       name: 'Admin Panel',
-      url: '/',
+      url: '/admin-panel',
     },
     {
       name: 'About',
