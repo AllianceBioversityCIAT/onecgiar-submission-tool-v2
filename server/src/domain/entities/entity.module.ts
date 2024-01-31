@@ -17,10 +17,11 @@ import { UserRoleEntitiesModule } from './user-role-entities/user-role-entities.
 import { EntityCentersModule } from './entity-centers/entity-centers.module';
 import { EntityImpactAreasModule } from './entity-impact-areas/entity-impact-areas.module';
 import { EntityDiagramImagesModule } from './entity-diagram-images/entity-diagram-images.module';
+import { EntitiesRepository } from '../../db/repositories/entities.repository';
 
 @Module({
   controllers: [EntityController],
-  providers: [EntityService],
+  providers: [EntityService, EntitiesRepository],
   imports: [
     GeneralInformationModule,
     ContextModule,
@@ -39,5 +40,6 @@ import { EntityDiagramImagesModule } from './entity-diagram-images/entity-diagra
     EntityImpactAreasModule,
     EntityDiagramImagesModule,
   ],
+  exports: [EntitiesRepository],
 })
 export class EntityModule {}

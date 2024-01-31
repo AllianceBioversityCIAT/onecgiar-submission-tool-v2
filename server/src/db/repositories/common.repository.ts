@@ -7,4 +7,16 @@ export class CommonSearchRepository<T> {
       return entities as Promise<T[]>;
     });
   }
+
+  static save<T>(
+    dataSource: DataSource,
+    entity: Function,
+    data: T[] | T,
+    reload: boolean = false,
+  ): Promise<T[]> {
+    return dataSource.transaction(async (manager) => {
+      const entities = manager.getRepository(entity).save(data, { reload });
+      return entities as Promise<T[]>;
+    });
+  }
 }
