@@ -1,9 +1,19 @@
 export class QueryUtil {
-  static buildQueryWhere(params: Record<string, Record<string, any>>) {
+  static buildQueryWhere(
+    params: Record<string, Record<string, any>>,
+    customConditionals?: Record<string, string[]>,
+  ) {
     let config: any = {
       where: '1 = 1 ',
       attr: {},
     };
+
+    for (const [tableAlias, values] of Object.entries(customConditionals)) {
+      config.where += values.reduce(
+        (acc, value) => `${acc} AND ${tableAlias}.${value} `,
+        '',
+      );
+    }
 
     for (const [tableAlias, tableParams] of Object.entries(params)) {
       for (const [key, value] of Object.entries(tableParams)) {

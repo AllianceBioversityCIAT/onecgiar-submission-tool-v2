@@ -3,14 +3,14 @@ import { ServiceResponseDto } from '../../../domain/shared/global-dto/service-re
 import { ClarisaActionArea } from './entities/clarisa-action-area.entity';
 import { DataSource } from 'typeorm';
 import { ResponseUtils } from '../../../domain/shared/utils/response.utils';
-import { CommonSearchRepository } from '../../../db/repositories/common.repository';
+import { CommonRepository } from '../../../db/repositories/common.repository';
 
 @Injectable()
 export class ClarisaActionAreasService {
   constructor(private readonly dataSource: DataSource) {}
 
   find(): Promise<ServiceResponseDto<ClarisaActionArea[]>> {
-    const res = CommonSearchRepository.findAll<ClarisaActionArea>(
+    const res = CommonRepository.findAll<ClarisaActionArea>(
       this.dataSource,
       ClarisaActionArea,
     );

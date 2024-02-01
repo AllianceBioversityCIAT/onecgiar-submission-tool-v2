@@ -3,7 +3,6 @@ import { ClarisaCgiarEntityTypesModule } from './clarisa-cgiar-entity-types/clar
 import { ClarisaTaskService } from './clarisa-task.service';
 import { HttpModule } from '@nestjs/axios';
 import { ResultsSdgTargetRepository } from '../../db/repositories/clarisa-cgiar-entity-type.repository';
-import { ClarisaCgiarSubEntityTypesModule } from './clarisa-cgiar-sub-entity-types/clarisa-cgiar-sub-entity-types.module';
 import { ClarisaActionAreasModule } from './clarisa-action-areas/clarisa-action-areas.module';
 import { ClarisaTaskController } from './clarisa-task.controller';
 import { ClarisaCountriesModule } from './clarisa-countries/clarisa-countries.module';
@@ -16,7 +15,6 @@ const repository = [ResultsSdgTargetRepository];
   imports: [
     ClarisaCgiarEntityTypesModule,
     HttpModule,
-    ClarisaCgiarSubEntityTypesModule,
     ClarisaActionAreasModule,
     ClarisaCountriesModule,
     ClarisaRegionsModule,

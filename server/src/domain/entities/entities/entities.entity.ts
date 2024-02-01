@@ -4,25 +4,28 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ClarisaCgiarEntityType } from '../../../tools/clarisa/clarisa-cgiar-entity-types/entities/clarisa-cgiar-entity-type.entity';
-import { EntityLevel2 } from '../entity-level-2/entities/entity-level-2.entity';
 import { AuditableEntity } from '../../shared/global-dto/auditable.entity';
 import { UserRoleEntity } from '../user-role-entities/entities/user-role-entity.entity';
 import { EntityCenter } from '../entity-centers/entities/entity-center.entity';
 import { EntityImpactArea } from '../entity-impact-areas/entities/entity-impact-area.entity';
-import { ClarisaActionArea } from '../../../tools/clarisa/clarisa-action-areas/entities/clarisa-action-area.entity';
 import { EntityDiagramImage } from '../entity-diagram-images/entities/entity-diagram-image.entity';
+import { InitiativeDetail } from '../initiative-details/entities/initiative-detail.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('entities')
 export class Entities extends AuditableEntity {
+  @ApiProperty()
   @PrimaryGeneratedColumn({
     type: 'bigint',
     name: 'entity_id',
   })
   entity_id: number;
 
+  @ApiProperty()
   @Column({
     type: 'text',
     name: 'name',
@@ -30,6 +33,7 @@ export class Entities extends AuditableEntity {
   })
   name!: string;
 
+  @ApiProperty()
   @Column({
     type: 'text',
     name: 'short_name',
@@ -37,6 +41,7 @@ export class Entities extends AuditableEntity {
   })
   short_name!: string;
 
+  @ApiProperty()
   @Column({
     type: 'text',
     name: 'description',
@@ -44,6 +49,7 @@ export class Entities extends AuditableEntity {
   })
   description!: string;
 
+  @ApiProperty()
   @Column({
     type: 'text',
     name: 'official_code',
@@ -51,6 +57,7 @@ export class Entities extends AuditableEntity {
   })
   official_code!: string;
 
+  @ApiProperty()
   @Column({
     type: 'text',
     name: 'phase_id',
@@ -58,6 +65,7 @@ export class Entities extends AuditableEntity {
   })
   phase_id!: string;
 
+  @ApiProperty()
   @Column({
     type: 'bigint',
     name: 'clarisa_cgiar_entity_type_id',
@@ -65,66 +73,33 @@ export class Entities extends AuditableEntity {
   })
   entity_type_id: number;
 
+  @ApiProperty()
   @Column({
-    name: 'lead_name',
-    type: 'text',
-    nullable: true,
-  })
-  lead_name!: string;
-
-  @Column({
-    name: 'lead_email',
-    type: 'text',
-    nullable: true,
-  })
-  lead_email!: string;
-
-  @Column({
-    name: 'co_lead_name',
-    type: 'text',
-    nullable: true,
-  })
-  co_lead_name!: string;
-
-  @Column({
-    name: 'co_lead_email',
-    type: 'text',
-    nullable: true,
-  })
-  co_lead_email!: string;
-
-  @Column({
-    name: 'budget',
-    type: 'decimal',
-    precision: 12,
-    scale: 2,
-    nullable: true,
-  })
-  budget!: number;
-
-  @Column({
-    name: 'clarisa_primary_action_area_id',
     type: 'bigint',
+    name: 'parent_entity_id',
     nullable: true,
   })
-  clarisa_primary_action_area_id!: number;
-
-  @Column({
-    name: 'executive_summary_html',
-    type: 'text',
-    nullable: true,
-  })
-  executive_summary_html!: string;
-
-  @Column({
-    name: 'executive_summary',
-    type: 'text',
-    nullable: true,
-  })
-  executive_summary!: string;
+  parent_entity_id!: number;
 
   //--- relations
 
+  @ApiProperty({ type: () => Entities })
+  @ManyToOne(() => Entities, (entity) => entity.child_entity_array)
+  @JoinColumn({ name: 'parent_entity_id' })
+  parent_entity_obj!: Entities;
+
+  @ApiProperty({ type: () => Entities, isArray: true })
+  @OneToMany(() => Entities, (entity) => entity.parent_entity_obj)
+  child_entity_array!: Entities[];
+
+  @ApiProperty({ type: () => InitiativeDetail })
+  @OneToOne(
+    () => InitiativeDetail,
+    (initiativeDetail) => initiativeDetail.entity_obj,
+  )
+  initiative_detail_obj!: InitiativeDetail;
+
+  @ApiProperty({ type: () => ClarisaCgiarEntityType })
   @ManyToOne(
     () => ClarisaCgiarEntityType,
     (entity_type) => entity_type.entities_array,
@@ -132,28 +107,25 @@ export class Entities extends AuditableEntity {
   @JoinColumn({ name: 'clarisa_cgiar_entity_type_id' })
   entity_type_obj!: ClarisaCgiarEntityType;
 
-  @ManyToOne(() => ClarisaActionArea, (action_area) => action_area.entity_array)
-  @JoinColumn({ name: 'clarisa_primary_action_area_id' })
-  clarisa_primary_action_area_obj!: ClarisaActionArea;
-
-  @OneToMany(() => EntityLevel2, (entity_level_2) => entity_level_2.entity_obj)
-  entity_level_2_array!: EntityLevel2[];
-
+  @ApiProperty({ type: () => UserRoleEntity })
   @OneToMany(
     () => UserRoleEntity,
     (UserRoleEntity) => UserRoleEntity.entity_obj,
   )
   user_role_entity_array!: UserRoleEntity[];
 
+  @ApiProperty({ type: () => EntityCenter })
   @OneToMany(() => EntityCenter, (entity_center) => entity_center.entity_obj)
   entity_center_array!: EntityCenter[];
 
+  @ApiProperty({ type: () => EntityImpactArea })
   @OneToMany(
     () => EntityImpactArea,
     (entity_impact_area) => entity_impact_area.entity_obj,
   )
   entity_impact_area_array!: EntityImpactArea[];
 
+  @ApiProperty({ type: () => EntityDiagramImage })
   @OneToMany(
     () => EntityDiagramImage,
     (entity_diagram_image) => entity_diagram_image.entity_obj,

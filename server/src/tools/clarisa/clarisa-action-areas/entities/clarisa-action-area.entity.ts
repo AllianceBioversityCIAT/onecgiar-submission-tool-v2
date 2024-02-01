@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { Entities } from '../../../../domain/entities/entities/entities.entity';
+import { InitiativeDetail } from '../../../../domain/entities/initiative-details/entities/initiative-detail.entity';
 
 @Entity('clarisa_action_areas')
 export class ClarisaActionArea {
@@ -27,8 +28,8 @@ export class ClarisaActionArea {
   //--- relations
 
   @OneToMany(
-    () => Entities,
-    (entities) => entities.clarisa_primary_action_area_obj,
+    () => InitiativeDetail,
+    (init) => init.clarisa_primary_action_area_obj,
   )
-  entity_array: Entities[];
+  initiative_array: Entities[];
 }

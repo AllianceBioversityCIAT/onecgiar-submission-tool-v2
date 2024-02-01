@@ -28,6 +28,12 @@ export class EntitiesRepository extends Repository<Entities> {
           'edia',
           'edia.is_active = true',
         )
+        .leftJoinAndSelect(
+          'entities.initiative_detail_obj',
+          'ido',
+          'ido.is_active = true',
+        )
+        .leftJoinAndSelect('ido.clarisa_primary_action_area_obj', 'cpaai')
         .where(
           'entities.is_active = true AND entities.entity_id = :entity_id',
           { entity_id },
