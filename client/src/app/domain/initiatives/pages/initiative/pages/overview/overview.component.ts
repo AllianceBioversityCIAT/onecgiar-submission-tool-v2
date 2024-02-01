@@ -3,6 +3,7 @@ import { FieldContainerDirective } from '../../../../../shared/directives/field-
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @Component({
   selector: 'app-overview',
@@ -12,6 +13,7 @@ import { DropdownModule } from 'primeng/dropdown';
     FieldContainerDirective,
     FormsModule,
     DropdownModule,
+    InputTextareaModule,
   ],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.scss',
