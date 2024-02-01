@@ -17,7 +17,7 @@ export class InitiativeDetailRepository extends Repository<InitiativeDetail> {
         entity_initiative_id: entity_id,
         entity_obj: { is_active: true },
       },
-      select: select,
+      select: ['entity_initiative_id', ...select],
     });
   }
 }
