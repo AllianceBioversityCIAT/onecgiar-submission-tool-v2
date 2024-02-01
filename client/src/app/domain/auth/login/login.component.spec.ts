@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ActivatedRoute } from '@angular/router';
 import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
@@ -8,10 +8,21 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginComponent]
-    })
-    .compileComponents();
-    
+      imports: [LoginComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: jest.fn().mockReturnValue('mockAwsToken'),
+              },
+            },
+          },
+        },
+      ],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
