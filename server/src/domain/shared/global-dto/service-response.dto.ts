@@ -8,6 +8,7 @@ export class ServiceResponseDto<T> {
   @ApiProperty({
     description:
       'The data field can contain different types of data depending on the context.',
+    type: () => Object,
   })
   data?: T;
 
