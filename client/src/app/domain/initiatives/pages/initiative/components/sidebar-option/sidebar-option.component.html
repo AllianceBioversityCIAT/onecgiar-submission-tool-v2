@@ -1,0 +1,22 @@
+<div #parent class="
+  cursor-pointer text-white border-round-sm text-sm p-1 pl-2 mb-2
+  flex justify-content-between	align-items-center
+  transition-all transition-duration-500 hover:surface-700 {{option?.expand && 'bg-black-alpha-30'}}"
+  [routerLink]="option?.children?.length ? undefined:['/'+option.route]" (click)="
+  option.expand=!option.expand">
+  {{option.label}}
+  @if (option?.children?.length) {
+  <div class="transition-all animation-duration-200 {{option?.expand && 'rotate-180'}}">
+    <i class="material-icons-round">
+      expand_more
+    </i>
+  </div>
+  }
+</div>
+<div #ref class="flex flex-column pl-2 overflow-hidden"
+  [@expand]="option?.children?.length ? (option?.expand?'expand_more':'expand_less') : null">
+  @for (itemOption of option.children; track $index) {
+  <div app-sidebar-option [option]="itemOption">
+  </div>
+  }
+</div>

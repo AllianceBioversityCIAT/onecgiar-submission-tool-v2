@@ -1,0 +1,19 @@
+<div class="grid grid-nogutter">
+  <div class="col-fixed p-0 bg-gray-900" style="min-width: 300px; min-height: calc(100vh - 200px)">
+    <app-sidebar />
+  </div>
+  <div class="col min-h-screen p-3">
+    <div class="border-1 border-round-xl" style="background-color: #f7f8f9; border-color: #f7f8f9">
+      <div class="bg-primary px-4 py-2 text-base border-round-xl border-noround-bottom">
+        Breadcrumb
+      </div>
+
+      <h1
+        class="text-xl font-semibold px-4 py-3 bg-primary w-max border-round-xl border-noround-top"
+        style="border-bottom-left-radius: 0 !important">
+        Challenge statement
+      </h1>
+      <router-outlet />
+    </div>
+  </div>
+</div>

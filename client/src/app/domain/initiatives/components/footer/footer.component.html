@@ -1,0 +1,30 @@
+<footer
+  class="flex align-items-center justify-content-center gap-4 p-3 bg-primary"
+>
+  <img
+    src="/assets/cgiar_logo.svg"
+    alt="CGIAR System Organization"
+    class="w-3rem"
+  />
+  <div
+    class="flex flex-column align-items-centerc justify-content-center gap-2"
+  >
+    <div class="flex align-items-center justify-content-center gap-3">
+      <p class="no-underline text-base text-white font-bold">Contact Us</p>
+      @for (footerLink of footerLinks; track footerLink.label) {
+        <a
+          [href]="footerLink.link"
+          class="no-underline text-base text-white font-bold"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {{ footerLink.label }}
+        </a>
+      }
+    </div>
+
+    <div class="text-sm font-normal">
+      © 2023 CGIAR System Organization. All rights reserved.
+    </div>
+  </div>
+</footer>

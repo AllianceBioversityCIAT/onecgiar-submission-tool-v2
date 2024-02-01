@@ -1,0 +1,54 @@
+<div class="grid p-4">
+  <div class="col-6" fieldContainer label="Short name" [maxwords]="3">
+    <input
+      type="text"
+      pInputText
+      [(ngModel)]="body().value1"
+      (ngModelChange)="updateSignal($event, 'value1')" />
+  </div>
+  <div
+    class="col-12"
+    fieldContainer
+    label="Short Initiative name"
+    [maxwords]="50"
+    [signalBody]="this.body"
+    bodyValue="value2">
+    <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="body().value1"></textarea>
+  </div>
+
+  <div class="col-6" fieldContainer label="Lead name and email">
+    <p-dropdown
+      [options]="cities()"
+      [(ngModel)]="body().city"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Select a City"></p-dropdown>
+  </div>
+
+  <div class="col-6" fieldContainer label="Co-Lead name and email">
+    <p-dropdown
+      [options]="cities()"
+      [(ngModel)]="body().city"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Select a City"></p-dropdown>
+  </div>
+
+  <div class="col-6" fieldContainer label="Primary CGIAR Action Area">
+    <p-dropdown
+      [options]="cities()"
+      [(ngModel)]="body().city"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Select a City"></p-dropdown>
+  </div>
+
+  <div class="col-6" fieldContainer label="Budget USD">
+    <p-dropdown
+      [options]="cities()"
+      [(ngModel)]="body().city"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Select a City"></p-dropdown>
+  </div>
+</div>
