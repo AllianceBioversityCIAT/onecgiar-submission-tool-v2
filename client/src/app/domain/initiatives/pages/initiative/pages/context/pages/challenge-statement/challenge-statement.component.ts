@@ -13,8 +13,4 @@ import { FieldContainerDirective } from '../../../../../../../shared/directives/
 })
 export class ChallengeStatementComponent {
   inputText: string | undefined = '';
-
-  handleSubmit() {
-    console.log(this.inputText);
-  }
 }

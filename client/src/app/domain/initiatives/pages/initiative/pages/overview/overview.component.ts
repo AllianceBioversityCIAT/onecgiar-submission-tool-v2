@@ -34,8 +34,6 @@ export class OverviewComponent {
   ]);
 
   updateSignal(e: any, signalName: string) {
-    // console.log(signalName);
-    // console.log(e);
     this.body.update((prev) => ({ ...prev, [signalName]: e }));
   }
 }

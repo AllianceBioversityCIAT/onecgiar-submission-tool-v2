@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class InitiativesService {
@@ -94,31 +93,7 @@ export class InitiativesService {
     ];
   }
 
-  constructor(private http: HttpClient) {}
-
-  getInitiativesMini() {
-    return Promise.resolve(this.getData().slice(0, 5));
-  }
-
-  getInitiativesSmall() {
-    return Promise.resolve(this.getData().slice(0, 10));
-  }
-
-  getInitiativesMedium() {
-    return Promise.resolve(this.getData().slice(0, 50));
-  }
-
   getInitiativesLarge() {
     return Promise.resolve(this.getData().slice(0, 200));
-  }
-
-  getInitiativesXLarge() {
-    return Promise.resolve(this.getData());
-  }
-
-  getInitiatives(params?: any) {
-    return this.http
-      .get<any>('https://www.primefaces.org/data/customers', { params: params })
-      .toPromise();
   }
 }

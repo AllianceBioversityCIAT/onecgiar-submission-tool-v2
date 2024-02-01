@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidebarOptionComponent } from './sidebar-option.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SidebarOptionComponent', () => {
   let component: SidebarOptionComponent;
@@ -8,13 +9,11 @@ describe('SidebarOptionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SidebarOptionComponent]
-    })
-    .compileComponents();
-    
+      imports: [SidebarOptionComponent, RouterTestingModule],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(SidebarOptionComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
