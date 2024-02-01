@@ -12,7 +12,6 @@ export class LoginComponent {
   private activatedRoute = inject(ActivatedRoute);
 
   constructor() {
-    const awsToken = this.activatedRoute.snapshot.paramMap.get('awsToken');
-    console.log(awsToken);
+    this.activatedRoute.snapshot.paramMap.get('awsToken');
   }
 }

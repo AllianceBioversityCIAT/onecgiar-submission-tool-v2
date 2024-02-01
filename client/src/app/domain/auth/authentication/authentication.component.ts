@@ -15,16 +15,15 @@ export class AuthenticationComponent {
   api = inject(ApiService);
 
   ngOnInit(): void {
-    const awsToken = this.activatedRoute.snapshot.paramMap.get('awsToken');
-    console.log(awsToken);
-    this.getExample();
-    setTimeout(() => {
-      console.log('hello');
-    }, 3000);
+    const { code } = this.activatedRoute.snapshot.queryParams || {};
+    this.login(code);
+  }
+
+  async login(code: string) {
+    await this.api.login(code);
   }
 
   async getExample() {
-    const response = await this.api.getExample();
-    console.log(response);
+    await this.api.getExample();
   }
 }
