@@ -6,6 +6,8 @@ import { DecodedUserData } from '../interfaces/responses.interface';
 })
 export class GlobalVariablesService {
   currentInitiativeId = signal('');
+  isSavingSection = signal(false);
+
   decodedUserData: WritableSignal<DecodedUserData> = signal(
     JSON.parse(localStorage.getItem('decoded') ?? '{}') ?? {},
   );

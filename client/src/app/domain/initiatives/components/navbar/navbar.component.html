@@ -1,5 +1,5 @@
 <nav
-  class="flex align-items-center justify-content-between p-3 w-full bg-bluegray-900 text-white px-8"
+  class="flex align-items-center justify-content-between p-3 w-full bg-bluegray-900 text-white px-5"
   [ngClass]="{ 'sticky top-0': !this.globalVars.decodedUserData().isLogged }">
   <img
     src="/assets/cgiar_logo.svg"
@@ -37,7 +37,7 @@
 
 @if (this.globalVars.decodedUserData().isLogged) {
   <div
-    class="sticky top-0 px-2 py-2 flex gap-3 align-items-center w-full overflow-y-auto bg-bluegray-900 text-white z-5 px-8">
+    class="sticky top-0 px-2 py-2 flex gap-3 align-items-center w-full overflow-y-auto bg-bluegray-900 text-white z-5 px-5">
     @for (navLink of navbarLinks; track navLink.name) {
       @if (navLink.name === 'FAQ') {
         <a
