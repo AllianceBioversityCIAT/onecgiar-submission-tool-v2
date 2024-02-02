@@ -6,6 +6,7 @@ import { ServiceResponseDto } from '../shared/global-dto/service-response.dto';
 import { Entities } from './entities/entities.entity';
 import { get } from 'http';
 import { InitiativeDetail } from './initiative-details/entities/initiative-detail.entity';
+import { BodySaveOverviewDoc } from './dto/body-save-overview.doc';
 
 @ApiTags('Entity')
 @Controller()
@@ -32,6 +33,7 @@ export class EntityController {
   }
 
   @Patch(':id([0-9]+)/overview-summary/save')
+  @ApiBody({ type: BodySaveOverviewDoc })
   saveOverviewSummary(
     @Body() saveOverviewDto: saveOverviewDto,
     @Param('id') id: string,

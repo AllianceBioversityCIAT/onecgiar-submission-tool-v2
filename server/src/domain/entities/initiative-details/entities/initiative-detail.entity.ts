@@ -2,9 +2,11 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 import { Entities } from '../../entities/entities.entity';
 import { AuditableEntity } from '../../../shared/global-dto/auditable.entity';
 import { ClarisaActionArea } from '../../../../tools/clarisa/clarisa-action-areas/entities/clarisa-action-area.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('initiative_details')
 export class InitiativeDetail extends AuditableEntity {
+  @ApiProperty()
   @Column({
     type: 'bigint',
     name: 'entity_initiative_id',
@@ -13,6 +15,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   entity_initiative_id: number;
 
+  @ApiProperty()
   @Column({
     name: 'lead_name',
     type: 'text',
@@ -20,6 +23,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   lead_name!: string;
 
+  @ApiProperty()
   @Column({
     name: 'lead_email',
     type: 'text',
@@ -27,6 +31,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   lead_email!: string;
 
+  @ApiProperty()
   @Column({
     name: 'co_lead_name',
     type: 'text',
@@ -34,6 +39,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   co_lead_name!: string;
 
+  @ApiProperty()
   @Column({
     name: 'co_lead_email',
     type: 'text',
@@ -41,6 +47,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   co_lead_email!: string;
 
+  @ApiProperty()
   @Column({
     name: 'budget',
     type: 'decimal',
@@ -50,6 +57,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   budget!: number;
 
+  @ApiProperty()
   @Column({
     name: 'clarisa_primary_action_area_id',
     type: 'bigint',
@@ -57,6 +65,8 @@ export class InitiativeDetail extends AuditableEntity {
   })
   clarisa_primary_action_area_id!: number;
 
+  @ApiProperty()
+  @ApiProperty()
   @Column({
     name: 'executive_summary_html',
     type: 'text',
@@ -64,6 +74,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   executive_summary_html!: string;
 
+  @ApiProperty()
   @Column({
     name: 'executive_summary',
     type: 'text',
@@ -71,6 +82,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   executive_summary!: string;
 
+  @ApiProperty()
   @Column({
     name: 'challenge_statement_html',
     type: 'text',
@@ -78,6 +90,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   challenge_statement_html!: string;
 
+  @ApiProperty()
   @Column({
     name: 'challenge_statement',
     type: 'text',
@@ -85,6 +98,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   challenge_statement!: string;
 
+  @ApiProperty()
   @Column({
     name: 'measurable_three_year_html',
     type: 'text',
@@ -92,6 +106,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   measurable_three_year_html!: string;
 
+  @ApiProperty()
   @Column({
     name: 'measurable_three_year',
     type: 'text',
@@ -99,6 +114,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   measurable_three_year!: string;
 
+  @ApiProperty()
   @Column({
     name: 'p25_initiative_model_html',
     type: 'text',
@@ -106,6 +122,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   p25_initiative_model_html!: string;
 
+  @ApiProperty()
   @Column({
     name: 'p25_initiative_model',
     type: 'text',
@@ -113,6 +130,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   p25_initiative_model!: string;
 
+  @ApiProperty()
   @Column({
     name: 'comparative_advantage_html',
     type: 'text',
@@ -120,6 +138,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   comparative_advantage_html!: string;
 
+  @ApiProperty()
   @Column({
     name: 'comparative_advantage',
     type: 'text',
@@ -127,6 +146,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   comparative_advantage!: string;
 
+  @ApiProperty()
   @Column({
     name: 'prior_evaluations_impact_assessments_html',
     type: 'text',
@@ -134,6 +154,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   prior_evaluations_impact_assessments_html!: string;
 
+  @ApiProperty()
   @Column({
     name: 'prior_evaluations_impact_assessments',
     type: 'text',
@@ -141,6 +162,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   prior_evaluations_impact_assessments!: string;
 
+  @ApiProperty()
   @Column({
     name: 'priority_setting_html',
     type: 'text',
@@ -148,6 +170,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   priority_setting_html!: string;
 
+  @ApiProperty()
   @Column({
     name: 'priority_setting',
     type: 'text',
@@ -155,6 +178,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   priority_setting!: string;
 
+  @ApiProperty()
   @Column({
     name: 'participatory_desing_process_html',
     type: 'text',
@@ -162,6 +186,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   participatory_desing_process_html!: string;
 
+  @ApiProperty()
   @Column({
     name: 'participatory_desing_process',
     type: 'text',
@@ -169,6 +194,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   participatory_desing_process!: string;
 
+  @ApiProperty()
   @Column({
     name: 'partnerships_html',
     type: 'text',
@@ -176,6 +202,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   partnerships_html!: string;
 
+  @ApiProperty()
   @Column({
     name: 'partnerships',
     type: 'text',
@@ -183,6 +210,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   partnerships!: string;
 
+  @ApiProperty()
   @Column({
     name: ' portfolio_linkages_html',
     type: 'text',
@@ -190,6 +218,7 @@ export class InitiativeDetail extends AuditableEntity {
   })
   portfolio_linkages_html!: string;
 
+  @ApiProperty()
   @Column({
     name: 'portfolio_linkages',
     type: 'text',

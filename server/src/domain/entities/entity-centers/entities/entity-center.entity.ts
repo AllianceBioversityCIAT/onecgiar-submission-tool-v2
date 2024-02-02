@@ -8,15 +8,18 @@ import {
 import { AuditableEntity } from '../../../shared/global-dto/auditable.entity';
 import { Entities } from '../../entities/entities.entity';
 import { ClarisaCgiarEntity } from '../../../../tools/clarisa/clarisa-cgiar-entities/entities/clarisa-cgiar-entity.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('entity_centers')
 export class EntityCenter extends AuditableEntity {
+  @ApiProperty()
   @PrimaryGeneratedColumn({
     name: 'entity_center_id',
     type: 'bigint',
   })
   entity_center_id: number;
 
+  @ApiProperty()
   @Column({
     name: 'entity_id',
     type: 'bigint',
@@ -24,6 +27,7 @@ export class EntityCenter extends AuditableEntity {
   })
   entity_id: number;
 
+  @ApiProperty()
   @Column({
     type: 'varchar',
     length: 15,
