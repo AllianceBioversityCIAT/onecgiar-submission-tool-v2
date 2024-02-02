@@ -1,16 +1,18 @@
-import { Controller, HttpStatus, Post, UseGuards } from '@nestjs/common';
+import { Controller, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import {
-  ApiBasicAuth,
   ApiBearerAuth,
   ApiDefaultResponse,
+  ApiHeader,
+  ApiOperation,
   ApiTags,
+  PartialType,
 } from '@nestjs/swagger';
 import { SearchRequest } from '../shared/decorators/search-request.decorator';
-import { ResponseUtils } from '../shared/utils/response.utils';
 import { CognitoProfileDto } from '../shared/global-dto/cognito-profile.dto';
 import { ServiceResponseDto } from '../shared/global-dto/service-response.dto';
 import { AuthService } from './auth.service';
+import { ServerResponseDto } from '../shared/global-dto/server-response.dto';
 
 @ApiTags('Auth')
 @Controller()
@@ -18,8 +20,16 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @ApiBearerAuth()
+  @ApiOperation({
+    description: 'This endpoint requires Bearer authentication.',
+    summary: 'AWS Cognito authentication',
+  })
+  @ApiHeader({
+    name: 'authorization',
+    description: 'Bearer <token>',
+  })
   @ApiDefaultResponse({
-    type: ServiceResponseDto<CognitoProfileDto>,
+    type: ServerResponseDto<string>,
   })
   @UseGuards(AuthGuard('cognito'))
   @Post('login')

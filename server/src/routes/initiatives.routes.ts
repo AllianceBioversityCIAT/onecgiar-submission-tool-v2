@@ -10,8 +10,13 @@ import { MeliaModule } from '../domain/entities/melia/melia.module';
 import { RiskAssessmentModule } from '../domain/entities/risk-assessment/risk-assessment.module';
 import { TheoryOfChangeModule } from '../domain/entities/theory-of-change/theory-of-change.module';
 import { PeopleAndCultureModule } from '../domain/entities/people-and-culture/people-and-culture.module';
+import { InitiativeDetailsModule } from '../domain/entities/initiative-details/initiative-details.module';
 
 const children: Routes = [
+  {
+    path: ':id([0-9]+)/initiative-details',
+    module: InitiativeDetailsModule,
+  },
   {
     path: 'climate',
     module: ClimateModule,
