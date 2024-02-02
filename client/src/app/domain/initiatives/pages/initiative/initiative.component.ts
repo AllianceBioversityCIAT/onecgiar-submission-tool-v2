@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { InitiativeService } from './services/initiative.service';
+import { GlobalVariablesService } from '../../../shared/services/global-variables.service';
 
 @Component({
   selector: 'app-initiative',
@@ -9,13 +9,14 @@ import { InitiativeService } from './services/initiative.service';
   imports: [RouterModule, SidebarComponent],
   templateUrl: './initiative.component.html',
   styleUrl: './initiative.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InitiativeComponent {
   private activatedRoute = inject(ActivatedRoute);
-  private initiativeSE = inject(InitiativeService);
+  private globalVars = inject(GlobalVariablesService);
 
-  constructor() {
-    this.initiativeSE.currentInitiativeId.set(
+  ngOnInit(): void {
+    this.globalVars.currentInitiativeId.set(
       this.activatedRoute.snapshot.paramMap.get('initiativeId') ?? '',
     );
   }

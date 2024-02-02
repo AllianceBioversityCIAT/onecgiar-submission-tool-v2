@@ -1,8 +1,9 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
+import { GlobalVariablesService } from '../../../shared/services/global-variables.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,8 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
   imports: [AvatarModule, AvatarGroupModule, NgClass, RouterLink, RouterLinkActive],
 })
 export class NavbarComponent {
-  isLogged = true;
+  globalVars = inject(GlobalVariablesService);
+  router = inject(Router);
   navbarLinks = [
     {
       name: 'Initiatives',
@@ -35,4 +37,15 @@ export class NavbarComponent {
       url: '/about',
     },
   ];
+
+  logout() {
+    localStorage.clear();
+    this.globalVars.decodedUserData.set({ isLogged: false });
+  }
+
+  login() {
+    const queryParams = { code: 'ca2507b8-4978-4141-9c49-0488a3764f31' };
+
+    this.router.navigate(['/authentication'], { queryParams: queryParams });
+  }
 }

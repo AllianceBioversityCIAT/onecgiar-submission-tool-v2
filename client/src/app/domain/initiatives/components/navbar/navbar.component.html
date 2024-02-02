@@ -1,6 +1,6 @@
 <nav
-  class="flex align-items-center justify-content-between p-3 w-full bg-bluegray-900 text-white"
-  [ngClass]="{ 'sticky top-0': !isLogged }">
+  class="flex align-items-center justify-content-between p-3 w-full bg-bluegray-900 text-white px-8"
+  [ngClass]="{ 'sticky top-0': !this.globalVars.decodedUserData().isLogged }">
   <img
     src="/assets/cgiar_logo.svg"
     alt="CGIAR System Organization"
@@ -8,22 +8,25 @@
     routerLink="/home" />
 
   <div class="flex align-items-center justify-content-between gap-4">
-    @if (isLogged) {
+    @if (this.globalVars.decodedUserData().isLogged) {
       <div class="flex align-items-center border">
         <p-avatar
-          label="V"
+          [label]="globalVars.decodedUserData().letter || '?'"
           styleClass="mr-2"
           size="normal"
           shape="circle"
           [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"></p-avatar>
 
-        <p class="m-0 text-sm">Prueba's name</p>
+        <p class="m-0 text-sm">
+          {{ globalVars.decodedUserData().last_name }} {{ globalVars.decodedUserData().first_name }}
+        </p>
       </div>
     }
 
     <div
+      (click)="this.globalVars.decodedUserData().isLogged ? this.logout() : this.login()"
       class="text-sm py-2 px-3 m-0 border-round cursor-pointer bg-primary hover:bg-white hover:transition-colors hover:text-primary">
-      @if (isLogged) {
+      @if (this.globalVars.decodedUserData().isLogged) {
         Logout
       } @else {
         Login
@@ -32,9 +35,9 @@
   </div>
 </nav>
 
-@if (isLogged) {
+@if (this.globalVars.decodedUserData().isLogged) {
   <div
-    class="sticky top-0 px-2 py-2 flex gap-3 align-items-center w-full overflow-y-auto bg-bluegray-900 text-white z-5">
+    class="sticky top-0 px-2 py-2 flex gap-3 align-items-center w-full overflow-y-auto bg-bluegray-900 text-white z-5 px-8">
     @for (navLink of navbarLinks; track navLink.name) {
       @if (navLink.name === 'FAQ') {
         <a
@@ -46,7 +49,7 @@
         </a>
       } @else {
         <p
-          class="text-sm p-2 m-0 border-round min-w-max cursor-pointer hover:bg-primary hover:transition-colors hover:text-white"
+          class="text-sm p-2 m-0 border-round min-w-max cursor-pointer hover:bg-primary hover:transition-colors hover:text-white px-3"
           [routerLink]="[navLink.url]"
           routerLinkActive="bg-primary">
           {{ navLink.name }}

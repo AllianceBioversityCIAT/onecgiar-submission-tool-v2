@@ -2,10 +2,6 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'login/:awsToken',
-    loadComponent: () => import('@auth/login/login.component').then((c) => c.LoginComponent),
-  },
-  {
     path: 'authentication',
     loadComponent: () =>
       import('@auth/authentication/authentication.component').then(

@@ -3,7 +3,7 @@ import { SidebarOptionsComponent } from '../sidebar-options/sidebar-options.comp
 import { MenuModule } from 'primeng/menu';
 import { Router } from '@angular/router';
 import { SidebarOption } from '../../../../../shared/interfaces/ui.interface';
-import { InitiativeService } from '../../services/initiative.service';
+import { GlobalVariablesService } from '../../../../../shared/services/global-variables.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +15,7 @@ import { InitiativeService } from '../../services/initiative.service';
 })
 export class SidebarComponent {
   router = inject(Router);
-  initiativeSE = inject(InitiativeService);
+  globalVars = inject(GlobalVariablesService);
   options: Signal<SidebarOption[]> = computed(() => {
     // this.initiativeSE.currentInitiativeId() +
     let options = [
@@ -98,7 +98,7 @@ export class SidebarComponent {
       });
     };
 
-    addInitiativeId(options, `initiative/${this.initiativeSE.currentInitiativeId()}`);
+    addInitiativeId(options, `initiative/${this.globalVars.currentInitiativeId()}`);
 
     return options;
   });

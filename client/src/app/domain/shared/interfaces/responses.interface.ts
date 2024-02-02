@@ -16,3 +16,13 @@ export interface LoginRes {
   timestamp: string;
   path: string;
 }
+
+export interface DecodedUserData {
+  user_id?: number;
+  first_name?: string;
+  last_name?: string;
+  iat?: number;
+  exp?: number;
+  letter?: string;
+  isLogged: boolean;
+}

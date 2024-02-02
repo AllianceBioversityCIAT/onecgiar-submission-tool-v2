@@ -94,7 +94,9 @@
     </ng-template>
 
     <ng-template pTemplate="body" let-initiative>
-      <tr routerLink="/initiative/{{ initiative.id }}/overview">
+      <tr
+        routerLink="/initiative/{{ initiative.id }}/overview"
+        class="cursor-pointer transition-colors hover:bg-black-alpha-10">
         <td>
           {{ initiative.official_code }}
         </td>
