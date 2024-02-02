@@ -8,15 +8,18 @@ import {
 import { AuditableEntity } from '../../../shared/global-dto/auditable.entity';
 import { Entities } from '../../entities/entities.entity';
 import { ClarisaImpactArea } from '../../../../tools/clarisa/clarisa-impact-areas/entities/clarisa-impact-area.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('entity_impact_areas')
 export class EntityImpactArea extends AuditableEntity {
+  @ApiProperty()
   @PrimaryGeneratedColumn({
     name: 'entity_impact_area_id',
     type: 'bigint',
   })
   entity_impact_area_id: number;
 
+  @ApiProperty()
   @Column({
     name: 'entity_id',
     type: 'bigint',
@@ -24,6 +27,7 @@ export class EntityImpactArea extends AuditableEntity {
   })
   entity_id: number;
 
+  @ApiProperty()
   @Column({
     name: 'clarisa_impact_area_id',
     type: 'bigint',

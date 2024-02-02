@@ -7,15 +7,18 @@ import {
 } from 'typeorm';
 import { AuditableEntity } from '../../../shared/global-dto/auditable.entity';
 import { Entities } from '../../entities/entities.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('entity_diagram_images')
 export class EntityDiagramImage extends AuditableEntity {
+  @ApiProperty()
   @PrimaryGeneratedColumn({
     name: 'entity_diagram_image_id',
     type: 'bigint',
   })
   entity_diagram_image_id: number;
 
+  @ApiProperty()
   @Column({
     name: 'entity_id',
     type: 'bigint',
@@ -23,6 +26,7 @@ export class EntityDiagramImage extends AuditableEntity {
   })
   entity_id: number;
 
+  @ApiProperty()
   @Column({
     name: 'image_url',
     type: 'text',
