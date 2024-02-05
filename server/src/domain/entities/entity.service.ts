@@ -4,7 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { DataSource, IsNull, Not } from 'typeorm';
+import { DataSource } from 'typeorm';
 import { Entities } from './entities/entities.entity';
 import { ResponseUtils } from '../shared/utils/response.utils';
 import { QueryUtil } from '../shared/utils/query.util';
@@ -15,7 +15,6 @@ import { EntitiesRepository } from '../../db/repositories/entities.repository';
 import { ArrayUtil } from '../shared/utils/array-management.util';
 import { EntityImpactArea } from './entity-impact-areas/entities/entity-impact-area.entity';
 import { EntityCenter } from './entity-centers/entities/entity-center.entity';
-import { CommonRepository } from '../../db/repositories/common.repository';
 import { RegexUtil } from '../shared/utils/regex.utils';
 import { InitiativeDetail } from './initiative-details/entities/initiative-detail.entity';
 

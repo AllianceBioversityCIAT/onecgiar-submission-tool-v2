@@ -47,7 +47,13 @@ export class EntityController {
   }
 
   @Patch(':id([0-9]+)/overview-executive-summary/save')
-  @ApiBody({ type: InitiativeDetail })
+  @ApiBody({
+    schema: {
+      properties: {
+        executive_summary_html: { type: 'string' },
+      },
+    },
+  })
   saveOverviewExecutiveSummary(
     @Body('executive_summary_html') executive_summary: string,
     @Param('id') entity_id: string,
