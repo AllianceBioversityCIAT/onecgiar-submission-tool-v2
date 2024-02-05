@@ -35,4 +35,8 @@ export class ToPromiseService {
   get = (url: string) => {
     return this.TP(this.http.get<any>(url));
   };
+
+  patch = (url: string, body: any) => {
+    return this.TP(this.http.patch<any>(url, body));
+  };
 }
