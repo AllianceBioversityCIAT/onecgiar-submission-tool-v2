@@ -4,7 +4,10 @@
     label="Priority Setting:"
     description="Provide results from, and method used, to set priority science (research questions, methods), innovations, activities, geographies, systems, crops or other choices relevant to the Initiative."
     [maxwords]="500">
-    <p-editor [style]="{ height: '320px' }">
+    <p-editor
+      [style]="{ height: '320px' }"
+      placeholder="Enter text here..."
+      [(ngModel)]="prioritySettingsBody().priority_setting_html">
       <ng-template pTemplate="header">
         <span class="ql-formats">
           <button type="button" class="ql-bold" aria-label="Bold"></button>
@@ -15,4 +18,10 @@
       </ng-template>
     </p-editor>
   </div>
+</div>
+
+<div>
+  <pre>
+    {{ prioritySettingsBody() | json }}
+  </pre>
 </div>

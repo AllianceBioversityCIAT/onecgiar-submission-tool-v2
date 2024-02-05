@@ -1,6 +1,9 @@
 <div class="p-5">
   <div fieldContainer label="Partnerships:" description="Desc example" [maxwords]="500">
-    <p-editor [style]="{ height: '320px' }">
+    <p-editor
+      [style]="{ height: '320px' }"
+      [(ngModel)]="partnershipBody().partnerships_html"
+      placeholder="Enter partnerships here...">
       <ng-template pTemplate="header">
         <span class="ql-formats">
           <button type="button" class="ql-bold" aria-label="Bold"></button>
@@ -13,4 +16,10 @@
   </div>
 
   <h1>Table</h1>
+</div>
+
+<div>
+  <pre>
+    {{ partnershipBody() | json }}
+  </pre>
 </div>

@@ -4,7 +4,10 @@
     label="Learning from prior evaluations and Impact Assessments (IA):"
     description="Describe key learnings that have influenced the design of the Initiative, from relevant evaluations, impact assessments or other reviews whether internally or externally commissioned."
     [maxwords]="500">
-    <p-editor [style]="{ height: '320px' }">
+    <p-editor
+      [style]="{ height: '320px' }"
+      placeholder="Enter text here..."
+      [(ngModel)]="learningFPEBody().prior_evaluations_impact_assessments_html">
       <ng-template pTemplate="header">
         <span class="ql-formats">
           <button type="button" class="ql-bold" aria-label="Bold"></button>
@@ -15,4 +18,9 @@
       </ng-template>
     </p-editor>
   </div>
+</div>
+<div>
+  <pre>
+    {{ learningFPEBody() | json }}
+  </pre>
 </div>

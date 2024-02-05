@@ -1,6 +1,9 @@
 <div class="p-5">
   <div fieldContainer label="Portfolio Linkages:" description="desc example" [maxwords]="500">
-    <p-editor [style]="{ height: '320px' }">
+    <p-editor
+      [style]="{ height: '320px' }"
+      placeholder="Enter text here..."
+      [(ngModel)]="portfolioLinkagesBody().portfolio_linkages_html">
       <ng-template pTemplate="header">
         <span class="ql-formats">
           <button type="button" class="ql-bold" aria-label="Bold"></button>
@@ -13,4 +16,10 @@
   </div>
 
   <h1>Table</h1>
+</div>
+
+<div>
+  <pre>
+    {{ portfolioLinkagesBody() | json }}
+  </pre>
 </div>

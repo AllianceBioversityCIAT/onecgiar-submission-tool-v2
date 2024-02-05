@@ -4,7 +4,10 @@
     label="Measurable three-year outcomes"
     description="desc example"
     [maxwords]="400">
-    <p-editor [style]="{ height: '320px' }">
+    <p-editor
+      [style]="{ height: '320px' }"
+      placeholder="Enter measurable three-year outcomes here..."
+      [(ngModel)]="mesurableObjectivesBody().measurable_three_year_html">
       <ng-template pTemplate="header">
         <span class="ql-formats">
           <button type="button" class="ql-bold" aria-label="Bold"></button>
@@ -21,7 +24,10 @@
     label="2.2.1 The P25 Initiative model"
     description="desc example"
     [maxwords]="400">
-    <p-editor [style]="{ height: '320px' }">
+    <p-editor
+      [style]="{ height: '320px' }"
+      placeholder="Enter the P25 Initiative model here..."
+      [(ngModel)]="mesurableObjectivesBody().p25_initiative_model_html">
       <ng-template pTemplate="header">
         <span class="ql-formats">
           <button type="button" class="ql-bold" aria-label="Bold"></button>
@@ -32,4 +38,10 @@
       </ng-template>
     </p-editor>
   </div>
+</div>
+
+<div>
+  <pre>
+    {{ mesurableObjectivesBody() | json }}
+  </pre>
 </div>
