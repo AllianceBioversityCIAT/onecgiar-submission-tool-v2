@@ -61,7 +61,7 @@ export class SummaryTableComponent {
         path.reduce((acc, key) => (acc[key] = acc[key] || {}), prev)[lastKey] = value;
       };
       editDataByPathString(e);
-      return prev;
+      return { ...prev };
     });
   }
 
