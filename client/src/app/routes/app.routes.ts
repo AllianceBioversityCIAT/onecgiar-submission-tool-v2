@@ -43,6 +43,20 @@ export const routes: Routes = [
               import(
                 '../domain/initiatives/pages/initiative/pages/overview/overview.component'
               ).then((c) => c.OverviewComponent),
+            children: [
+              {
+                path: '',
+                redirectTo: 'summary-table',
+                pathMatch: 'full',
+              },
+              {
+                path: 'summary-table',
+                loadComponent: () =>
+                  import(
+                    '../domain/initiatives/pages/initiative/pages/overview/summary-table/summary-table.component'
+                  ).then((c) => c.SummaryTableComponent),
+              },
+            ],
           },
           {
             path: 'context',

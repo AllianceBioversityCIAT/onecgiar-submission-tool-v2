@@ -20,9 +20,15 @@ export class SidebarComponent {
     // this.initiativeSE.currentInitiativeId() +
     let options = [
       {
-        label: 'Overview',
+        label: '1. Overview',
         route: 'overview',
         inUnderConstruction: false,
+        children: [
+          {
+            label: '1.1 Summary Table',
+            route: 'summary-table',
+          },
+        ],
       },
       {
         label: '2. Context',
