@@ -54,7 +54,6 @@ export class OverviewComponent {
     const response = await this.api.GET_overview('1');
     console.log(response.data);
     this.api.updateSignalBody(this.body, response.data);
-    console.log(this.body());
   }
 
   async saveSection() {
@@ -62,5 +61,6 @@ export class OverviewComponent {
     const response = await this.api.PATCH_overview('1', this.body());
     console.log(response);
     this.globalVars.isSavingSection.set(false);
+    this.getSectionData();
   }
 }

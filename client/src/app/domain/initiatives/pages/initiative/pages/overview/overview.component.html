@@ -13,7 +13,7 @@
       (ngModelChange)="updateSignal($event, 'short_name')" />
   </div>
 
-  <!-- <div
+  <div
     class="col-12"
     fieldContainer
     label="Short Initiative name"
@@ -26,26 +26,41 @@
       pInputTextarea
       [(ngModel)]="body().name"
       style="resize: vertical"></textarea>
-  </div> -->
+  </div>
+
+  <div class="col-6" fieldContainer label="Lead name">
+    <input
+      [disabled]="true"
+      type="text"
+      pInputText
+      [(ngModel)]="body().initiative_detail_obj.lead_name" />
+  </div>
+
+  <div class="col-6" fieldContainer label="Lead email">
+    <input
+      [disabled]="true"
+      type="text"
+      pInputText
+      [(ngModel)]="body().initiative_detail_obj.lead_name" />
+  </div>
+
+  <div class="col-6" fieldContainer label="Co-Lead name">
+    <input
+      [disabled]="true"
+      type="text"
+      pInputText
+      [(ngModel)]="body().initiative_detail_obj.co_lead_name" />
+  </div>
+
+  <div class="col-6" fieldContainer label="Co-Lead email">
+    <input
+      [disabled]="true"
+      type="text"
+      pInputText
+      [(ngModel)]="body().initiative_detail_obj.co_lead_email" />
+  </div>
+
   <!--
-  <div class="col-6" fieldContainer label="Lead name and email">
-    <p-dropdown
-      [options]="cities()"
-      [(ngModel)]="body().city"
-      optionLabel="name"
-      [showClear]="true"
-      placeholder="Select a City"></p-dropdown>
-  </div>
-
-  <div class="col-6" fieldContainer label="Co-Lead name and email">
-    <p-dropdown
-      [options]="cities()"
-      [(ngModel)]="body().city"
-      optionLabel="name"
-      [showClear]="true"
-      placeholder="Select a City"></p-dropdown>
-  </div>
-
   <div class="col-6" fieldContainer label="Primary CGIAR Action Area">
     <p-dropdown
       [options]="cities()"
@@ -62,7 +77,7 @@
       [minFractionDigits]="0"
       [maxFractionDigits]="2"></p-inputNumber>
   </div>
-
+ <!--
   <div class="col-6" fieldContainer label="Multiple CGIAR centers">
     <p-multiSelect
       [options]="cities()"
