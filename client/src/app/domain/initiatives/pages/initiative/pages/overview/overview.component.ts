@@ -10,6 +10,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ApiService } from '../../../../../shared/services/api.service';
 import { GlobalVariablesService } from '../../../../../shared/services/global-variables.service';
 import { OverviewBody } from '../../../../../shared/models/overview-body.class';
+import { ActionAreasListService } from '../../../../../shared/services/control-lists/action-areas/action-areas-list.service';
+import { group } from '@angular/animations';
 
 @Component({
   selector: 'app-overview',
@@ -30,13 +32,12 @@ import { OverviewBody } from '../../../../../shared/models/overview-body.class';
 })
 export class OverviewComponent {
   api = inject(ApiService);
+  actionAreasListSE = inject(ActionAreasListService);
   globalVars = inject(GlobalVariablesService);
   body = signal(new OverviewBody());
   uploadedFiles: any[] = [];
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.getSectionData();
   }
 
@@ -46,8 +47,16 @@ export class OverviewComponent {
     }
   });
 
-  updateSignal(e: any, signalName: keyof InstanceType<typeof OverviewBody>) {
-    this.body.update((prev) => ({ ...prev, [signalName]: e }));
+  updateSignal(e: any, pathString: keyof InstanceType<typeof OverviewBody> | string) {
+    this.body.update((prev: any) => {
+      const editDataByPathString = (value: any) => {
+        const path = pathString.split('.');
+        const lastKey: any = path.pop();
+        path.reduce((acc, key) => (acc[key] = acc[key] || {}), prev)[lastKey] = value;
+      };
+      editDataByPathString(e);
+      return prev;
+    });
   }
 
   async getSectionData() {
@@ -59,7 +68,6 @@ export class OverviewComponent {
   async saveSection() {
     console.log(this.body());
     const response = await this.api.PATCH_overview('1', this.body());
-    console.log(response);
     this.globalVars.isSavingSection.set(false);
     this.getSectionData();
   }

@@ -11,8 +11,4 @@ export class GlobalVariablesService {
   decodedUserData: WritableSignal<DecodedUserData> = signal(
     JSON.parse(localStorage.getItem('decoded') ?? '{}') ?? {},
   );
-
-  constructor() {
-    console.log(this.decodedUserData());
-  }
 }

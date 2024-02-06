@@ -34,10 +34,6 @@ export class ApiService {
     }
   }
 
-  hello(): any {
-    console.log('hello');
-  }
-
   login = (awsToken: string): Promise<MainResponse<LoginRes>> => {
     const url = () => `http://localhost:3002/auth/login`;
     return this.TP.post(url(), {}, awsToken);
@@ -45,7 +41,7 @@ export class ApiService {
 
   GET_overview = (id: string): Promise<MainResponse<OverviewBody>> => {
     const url = () => `api/entity/${id}/overview-summary`;
-    return this.TP.get(url(), true);
+    return this.TP.get(url(), { flatten: true });
   };
 
   PATCH_overview = (id: string, body: OverviewBody): Promise<MainResponse<OverviewBody>> => {

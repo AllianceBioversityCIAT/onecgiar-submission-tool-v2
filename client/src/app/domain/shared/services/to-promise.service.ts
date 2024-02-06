@@ -10,14 +10,17 @@ import { environment } from '../../../../environments/environment';
 export class ToPromiseService {
   constructor(public http: HttpClient) {}
 
-  private TP = (subscription: Observable<any>, flatten?: boolean): Promise<MainResponse<any>> => {
+  private TP = (
+    subscription: Observable<any>,
+    dataConfig?: DataConfig,
+  ): Promise<MainResponse<any>> => {
     return new Promise(async (resolve) => {
       try {
         resolve(
           await firstValueFrom(
             subscription.pipe(
               map((data) =>
-                flatten ? { data: data.data, success: true } : { data, success: true },
+                dataConfig?.flatten ? { data: data.data, success: true } : { data, success: true },
               ),
             ),
           ),
@@ -41,11 +44,15 @@ export class ToPromiseService {
     return this.TP(this.http.put<any>(url, body));
   };
 
-  get = (url: string, flatten?: boolean) => {
-    return this.TP(this.http.get<any>(environment.apiBaseUrl + url), flatten);
+  get = (url: string, dataConfig?: DataConfig) => {
+    return this.TP(this.http.get<any>(environment.apiBaseUrl + url), dataConfig);
   };
 
   patch = (url: string, body: any) => {
     return this.TP(this.http.patch<any>(environment.apiBaseUrl + url, body));
   };
+}
+
+interface DataConfig {
+  flatten?: boolean;
 }

@@ -10,6 +10,7 @@ export class OverviewBody {
   entity_impact_area_array: Entityimpactareaarray[] = [];
   entity_diagram_image_array: Entitydiagramimagearray[] = [];
   initiative_detail_obj: Initiativedetailobj | any = {};
+  test: string = '';
 }
 
 interface Initiativedetailobj {

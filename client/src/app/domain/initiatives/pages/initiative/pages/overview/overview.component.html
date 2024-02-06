@@ -17,13 +17,14 @@
     class="col-12"
     fieldContainer
     label="Short Initiative name"
-    [maxwords]="50"
+    bodyValue="name"
     [signalBody]="this.body"
-    bodyValue="value2">
+    [maxwords]="50">
     <textarea
       rows="5"
       cols="30"
       pInputTextarea
+      (ngModelChange)="updateSignal($event, 'name')"
       [(ngModel)]="body().name"
       style="resize: vertical"></textarea>
   </div>
@@ -60,24 +61,25 @@
       [(ngModel)]="body().initiative_detail_obj.co_lead_email" />
   </div>
 
-  <!--
   <div class="col-6" fieldContainer label="Primary CGIAR Action Area">
     <p-dropdown
-      [options]="cities()"
-      [(ngModel)]="body().city"
+      [options]="this.actionAreasListSE.list()"
+      (ngModelChange)="updateSignal($event, 'initiative_detail_obj.clarisa_primary_action_area_id')"
+      [(ngModel)]="body().initiative_detail_obj.clarisa_primary_action_area_id"
       optionLabel="name"
+      optionValue="id"
       [showClear]="true"
       placeholder="Select a City"></p-dropdown>
   </div>
-
+  <!--
   <div fieldContainer class="col-6" label="Budget USD">
     <p-inputNumber
       [min]="0"
       mode="decimal"
       [minFractionDigits]="0"
       [maxFractionDigits]="2"></p-inputNumber>
-  </div>
- <!--
+  </div> -->
+  <!--
   <div class="col-6" fieldContainer label="Multiple CGIAR centers">
     <p-multiSelect
       [options]="cities()"
