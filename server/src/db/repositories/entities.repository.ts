@@ -24,11 +24,6 @@ export class EntitiesRepository extends Repository<Entities> {
           'eiaa.is_active = true',
         )
         .leftJoinAndSelect(
-          'entities.entity_diagram_image_array',
-          'edia',
-          'edia.is_active = true',
-        )
-        .leftJoinAndSelect(
           'entities.initiative_detail_obj',
           'ido',
           'ido.is_active = true',

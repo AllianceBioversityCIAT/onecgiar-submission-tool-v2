@@ -74,6 +74,39 @@ export class EntityService {
     });
   }
 
+  findBaseEntities(
+    type?: string,
+    entity_id?: number,
+    officialCode?: string,
+    active: number = 1,
+  ) {
+    const config = QueryUtil.buildQueryWhere(
+      {
+        entities: {
+          is_active: active,
+          official_code: officialCode,
+          entity_id: entity_id,
+          entity_type_id: ClarisaCgiarEntityTypesEnum.getFromName(type)?.value,
+        },
+      },
+      {
+        entities: ['parent_entity_id IS NULL'],
+      },
+    );
+    return this._entitiesRepository
+      .createQueryBuilder('entities')
+      .leftJoinAndSelect('entities.entity_type_obj', 'entityType')
+      .where(config.where, config.attr)
+      .getMany()
+      .then((res) =>
+        ResponseUtils.format({
+          message: `Success`,
+          status: HttpStatus.OK,
+          data: res,
+        }),
+      );
+  }
+
   async saveOverviewSummary(
     entity_id: number,
     reqSave: saveOverviewDto,

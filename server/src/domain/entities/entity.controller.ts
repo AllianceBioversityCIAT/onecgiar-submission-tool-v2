@@ -32,6 +32,25 @@ export class EntityController {
     );
   }
 
+  @ApiQuery({ name: 'type', required: false })
+  @ApiQuery({ name: 'id', required: false })
+  @ApiQuery({ name: 'official-code', required: false })
+  @ApiQuery({ name: 'active', required: false })
+  @Get('base')
+  findBaseEntities(
+    @Query('type') type: string,
+    @Query('id') id: string,
+    @Query('official-code') officialCode: string,
+    @Query('active') active: string = '1',
+  ) {
+    return this.initiativesService.findBaseEntities(
+      type,
+      +id,
+      officialCode,
+      +active,
+    );
+  }
+
   @Patch(':id([0-9]+)/overview-summary/save')
   @ApiBody({ type: BodySaveOverviewDoc })
   saveOverviewSummary(
