@@ -164,6 +164,7 @@ export class EntityService {
       reqInitDetails?.clarisa_primary_action_area_id;
     TEMP_InitiativeDetails.budget = reqInitDetails?.budget;
 
+    delete TEMP_InitiativeDetails.clarisa_primary_action_area_obj;
     delete TEMP_Entity.entity_impact_area_array;
     delete TEMP_Entity.entity_center_array;
     delete TEMP_Entity.initiative_detail_obj;
