@@ -37,11 +37,11 @@ export class ToPromiseService {
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
-    return this.TP(this.http.post<any>(url, body, { headers }));
+    return this.TP(this.http.post<any>(environment.apiBaseUrl + url, body, { headers }));
   };
 
   put = (url: string, body: any) => {
-    return this.TP(this.http.put<any>(url, body));
+    return this.TP(this.http.put<any>(environment.apiBaseUrl + url, body));
   };
 
   get = (url: string, dataConfig?: DataConfig) => {

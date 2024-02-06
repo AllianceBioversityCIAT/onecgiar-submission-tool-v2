@@ -106,6 +106,7 @@ export class FieldContainerDirective {
   }
 
   private updateLabel(text: string) {
+    console.log('updateLabel');
     const labelElement = this.el.nativeElement.querySelector('.words');
     if (labelElement) {
       labelElement.textContent = `${IBDWordCounter(text)}/${this.maxwords}`;

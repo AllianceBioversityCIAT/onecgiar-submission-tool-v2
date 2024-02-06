@@ -11,10 +11,13 @@ import { ApiService } from '../../../../../../shared/services/api.service';
 import { GlobalVariablesService } from '../../../../../../shared/services/global-variables.service';
 import { OverviewBody } from '../../../../../../shared/models/overview-body.class';
 import { ActionAreasListService } from '../../../../../../shared/services/control-lists/action-areas/action-areas-list.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-summary-table',
   standalone: true,
+  providers: [MessageService],
   imports: [
     InputTextModule,
     FieldContainerDirective,
@@ -24,6 +27,7 @@ import { ActionAreasListService } from '../../../../../../shared/services/contro
     InputNumberModule,
     FileUploadModule,
     MultiSelectModule,
+    ToastModule,
   ],
   templateUrl: './summary-table.component.html',
   styleUrl: './summary-table.component.scss',
@@ -33,7 +37,10 @@ export class SummaryTableComponent {
   api = inject(ApiService);
   actionAreasListSE = inject(ActionAreasListService);
   globalVars = inject(GlobalVariablesService);
+  messageService = inject(MessageService);
+
   body = signal(new OverviewBody());
+
   uploadedFiles: any[] = [];
 
   ngOnInit(): void {
@@ -68,6 +75,11 @@ export class SummaryTableComponent {
     console.log(this.body());
     const response = await this.api.PATCH_overview('1', this.body());
     this.globalVars.isSavingSection.set(false);
+    this.messageService.add({
+      severity: response?.success ? 'success' : 'error',
+      summary: 'Success',
+      detail: response?.success ? 'Section saved' : 'Error',
+    });
     this.getSectionData();
   }
 }
