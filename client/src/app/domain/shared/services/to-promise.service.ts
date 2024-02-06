@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, firstValueFrom, map } from 'rxjs';
-import { ErrorResponse, MainResponse } from '../interfaces/responses.interface';
+import { MainResponse } from '../interfaces/responses.interface';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,10 +10,18 @@ import { ErrorResponse, MainResponse } from '../interfaces/responses.interface';
 export class ToPromiseService {
   constructor(public http: HttpClient) {}
 
-  TP = (subscription: Observable<any>): Promise<MainResponse<any>> => {
+  private TP = (subscription: Observable<any>, flatten?: boolean): Promise<MainResponse<any>> => {
     return new Promise(async (resolve) => {
       try {
-        resolve(await firstValueFrom(subscription.pipe(map((data) => ({ data, success: true })))));
+        resolve(
+          await firstValueFrom(
+            subscription.pipe(
+              map((data) =>
+                flatten ? { data: data.data, success: true } : { data, success: true },
+              ),
+            ),
+          ),
+        );
       } catch (error: any) {
         console.error(error);
         resolve({ success: false, errorDetail: error?.error?.message, data: error });
@@ -32,8 +41,8 @@ export class ToPromiseService {
     return this.TP(this.http.put<any>(url, body));
   };
 
-  get = (url: string) => {
-    return this.TP(this.http.get<any>(url));
+  get = (url: string, flatten?: boolean) => {
+    return this.TP(this.http.get<any>(environment.apiBaseUrl + url), flatten);
   };
 
   patch = (url: string, body: any) => {
