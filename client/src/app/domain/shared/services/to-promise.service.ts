@@ -46,6 +46,6 @@ export class ToPromiseService {
   };
 
   patch = (url: string, body: any) => {
-    return this.TP(this.http.patch<any>(url, body));
+    return this.TP(this.http.patch<any>(environment.apiBaseUrl + url, body));
   };
 }

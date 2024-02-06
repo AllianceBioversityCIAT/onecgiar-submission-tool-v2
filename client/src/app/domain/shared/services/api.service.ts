@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, WritableSignal, inject } from '@angular/core';
 import { ToPromiseService } from './to-promise.service';
 import { OverviewBody } from '../models/overview-body.class';
 import { LoginRes, MainResponse } from '../interfaces/responses.interface';
@@ -11,6 +11,32 @@ import { GlobalVariablesService } from './global-variables.service';
 export class ApiService {
   TP = inject(ToPromiseService);
   public globalVars = inject(GlobalVariablesService);
+
+  cleanBody(body: any) {
+    for (const key in body) {
+      if (typeof body[key] === 'string') {
+        (body[key] as any) = '';
+      } else if (typeof body[key] === 'number') {
+        (body[key] as any) = null;
+      } else if (Array.isArray(body[key])) {
+        (body[key] as any) = [];
+      } else {
+        (body[key] as any) = null;
+      }
+    }
+  }
+
+  updateSignalBody(body: WritableSignal<any>, newBody: any) {
+    for (const key in newBody) {
+      if (newBody[key] !== null) {
+        body.update((prev) => ({ ...prev, [key]: newBody[key] }));
+      }
+    }
+  }
+
+  hello(): any {
+    console.log('hello');
+  }
 
   login = (awsToken: string): Promise<MainResponse<LoginRes>> => {
     const url = () => `http://localhost:3002/auth/login`;

@@ -78,6 +78,7 @@ export class FieldContainerDirective {
     maxWordsElement.textContent = `Max ${this.maxwords} words`;
     wordsElement.textContent = `0/${this.maxwords}`;
 
+    this.renderer.addClass(wordsElement, 'words'); // To update counter
     this.renderer.addClass(parentElement, 'flex');
     this.renderer.addClass(parentElement, 'align-items-center');
     this.renderer.addClass(parentElement, 'justify-content-between');

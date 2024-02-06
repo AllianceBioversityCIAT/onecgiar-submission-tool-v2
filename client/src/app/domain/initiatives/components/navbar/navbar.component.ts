@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
@@ -11,6 +11,7 @@ import { GlobalVariablesService } from '../../../shared/services/global-variable
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
   imports: [AvatarModule, AvatarGroupModule, NgClass, RouterLink, RouterLinkActive],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
   globalVars = inject(GlobalVariablesService);
