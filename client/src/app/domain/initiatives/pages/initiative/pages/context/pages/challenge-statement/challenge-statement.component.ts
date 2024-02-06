@@ -1,33 +1,25 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, effect, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
 import { EditorModule } from 'primeng/editor';
 import { ButtonModule } from 'primeng/button';
-import { FieldContainerDirective } from '../../../../../../../shared/directives/field-container.directive';
-import { GlobalVariablesService } from '../../../../../../../shared/services/global-variables.service';
-import { ToPromiseService } from '../../../../../../../shared/services/to-promise.service';
-import { environment } from '../../../../../../../../../environments/environment.development';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { ApiService } from '../../../../../../../shared/services/api.service';
+import { FieldContainerDirective } from '../../../../../../../shared/directives/field-container.directive';
+import { GlobalVariablesService } from '../../../../../../../shared/services/global-variables.service';
 
 @Component({
   selector: 'app-challenge-statement',
   standalone: true,
-  imports: [
-    FormsModule,
-    EditorModule,
-    ButtonModule,
-    FieldContainerDirective,
-    JsonPipe,
-    ToastModule,
-  ],
+  imports: [FormsModule, EditorModule, ButtonModule, FieldContainerDirective, ToastModule],
   providers: [MessageService],
   templateUrl: './challenge-statement.component.html',
   styleUrl: './challenge-statement.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChallengeStatementComponent {
+export class ChallengeStatementComponent implements OnInit {
   public globalVars = inject(GlobalVariablesService);
-  public TP = inject(ToPromiseService);
+  public api = inject(ApiService);
   private messageService = inject(MessageService);
 
   public challengeStatementBody = signal({
@@ -38,37 +30,28 @@ export class ChallengeStatementComponent {
     this.getChallengeStatement();
   }
 
-  getChallengeStatement(): void {
-    this.TP.get(`${environment.apiBaseUrl}/entity/1/initiative-details/challenge-statement`).then(
-      (response) => {
-        if (response?.success) {
-          this.challengeStatementBody.set({
-            challenge_statement_html: response.data?.data?.challenge_statement_html,
-          });
-        }
-      },
-    );
+  async getChallengeStatement() {
+    const response = await this.api.GET_ChallengeStatement();
+
+    response?.success &&
+      this.challengeStatementBody.set({
+        challenge_statement_html: response.data?.data?.challenge_statement_html,
+      });
   }
 
   saveChallengeStatementButtonEffect = effect(() => {
-    if (this.globalVars.isSavingSection()) {
-      console.log(this.challengeStatementBody());
-      this.saveChallengeStatementSection();
-    }
+    this.globalVars.isSavingSection() && this.saveChallengeStatementSection();
   });
 
-  saveChallengeStatementSection(): void {
-    this.TP.patch(
-      `${environment.apiBaseUrl}/entity/${this.globalVars.currentInitiativeId()}/initiative-details/challenge-statement/save`,
-      this.challengeStatementBody(),
-    ).then((response) => {
-      this.globalVars.isSavingSection.set(false);
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Message Content',
-      });
-      console.log(response);
+  async saveChallengeStatementSection() {
+    const response = await this.api.PATCH_ChallengeStatement(this.challengeStatementBody());
+
+    this.messageService.add({
+      severity: response?.success ? 'success' : 'error',
+      summary: 'Success',
+      detail: response?.success ? 'Success' : 'Error',
     });
+
+    this.globalVars.isSavingSection.set(false);
   }
 }
