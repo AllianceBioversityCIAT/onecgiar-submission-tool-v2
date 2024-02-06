@@ -21,25 +21,39 @@ export class BodySaveOverviewDoc {
   official_code: string;
 
   @ApiProperty()
-  phase_id!: number;
-
-  @ApiProperty()
   entity_type_id: number;
 
   @ApiProperty()
   parent_entity_id!: number;
 
-  @ApiProperty({ type: [EntityCenter] })
+  @ApiProperty({
+    type: [
+      {
+        clarisa_center_code: { type: 'string' },
+      },
+    ],
+  })
   entity_center_array: EntityCenter[];
 
-  @ApiProperty({ type: [EntityImpactArea] })
+  @ApiProperty({
+    type: [
+      {
+        clarisa_impact_area_id: { type: 'number' },
+      },
+    ],
+  })
   entity_impact_area_array: EntityImpactArea[];
 
   @ApiProperty({
-    type: [EntityDiagramImage],
+    type: {
+      entity_initiative_id: { type: 'number' },
+      lead_name: { type: 'string' },
+      lead_email: { type: 'string' },
+      co_lead_name: { type: 'string' },
+      co_lead_email: { type: 'string' },
+      budget: { type: 'number' },
+      clarisa_primary_action_area_id: { type: 'number' },
+    },
   })
-  entity_diagram_image_array: EntityDiagramImage[];
-
-  @ApiProperty({ type: InitiativeDetail })
   initiative_detail_obj: InitiativeDetail = new InitiativeDetail();
 }

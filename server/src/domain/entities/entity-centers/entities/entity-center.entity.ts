@@ -31,10 +31,10 @@ export class EntityCenter extends AuditableEntity {
   @Column({
     type: 'varchar',
     length: 15,
-    name: 'clarisa_code',
+    name: 'clarisa_center_code',
     primary: true,
   })
-  clarisa_code: string;
+  clarisa_center_code: string;
 
   //--- relations
   @ManyToOne(() => Entities, (entity) => entity.entity_center_array)
@@ -45,6 +45,6 @@ export class EntityCenter extends AuditableEntity {
     () => ClarisaCgiarEntity,
     (clarisa_entity) => clarisa_entity.entity_center_array,
   )
-  @JoinColumn({ name: 'clarisa_code' })
+  @JoinColumn({ name: 'clarisa_center_code' })
   clarisa_entity_obj: ClarisaCgiarEntity;
 }
