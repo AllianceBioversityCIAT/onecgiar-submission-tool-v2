@@ -71,14 +71,16 @@
       [showClear]="true"
       placeholder="Select a City"></p-dropdown>
   </div>
-  <!--
+
   <div fieldContainer class="col-6" label="Budget USD">
     <p-inputNumber
       [min]="0"
       mode="decimal"
+      [(ngModel)]="body().initiative_detail_obj.budget"
+      (ngModelChange)="updateSignal($event, 'initiative_detail_obj.budget')"
       [minFractionDigits]="0"
       [maxFractionDigits]="2"></p-inputNumber>
-  </div> -->
+  </div>
   <!--
   <div class="col-6" fieldContainer label="Multiple CGIAR centers">
     <p-multiSelect
