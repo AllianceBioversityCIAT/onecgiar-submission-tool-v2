@@ -20,7 +20,7 @@ import { GlobalVariablesService } from '../../../../../../../shared/services/glo
 export class PortfolioLinkagesComponent implements OnInit {
   public globalVars = inject(GlobalVariablesService);
   public api = inject(ApiService);
-  private messageService = inject(MessageService);
+  public messageService = inject(MessageService);
 
   public portfolioLinkagesBody = signal({
     portfolio_linkages_html: null,

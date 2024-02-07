@@ -20,7 +20,7 @@ import { GlobalVariablesService } from '../../../../../../../shared/services/glo
 export class PartnershipsComponent implements OnInit {
   public globalVars = inject(GlobalVariablesService);
   public api = inject(ApiService);
-  private messageService = inject(MessageService);
+  public messageService = inject(MessageService);
 
   public partnershipBody = signal({
     partnerships_html: null,

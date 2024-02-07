@@ -20,7 +20,7 @@ import { GlobalVariablesService } from '../../../../../../../shared/services/glo
 export class LearningFpeAndIaComponent implements OnInit {
   public globalVars = inject(GlobalVariablesService);
   public api = inject(ApiService);
-  private messageService = inject(MessageService);
+  public messageService = inject(MessageService);
 
   public learningFPEBody = signal({
     prior_evaluations_impact_assessments_html: null,

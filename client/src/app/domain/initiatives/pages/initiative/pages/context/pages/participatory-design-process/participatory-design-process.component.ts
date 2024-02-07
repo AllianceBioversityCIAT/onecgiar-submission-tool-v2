@@ -20,7 +20,7 @@ import { ApiService } from '../../../../../../../shared/services/api.service';
 export class ParticipatoryDesignProcessComponent implements OnInit {
   public globalVars = inject(GlobalVariablesService);
   public api = inject(ApiService);
-  private messageService = inject(MessageService);
+  public messageService = inject(MessageService);
 
   public pDesignProcessBody = signal({
     participatory_desing_process_html: null,

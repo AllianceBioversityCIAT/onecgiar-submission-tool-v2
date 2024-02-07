@@ -20,7 +20,7 @@ import { GlobalVariablesService } from '../../../../../../../shared/services/glo
 export class MeasurableObjectivesComponent implements OnInit {
   public globalVars = inject(GlobalVariablesService);
   public api = inject(ApiService);
-  private messageService = inject(MessageService);
+  public messageService = inject(MessageService);
 
   public mesurableObjectivesBody = signal({
     measurable_three_year_html: null,
