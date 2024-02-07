@@ -20,6 +20,7 @@ export class NavbarComponent {
     {
       name: 'Initiatives',
       url: '/home',
+      onlyAuthenticated: true,
     },
     {
       name: 'Bussiness Intelligence Dashboard',
@@ -28,6 +29,7 @@ export class NavbarComponent {
     {
       name: 'FAQ',
       url: 'https://cgiar-prms.notion.site/732dccbbf1aa497998e1014b6f0ff23d?v=353021775b8441499a6c20cad279da24',
+      targetBlank: true,
     },
     {
       name: 'Admin Panel',

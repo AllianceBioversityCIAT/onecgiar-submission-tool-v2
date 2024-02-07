@@ -39,21 +39,26 @@
 <div
   class="sticky top-0 px-2 py-2 flex gap-3 align-items-center w-full overflow-y-auto bg-bluegray-900 text-white z-5 px-5">
   @for (navLink of navbarLinks; track navLink.name) {
-    @if (navLink.name === 'FAQ') {
-      <a
-        class="text-sm p-2 m-0 border-round min-w-max cursor-pointer text-white no-underline hover:bg-primary hover:transition-colors"
-        href="{{ navLink.url }}"
-        target="_blank"
-        rel="noopener noreferrer">
-        {{ navLink.name }}
-      </a>
-    } @else {
-      <p
-        class="text-sm p-2 m-0 border-round min-w-max cursor-pointer hover:bg-primary hover:transition-colors hover:text-white px-3"
-        [routerLink]="[navLink.url]"
-        routerLinkActive="bg-primary">
-        {{ navLink.name }}
-      </p>
+    @if (
+      navLink.onlyAuthenticated === this.globalVars.decodedUserData().isLogged ||
+      !navLink.onlyAuthenticated
+    ) {
+      @if (navLink.targetBlank) {
+        <a
+          class="text-sm p-2 m-0 border-round min-w-max cursor-pointer text-white no-underline hover:bg-primary hover:transition-colors"
+          href="{{ navLink.url }}"
+          target="_blank"
+          rel="noopener noreferrer">
+          {{ navLink.name }}
+        </a>
+      } @else {
+        <p
+          class="text-sm p-2 m-0 border-round min-w-max cursor-pointer hover:bg-primary hover:transition-colors hover:text-white px-3"
+          [routerLink]="[navLink.url]"
+          routerLinkActive="bg-primary">
+          {{ navLink.name }}
+        </p>
+      }
     }
   }
 </div>
