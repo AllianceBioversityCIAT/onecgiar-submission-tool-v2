@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { Authenticated } from '@auth/guard/auth.guard';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,7 @@ export const routes: Routes = [
           import('../domain/initiatives/pages/initiatives-list/initiatives-list.component').then(
             (c) => c.InitiativesListComponent,
           ),
+        canActivate: [Authenticated],
       },
       {
         path: 'initiative/:initiativeId',
