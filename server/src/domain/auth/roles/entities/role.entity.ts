@@ -1,6 +1,14 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { AuditableEntity } from '../../../shared/global-dto/auditable.entity';
 import { UserRoleEntity } from '../../../entities/user-role-entities/entities/user-role-entity.entity';
+import { ClarisaCgiarEntityType } from '../../../../tools/clarisa/clarisa-cgiar-entity-types/entities/clarisa-cgiar-entity-type.entity';
 
 @Entity('roles')
 export class Role extends AuditableEntity {
@@ -31,10 +39,24 @@ export class Role extends AuditableEntity {
   })
   priority: number;
 
+  @Column({
+    name: 'clarisa_entity_type_id',
+    type: 'bigint',
+    nullable: true,
+  })
+  clarisa_entity_type_id: number;
+
   // relations
   @OneToMany(
     () => UserRoleEntity,
     (user_role_entity) => user_role_entity.role_obj,
   )
   user_role_entity_array: UserRoleEntity[];
+
+  @ManyToOne(
+    () => ClarisaCgiarEntityType,
+    (clarisa_cgiar_entity_type) => clarisa_cgiar_entity_type.role_array,
+  )
+  @JoinColumn({ name: 'clarisa_entity_type_id' })
+  clarisa_cgiar_entity_type_obj: ClarisaCgiarEntityType;
 }

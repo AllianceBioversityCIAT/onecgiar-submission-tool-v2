@@ -36,4 +36,10 @@ export class ClarisaCgiarEntityTypesEnum {
       (n) => n.value === value,
     );
   }
+
+  public static getArray(): string[] {
+    return (Object.values(this) as ClarisaCgiarEntityTypesEnum[]).map(
+      (n) => n.name,
+    );
+  }
 }

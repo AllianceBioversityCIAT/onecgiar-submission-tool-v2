@@ -32,6 +32,14 @@ export class EntityController {
     );
   }
 
+  @ApiQuery({ name: 'id', required: false })
+  @Get('type/initiatives')
+  findInitiativeFull(
+    @Query('id') id: string,
+  ): Promise<ServiceResponseDto<Entities[]>> {
+    return this.initiativesService.findInitiativeFull(+id);
+  }
+
   @ApiQuery({ name: 'type', required: false })
   @ApiQuery({ name: 'id', required: false })
   @ApiQuery({ name: 'official-code', required: false })

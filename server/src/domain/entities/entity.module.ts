@@ -19,6 +19,7 @@ import { EntitiesRepository } from '../../db/repositories/entities.repository';
 import { InitiativeDetailsModule } from './initiative-details/initiative-details.module';
 import { FlagshipDetailsModule } from './flagship-details/flagship-details.module';
 import { WorkPackageDetailsModule } from './work-package-details/work-package-details.module';
+import { StatusModule } from './status/status.module';
 
 @Module({
   controllers: [EntityController],
@@ -41,6 +42,7 @@ import { WorkPackageDetailsModule } from './work-package-details/work-package-de
     InitiativeDetailsModule,
     FlagshipDetailsModule,
     WorkPackageDetailsModule,
+    StatusModule,
   ],
   exports: [EntitiesRepository],
 })

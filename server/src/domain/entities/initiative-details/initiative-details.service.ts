@@ -59,7 +59,7 @@ export class InitiativeDetailsService {
     keys.forEach((el) => {
       const TEMP_key = el.replace(RegexUtil.attrIsHtml, '');
       NEW_obj[el] = cliReq[el] ?? null;
-      NEW_obj[TEMP_key] = RegexUtil.f_cleanHtmlTags(cliReq[el], '') ?? null;
+      NEW_obj[TEMP_key] = RegexUtil.f.processHtmlTag(cliReq[el]) ?? null;
     });
 
     return NEW_obj as Partial<T>;

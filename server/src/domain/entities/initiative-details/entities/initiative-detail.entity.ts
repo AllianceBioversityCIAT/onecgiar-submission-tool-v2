@@ -3,6 +3,7 @@ import { Entities } from '../../entities/entities.entity';
 import { AuditableEntity } from '../../../shared/global-dto/auditable.entity';
 import { ClarisaActionArea } from '../../../../tools/clarisa/clarisa-action-areas/entities/clarisa-action-area.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { Status } from '../../status/entities/status.entity';
 
 @Entity('initiative_details')
 export class InitiativeDetail extends AuditableEntity {
@@ -226,7 +227,19 @@ export class InitiativeDetail extends AuditableEntity {
   })
   portfolio_linkages!: string;
 
+  @ApiProperty()
+  @Column({
+    name: 'status_id',
+    type: 'bigint',
+    nullable: true,
+  })
+  status_id!: number;
+
   //--- relations
+
+  @ManyToOne(() => Status, (status) => status.initiative_detail_array)
+  @JoinColumn({ name: 'status_id' })
+  status_obj!: Status;
 
   @OneToOne(() => Entities, (entity) => entity.initiative_detail_obj)
   @JoinColumn({ name: 'entity_initiative_id' })

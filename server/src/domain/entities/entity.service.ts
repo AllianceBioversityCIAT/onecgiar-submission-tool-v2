@@ -74,6 +74,58 @@ export class EntityService {
     });
   }
 
+  async findInitiativeFull(id?: number, active: number = 1) {
+    const response = await this.dataSource.transaction(async (manager) => {
+      const config = QueryUtil.buildQueryWhere(
+        {
+          entities: {
+            is_active: active,
+            entity_id: id,
+            entity_type_id:
+              ClarisaCgiarEntityTypesEnum.getFromName('initiatives')?.value,
+          },
+        },
+        {
+          entities: ['parent_entity_id IS NULL'],
+        },
+      );
+
+      return manager
+        .getRepository(Entities)
+        .createQueryBuilder('entities')
+        .leftJoinAndSelect(
+          'entities.child_entity_array',
+          'childEntity',
+          'childEntity.is_active = true',
+        )
+        .leftJoinAndSelect(
+          'childEntity.child_entity_array',
+          'childEntity2',
+          'childEntity2.is_active = true',
+        )
+        .leftJoin('entities.initiative_detail_obj', 'initiativeDetail')
+        .leftJoinAndSelect(
+          'initiativeDetail.clarisa_primary_action_area_obj',
+          'cpaao',
+        )
+        .leftJoinAndSelect('initiativeDetail.status_obj', 'so')
+        .addSelect('initiativeDetail.entity_initiative_id')
+        .addSelect('initiativeDetail.clarisa_primary_action_area_id')
+        .addSelect('initiativeDetail.status_id')
+        .leftJoinAndSelect('entities.entity_type_obj', 'entityType')
+        .leftJoinAndSelect('childEntity.entity_type_obj', 'entityType2')
+        .leftJoinAndSelect('childEntity2.entity_type_obj', 'entityType3')
+        .where(config.where, config.attr)
+        .getMany()
+        .then((res) => res);
+    });
+    return ResponseUtils.format<any>({
+      message: `Initiative found successfully`,
+      status: HttpStatus.OK,
+      data: response,
+    });
+  }
+
   findBaseEntities(
     type?: string,
     entity_id?: number,
@@ -206,10 +258,8 @@ export class EntityService {
     entity_id: number,
     executive_summary: string,
   ): Promise<ServiceResponseDto<InitiativeDetail>> {
-    const TEMP_executive_summary_clean = executive_summary.replace(
-      RegexUtil.cleanHtmlTags,
-      '',
-    );
+    const TEMP_executive_summary_clean =
+      RegexUtil.f.processHtmlTag(executive_summary) ?? null;
 
     let TEMP_update: Partial<InitiativeDetail> = {
       executive_summary_html: executive_summary,
@@ -266,7 +316,7 @@ export class EntityService {
     return initiativeDetails.then((res) =>
       Promise.resolve({
         message: 'Success',
-        status: 200,
+        status: HttpStatus.OK,
         data: res,
       }),
     );

@@ -6,6 +6,7 @@ import { DataSource } from 'typeorm';
 import { User } from './users/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { JwtPayloadDto } from './roles/dto/jwt-payload.dto';
 
 @Injectable()
 export class AuthService {
@@ -31,7 +32,7 @@ export class AuthService {
         throw new NotFoundException('User not found');
       })
       .then((res) => {
-        const payload = {
+        const payload: JwtPayloadDto = {
           user_id: res.user_id,
           first_name: res.first_name,
           last_name: res.last_name,

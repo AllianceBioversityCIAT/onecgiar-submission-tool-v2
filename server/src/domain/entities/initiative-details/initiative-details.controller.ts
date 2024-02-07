@@ -9,7 +9,7 @@ export class InitiativeDetailsController {
     private readonly initiativeDetailsService: InitiativeDetailsService,
   ) {}
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @Get('challenge-statement')
   findChallengeStatement(@Param('id') entity_id: string) {
     return this.initiativeDetailsService.findContextData(+entity_id, [
@@ -18,7 +18,7 @@ export class InitiativeDetailsController {
     ]);
   }
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @Get('measurable-three-year-outcome')
   findMesurableThreeYear(@Param('id') entity_id: string) {
     return this.initiativeDetailsService.findContextData(+entity_id, [
@@ -29,7 +29,7 @@ export class InitiativeDetailsController {
     ]);
   }
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @Get('prio-evaluation-impact-assessments')
   findPrioEvaluationImpactAssessments(@Param('id') entity_id: string) {
     return this.initiativeDetailsService.findContextData(+entity_id, [
@@ -38,7 +38,7 @@ export class InitiativeDetailsController {
     ]);
   }
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @Get('priority-setting')
   findPrioritySetting(@Param('id') entity_id: string) {
     return this.initiativeDetailsService.findContextData(+entity_id, [
@@ -47,7 +47,7 @@ export class InitiativeDetailsController {
     ]);
   }
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @Get('participatory-desing-process')
   findParticipatoryDesingProcess(@Param('id') entity_id: string) {
     return this.initiativeDetailsService.findContextData(+entity_id, [
@@ -56,7 +56,7 @@ export class InitiativeDetailsController {
     ]);
   }
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @Get('partnerships')
   findPartnership(@Param('id') entity_id: string) {
     return this.initiativeDetailsService.findContextData(+entity_id, [
@@ -65,7 +65,7 @@ export class InitiativeDetailsController {
     ]);
   }
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @Get('portfolio-linkage')
   findPortfolioLinkage(@Param('id') entity_id: string) {
     return this.initiativeDetailsService.findContextData(+entity_id, [
@@ -74,7 +74,7 @@ export class InitiativeDetailsController {
     ]);
   }
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @ApiBody({
     schema: {
       type: 'object',
@@ -93,7 +93,7 @@ export class InitiativeDetailsController {
     ]);
   }
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @ApiBody({
     schema: {
       type: 'object',
@@ -114,7 +114,7 @@ export class InitiativeDetailsController {
     ]);
   }
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @ApiBody({
     schema: {
       type: 'object',
@@ -133,7 +133,7 @@ export class InitiativeDetailsController {
     ]);
   }
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @ApiBody({
     schema: {
       type: 'object',
@@ -152,7 +152,7 @@ export class InitiativeDetailsController {
     ]);
   }
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @ApiBody({
     schema: {
       type: 'object',
@@ -171,7 +171,7 @@ export class InitiativeDetailsController {
     ]);
   }
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @ApiBody({
     schema: {
       type: 'object',
@@ -190,7 +190,7 @@ export class InitiativeDetailsController {
     ]);
   }
 
-  @ApiTags('Contex')
+  @ApiTags('Context')
   @ApiBody({
     schema: {
       type: 'object',
