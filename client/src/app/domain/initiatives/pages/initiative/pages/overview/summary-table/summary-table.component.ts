@@ -10,7 +10,7 @@ import { FieldContainerDirective } from '../../../../../../shared/directives/fie
 import { ApiService } from '../../../../../../shared/services/api.service';
 import { GlobalVariablesService } from '../../../../../../shared/services/global-variables.service';
 import { OverviewBody } from '../../../../../../shared/models/overview-body.class';
-import { ActionAreasListService } from '../../../../../../shared/services/control-lists/action-areas/action-areas-list.service';
+import { ActionAreasListService } from '../../../../../../shared/services/control-lists/action-areas-list.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 

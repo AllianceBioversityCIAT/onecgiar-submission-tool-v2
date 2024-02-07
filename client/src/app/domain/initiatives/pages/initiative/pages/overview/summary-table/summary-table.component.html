@@ -21,7 +21,7 @@
     [signalBody]="this.body"
     [maxwords]="50">
     <textarea
-      rows="5"
+      rows="1"
       cols="30"
       pInputTextarea
       (ngModelChange)="updateSignal($event, 'name')"
@@ -42,7 +42,7 @@
       [disabled]="true"
       type="text"
       pInputText
-      [(ngModel)]="body().initiative_detail_obj.lead_name" />
+      [(ngModel)]="body().initiative_detail_obj.lead_email" />
   </div>
 
   <div class="col-6" fieldContainer label="Co-Lead name">

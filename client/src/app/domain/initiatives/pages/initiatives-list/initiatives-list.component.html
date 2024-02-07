@@ -1,7 +1,7 @@
 <div class="p-5 h-full" style="min-height: calc(100vh - 200.06px)">
   <p-table
     #dt1
-    [value]="initiatives"
+    [value]="this.initativeListSE.list()"
     dataKey="id"
     [rows]="10"
     [showCurrentPageReport]="true"
@@ -83,33 +83,26 @@
             <p-columnFilter field="action_area_id" display="menu"></p-columnFilter>
           </div>
         </th>
-
-        <th style="width: 220px" id="current_stage">
-          <div class="flex align-items-center">
-            Current Stage
-            <p-columnFilter field="description" display="menu"></p-columnFilter>
-          </div>
-        </th>
       </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-initiative>
       <tr
-        routerLink="/initiative/{{ initiative.id }}/overview"
+        routerLink="/initiative/{{ initiative.entity_id }}/overview"
         class="cursor-pointer transition-colors hover:bg-black-alpha-10">
         <td>
           {{ initiative.official_code }}
         </td>
 
         <td>
-          <span class="ml-1 vertical-align-middle font-bold">{{ initiative.acronym }}</span>
+          <span class="ml-1 vertical-align-middle font-bold">{{ initiative.short_name }}</span>
           -
           <span class="ml-1 vertical-align-middle">{{ initiative.name }}</span>
         </td>
 
         <td>
           <p-tag
-            [value]="initiative.status"
+            [value]="'Developing*'"
             [styleClass]="
               'text-sm font-medium' +
               (initiative.status === 'Approved' ? ' bg-primary' : ' bg-blue-500')
@@ -118,12 +111,7 @@
         </td>
 
         <td>
-          <span class="ml-1 vertical-align-middle">{{ initiative.action_area_description }}</span>
-        </td>
-
-        <td>
-          <p-tag [value]="initiative.description" styleClass="text-sm font-medium bg-blue-500">
-          </p-tag>
+          <span class="ml-1 vertical-align-middle">Developing*</span>
         </td>
       </tr>
     </ng-template>

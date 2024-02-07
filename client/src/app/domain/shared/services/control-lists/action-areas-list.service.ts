@@ -1,7 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { ToPromiseService } from '../../to-promise.service';
-import { MainResponse } from '../../../interfaces/responses.interface';
-import { ActionAreaItem } from '../../../interfaces/control-lists-response.interface';
+import { ToPromiseService } from '../to-promise.service';
+import { MainResponse } from '../../interfaces/responses.interface';
+import { ActionAreaItem } from '../../interfaces/control-lists-response.interface';
 
 @Injectable({
   providedIn: 'root',

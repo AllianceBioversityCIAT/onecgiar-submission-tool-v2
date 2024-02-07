@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Table, TableModule } from 'primeng/table';
 import { ProgressBarModule } from 'primeng/progressbar';
-import { InitiativesService } from './initiatives-list.service';
 import { TagModule } from 'primeng/tag';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
@@ -13,6 +12,7 @@ import { CurrencyPipe, DatePipe, NgClass } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { RouterLink } from '@angular/router';
+import { InitativeListService } from '../../../shared/services/control-lists/initative-list.service';
 
 export interface IInitiative {
   acronym: string;
@@ -46,25 +46,18 @@ export interface IInitiative {
     DatePipe,
     ButtonModule,
     InputTextModule,
-    RouterLink
+    RouterLink,
   ],
-  providers: [InitiativesService],
   templateUrl: './initiatives-list.component.html',
   styleUrl: './initiatives-list.component.scss',
 })
 export class InitiativesListComponent {
   initiatives!: IInitiative[];
   statuses!: any[];
-  loading: boolean = true;
-
-  constructor(private initiativeService: InitiativesService) {}
+  loading: boolean = false;
+  initativeListSE = inject(InitativeListService);
 
   ngOnInit() {
-    this.initiativeService.getInitiativesLarge().then((initiatives) => {
-      this.initiatives = initiatives;
-      this.loading = false;
-    });
-
     this.statuses = [
       { label: 'Approved', value: 'Approved' },
       { label: 'Editing', value: 'Editing' },
