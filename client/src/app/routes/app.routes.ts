@@ -130,6 +130,34 @@ export const routes: Routes = [
               },
             ],
           },
+          {
+            path: 'innovation-portfolio',
+            loadComponent: () =>
+              import(
+                '../domain/initiatives/pages/initiative/pages/innovation-portfolio/innovation-portfolio.component'
+              ).then((c) => c.InnovationPortfolioComponent),
+            children: [
+              {
+                path: '',
+                redirectTo: 'innovation-portfolio-and-ma',
+                pathMatch: 'full',
+              },
+              {
+                path: 'innovation-portfolio-and-ma',
+                loadComponent: () =>
+                  import(
+                    '../domain/initiatives/pages/initiative/pages/innovation-portfolio/pages/innovation-portfolio-and-ma/innovation-portfolio-and-ma.component'
+                  ).then((c) => c.InnovationPortfolioAndMaComponent),
+              },
+              {
+                path: 'innovation-packages-and-srp',
+                loadComponent: () =>
+                  import(
+                    '../domain/initiatives/pages/initiative/pages/innovation-portfolio/pages/innovation-packages-and-srp/innovation-packages-and-srp.component'
+                  ).then((c) => c.InnovationPackagesAndSrpComponent),
+              },
+            ],
+          },
         ],
       },
       {

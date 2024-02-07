@@ -88,6 +88,21 @@ export class SidebarComponent {
           },
         ],
       },
+      {
+        label: '4. Innovation Portfolio Management at P25 Initiative level',
+        route: 'innovation-portfolio',
+        inUnderConstruction: false,
+        children: [
+          {
+            label: '4.1 Innovation portfolio vision and management approach',
+            route: 'innovation-portfolio-and-ma',
+          },
+          {
+            label: '4.2 Innovation Packages and Scaling Readiness implementation',
+            route: 'innovation-packages-and-srp',
+          },
+        ],
+      },
     ];
 
     // agrega el id de la iniciativa a las rutas al parametro route, pero si tine hijas pones el del padre y si tiene otro nivel haz lo mismo
