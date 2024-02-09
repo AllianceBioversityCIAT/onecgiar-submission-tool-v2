@@ -10,18 +10,18 @@ export class InitiativeDetailsController {
   ) {}
 
   @ApiTags('Context')
-  @Get('challenge-statement')
+  @Get('context/challenge-statement')
   findChallengeStatement(@Param('id') entity_id: string) {
-    return this.initiativeDetailsService.findContextData(+entity_id, [
+    return this.initiativeDetailsService.findInitiativeText(+entity_id, [
       'challenge_statement',
       'challenge_statement_html',
     ]);
   }
 
   @ApiTags('Context')
-  @Get('measurable-three-year-outcome')
+  @Get('context/measurable-three-year-outcome')
   findMesurableThreeYear(@Param('id') entity_id: string) {
-    return this.initiativeDetailsService.findContextData(+entity_id, [
+    return this.initiativeDetailsService.findInitiativeText(+entity_id, [
       'measurable_three_year',
       'measurable_three_year_html',
       'p25_initiative_model',
@@ -30,47 +30,65 @@ export class InitiativeDetailsController {
   }
 
   @ApiTags('Context')
-  @Get('prio-evaluation-impact-assessments')
+  @Get('context/prio-evaluation-impact-assessments')
   findPrioEvaluationImpactAssessments(@Param('id') entity_id: string) {
-    return this.initiativeDetailsService.findContextData(+entity_id, [
+    return this.initiativeDetailsService.findInitiativeText(+entity_id, [
       'prior_evaluations_impact_assessments',
       'prior_evaluations_impact_assessments_html',
     ]);
   }
 
   @ApiTags('Context')
-  @Get('priority-setting')
+  @Get('context/priority-setting')
   findPrioritySetting(@Param('id') entity_id: string) {
-    return this.initiativeDetailsService.findContextData(+entity_id, [
+    return this.initiativeDetailsService.findInitiativeText(+entity_id, [
       'priority_setting',
       'priority_setting_html',
     ]);
   }
 
   @ApiTags('Context')
-  @Get('participatory-desing-process')
+  @Get('context/participatory-desing-process')
   findParticipatoryDesingProcess(@Param('id') entity_id: string) {
-    return this.initiativeDetailsService.findContextData(+entity_id, [
+    return this.initiativeDetailsService.findInitiativeText(+entity_id, [
       'participatory_desing_process',
       'participatory_desing_process_html',
     ]);
   }
 
   @ApiTags('Context')
-  @Get('partnerships')
+  @Get('context/partnerships')
   findPartnership(@Param('id') entity_id: string) {
-    return this.initiativeDetailsService.findContextData(+entity_id, [
+    return this.initiativeDetailsService.findInitiativeText(+entity_id, [
       'partnerships',
       'partnerships_html',
     ]);
   }
 
   @ApiTags('Context')
-  @Get('portfolio-linkage')
+  @Get('context/portfolio-linkage')
   findPortfolioLinkage(@Param('id') entity_id: string) {
-    return this.initiativeDetailsService.findContextData(+entity_id, [
+    return this.initiativeDetailsService.findInitiativeText(+entity_id, [
       'portfolio_linkages',
       'portfolio_linkages_html',
+    ]);
+  }
+
+  @ApiTags('Portfolio')
+  @Get('portfolio/vision-management-approach')
+  findVisionManagementApproach(@Param('id') entity_id: string) {
+    return this.initiativeDetailsService.findInitiativeText(+entity_id, [
+      'vision_management_approach',
+      'vision_management_approach_html',
+    ]);
+  }
+
+  @ApiTags('Portfolio')
+  @Get('portfolio/scaling-readiness-implementation')
+  findScalingReadinessImplementation(@Param('id') entity_id: string) {
+    return this.initiativeDetailsService.findInitiativeText(+entity_id, [
+      'scaling_readiness_implementation',
+      'scaling_readiness_implementation_html',
     ]);
   }
 
@@ -83,12 +101,12 @@ export class InitiativeDetailsController {
       },
     },
   })
-  @Patch('challenge-statement/save')
+  @Patch('context/challenge-statement/save')
   saveChallengeStatement(
     @Param('id') entity_id: string,
     @Body() req: Partial<InitiativeDetail>,
   ) {
-    return this.initiativeDetailsService.saveContexData(+entity_id, req, [
+    return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
       'challenge_statement_html',
     ]);
   }
@@ -103,12 +121,12 @@ export class InitiativeDetailsController {
       },
     },
   })
-  @Patch('measurable-three-year-outcome/save')
+  @Patch('context/measurable-three-year-outcome/save')
   saveMesurableThreeYear(
     @Param('id') entity_id: string,
     @Body() req: Partial<InitiativeDetail>,
   ) {
-    return this.initiativeDetailsService.saveContexData(+entity_id, req, [
+    return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
       'measurable_three_year_html',
       'p25_initiative_model_html',
     ]);
@@ -123,12 +141,12 @@ export class InitiativeDetailsController {
       },
     },
   })
-  @Patch('prio-evaluation-impact-assessments/save')
+  @Patch('context/prio-evaluation-impact-assessments/save')
   savePrioEvaluationImpactAssessments(
     @Param('id') entity_id: string,
     @Body() req: Partial<InitiativeDetail>,
   ) {
-    return this.initiativeDetailsService.saveContexData(+entity_id, req, [
+    return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
       'prior_evaluations_impact_assessments_html',
     ]);
   }
@@ -142,12 +160,12 @@ export class InitiativeDetailsController {
       },
     },
   })
-  @Patch('priority-setting/save')
+  @Patch('context/priority-setting/save')
   savePrioritySetting(
     @Param('id') entity_id: string,
     @Body() req: Partial<InitiativeDetail>,
   ) {
-    return this.initiativeDetailsService.saveContexData(+entity_id, req, [
+    return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
       'priority_setting_html',
     ]);
   }
@@ -161,12 +179,12 @@ export class InitiativeDetailsController {
       },
     },
   })
-  @Patch('participatory-desing-process/save')
+  @Patch('context/participatory-desing-process/save')
   saveParticipatoryDesingProcess(
     @Param('id') entity_id: string,
     @Body() req: Partial<InitiativeDetail>,
   ) {
-    return this.initiativeDetailsService.saveContexData(+entity_id, req, [
+    return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
       'participatory_desing_process_html',
     ]);
   }
@@ -180,12 +198,12 @@ export class InitiativeDetailsController {
       },
     },
   })
-  @Patch('partnerships/save')
+  @Patch('context/partnerships/save')
   savePartnership(
     @Param('id') entity_id: string,
     @Body() req: Partial<InitiativeDetail>,
   ) {
-    return this.initiativeDetailsService.saveContexData(+entity_id, req, [
+    return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
       'partnerships_html',
     ]);
   }
@@ -199,13 +217,51 @@ export class InitiativeDetailsController {
       },
     },
   })
-  @Patch('portfolio-linkage/save')
+  @Patch('context/portfolio-linkage/save')
   savePortfolioLinkage(
     @Param('id') entity_id: string,
     @Body() req: Partial<InitiativeDetail>,
   ) {
-    return this.initiativeDetailsService.saveContexData(+entity_id, req, [
+    return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
       'portfolio_linkages_html',
+    ]);
+  }
+
+  @ApiTags('Portfolio')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        vision_management_approach_html: { type: 'string' },
+      },
+    },
+  })
+  @Patch('portfolio/vision-management-approach/save')
+  saveVisionManagementApproach(
+    @Param('id') entity_id: string,
+    @Body() req: Partial<InitiativeDetail>,
+  ) {
+    return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
+      'vision_management_approach_html',
+    ]);
+  }
+
+  @ApiTags('Portfolio')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        scaling_readiness_implementation_html: { type: 'string' },
+      },
+    },
+  })
+  @Patch('portfolio/scaling-readiness-implementation/save')
+  saveScalingReadinessImplementation(
+    @Param('id') entity_id: string,
+    @Body() req: Partial<InitiativeDetail>,
+  ) {
+    return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
+      'scaling_readiness_implementation_html',
     ]);
   }
 }

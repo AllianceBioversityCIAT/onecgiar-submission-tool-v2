@@ -212,6 +212,38 @@ export class InitiativeDetail extends AuditableEntity {
 
   @ApiProperty()
   @Column({
+    name: 'vision_management_approach_html',
+    type: 'text',
+    nullable: true,
+  })
+  vision_management_approach_html!: string;
+
+  @ApiProperty()
+  @Column({
+    name: 'vision_management_approach',
+    type: 'text',
+    nullable: true,
+  })
+  vision_management_approach!: string;
+
+  @ApiProperty()
+  @Column({
+    name: 'scaling_readiness_implementation_html',
+    type: 'text',
+    nullable: true,
+  })
+  scaling_readiness_implementation_html!: string;
+
+  @ApiProperty()
+  @Column({
+    name: 'scaling_readiness_implementation',
+    type: 'text',
+    nullable: true,
+  })
+  scaling_readiness_implementation!: string;
+
+  @ApiProperty()
+  @Column({
     name: 'status_id',
     type: 'bigint',
     nullable: true,

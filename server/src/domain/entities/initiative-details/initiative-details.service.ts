@@ -12,7 +12,7 @@ export class InitiativeDetailsService {
     private readonly _initiativeDetailRepository: InitiativeDetailRepository,
   ) {}
 
-  findContextData(
+  findInitiativeText(
     entity_id: number,
     select: (keyof InitiativeDetail & string)[] = [],
   ) {
@@ -29,7 +29,7 @@ export class InitiativeDetailsService {
     );
   }
 
-  async saveContexData(
+  async saveInitiativeText(
     entity_id: number,
     reqInitDetails: Partial<InitiativeDetail>,
     keys: (keyof InitiativeDetail)[],
