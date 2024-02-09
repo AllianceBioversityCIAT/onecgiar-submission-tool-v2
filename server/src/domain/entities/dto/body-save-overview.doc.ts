@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { EntityCenter } from '../entity-centers/entities/entity-center.entity';
-import { EntityDiagramImage } from '../entity-diagram-images/entities/entity-diagram-image.entity';
 import { EntityImpactArea } from '../entity-impact-areas/entities/entity-impact-area.entity';
 import { InitiativeDetail } from '../initiative-details/entities/initiative-detail.entity';
 
@@ -49,7 +48,7 @@ export class BodySaveOverviewDoc {
       entity_initiative_id: { type: 'number' },
       lead_name: { type: 'string' },
       lead_email: { type: 'string' },
-      co_lead_name: { type: 'string' },
+      co_lead_id: { type: 'string' },
       co_lead_email: { type: 'string' },
       budget: { type: 'number' },
       clarisa_primary_action_area_id: { type: 'number' },

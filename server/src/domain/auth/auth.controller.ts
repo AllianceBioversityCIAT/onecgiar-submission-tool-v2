@@ -6,7 +6,6 @@ import {
   ApiHeader,
   ApiOperation,
   ApiTags,
-  PartialType,
 } from '@nestjs/swagger';
 import { SearchRequest } from '../shared/decorators/search-request.decorator';
 import { CognitoProfileDto } from '../shared/global-dto/cognito-profile.dto';

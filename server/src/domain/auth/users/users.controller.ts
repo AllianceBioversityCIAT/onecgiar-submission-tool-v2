@@ -26,7 +26,7 @@ export class UsersController {
   @ApiBearerAuth()
   @ApiBody({ type: CreateUserDto })
   @Patch('save')
-  save(@Body() user: User): Promise<ServiceResponseDto<User>> {
+  save(@Body() user: CreateUserDto): Promise<ServiceResponseDto<User>> {
     return this.usersService.create(user);
   }
 }

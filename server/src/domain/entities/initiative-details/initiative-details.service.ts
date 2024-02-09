@@ -32,7 +32,7 @@ export class InitiativeDetailsService {
   async saveContexData(
     entity_id: number,
     reqInitDetails: Partial<InitiativeDetail>,
-    keys: (keyof InitiativeDetail & string)[],
+    keys: (keyof InitiativeDetail)[],
   ): Promise<ServiceResponseDto<Partial<InitiativeDetail>>> {
     const challenge = await this._initiativeDetailRepository.findOne({
       where: {

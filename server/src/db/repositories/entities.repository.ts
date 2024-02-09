@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { Entities } from '../../domain/entities/entities/entities.entity';
 
@@ -28,6 +28,8 @@ export class EntitiesRepository extends Repository<Entities> {
           'ido',
           'ido.is_active = true',
         )
+        .leftJoinAndSelect('ido.user_co_lead_obj', 'uclo')
+        .leftJoinAndSelect('ido.user_lead_obj', 'ulo')
         .leftJoinAndSelect('ido.clarisa_primary_action_area_obj', 'cpaai')
         .where(
           'entities.is_active = true AND entities.entity_id = :entity_id',

@@ -28,7 +28,7 @@ export class AuthService {
 
     return userExists
       .then((res) => {
-        if (res) return res as User;
+        if (res) return res;
         throw new NotFoundException('User not found');
       })
       .then((res) => {

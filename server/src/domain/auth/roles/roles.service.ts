@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   ConflictException,
   HttpStatus,
   Injectable,
@@ -11,7 +10,6 @@ import { ResponseUtils } from '../../shared/utils/response.utils';
 import { ServiceResponseDto } from '../../shared/global-dto/service-response.dto';
 import { JwtPayloadDto } from './dto/jwt-payload.dto';
 import { UserRoleEntity } from '../../entities/user-role-entities/entities/user-role-entity.entity';
-import { UpdateRoleDto } from './dto/update-role.dto';
 import { ClarisaCgiarEntityTypesEnum } from '../../shared/enums/cgiar-entity-type.enum';
 import { QueryUtil } from '../../shared/utils/query.util';
 

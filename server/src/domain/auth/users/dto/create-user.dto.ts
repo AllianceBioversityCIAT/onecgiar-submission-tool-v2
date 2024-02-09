@@ -9,4 +9,7 @@ export class CreateUserDto {
 
   @ApiProperty({ example: 'joindoe@cgiar.org', required: true })
   email: string;
+
+  @ApiProperty({ example: false, required: true })
+  is_admin: boolean;
 }

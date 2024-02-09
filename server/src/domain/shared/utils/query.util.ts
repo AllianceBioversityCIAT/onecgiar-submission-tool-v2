@@ -7,7 +7,6 @@ export class QueryUtil {
       where: '1 = 1 ',
       attr: {},
     };
-    console.log(params, customConditionals);
 
     for (const [tableAlias, values] of Object.entries(customConditionals)) {
       config.where += values.reduce(

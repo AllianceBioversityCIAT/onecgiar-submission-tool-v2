@@ -1,9 +1,12 @@
 import { ConflictException, HttpStatus, Injectable } from '@nestjs/common';
-import { DataSource, Like } from 'typeorm';
+import { DataSource, In, Like } from 'typeorm';
 import { User } from './entities/user.entity';
 import { QueryUtil } from '../../shared/utils/query.util';
 import { ServiceResponseDto } from '../../shared/global-dto/service-response.dto';
 import { ResponseUtils } from '../../shared/utils/response.utils';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UserRoleEntity } from '../../entities/user-role-entities/entities/user-role-entity.entity';
+import { Role } from '../roles/entities/role.entity';
 
 @Injectable()
 export class UsersService {
@@ -43,7 +46,7 @@ export class UsersService {
     );
   }
 
-  create(user: User): Promise<ServiceResponseDto<User>> {
+  create(user: CreateUserDto): Promise<ServiceResponseDto<User>> {
     return this.dataSource
       .transaction(async (manager) => {
         const ifExists = await manager.getRepository(User).findOne({
@@ -61,7 +64,30 @@ export class UsersService {
           first_name: user.first_name?.trim(),
           last_name: user.last_name?.trim(),
         };
-        return manager.getRepository(User).save(TEMP_user);
+        const newUser = await manager.getRepository(User).save(TEMP_user);
+        const roles = await manager.getRepository(Role).find({
+          where: {
+            role_name: In(['Admin', 'Guest']),
+            is_active: true,
+          },
+        });
+        const TEMP_role: Partial<UserRoleEntity> = {
+          user_id: newUser.user_id,
+        };
+
+        if (user.is_admin) {
+          TEMP_role.role_id = roles.find(
+            (role) => role.role_name === 'Admin',
+          ).role_id;
+        } else {
+          TEMP_role.role_id = roles.find(
+            (role) => role.role_name === 'Guest',
+          ).role_id;
+        }
+
+        await manager.getRepository(UserRoleEntity).save(TEMP_role);
+
+        return newUser;
       })
       .then((data) =>
         ResponseUtils.format({

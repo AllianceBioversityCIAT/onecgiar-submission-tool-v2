@@ -3,7 +3,6 @@ import { RolesService } from './roles.service';
 import { SearchRequest } from '../../shared/decorators/search-request.decorator';
 import { JwtPayloadDto } from './dto/jwt-payload.dto';
 import { Role } from './entities/role.entity';
-import { UpdateRoleDto } from './dto/update-role.dto';
 import { ServiceResponseDto } from '../../shared/global-dto/service-response.dto';
 import { ApiBody, ApiQuery } from '@nestjs/swagger';
 import { ClarisaCgiarEntityTypesEnum } from '../../shared/enums/cgiar-entity-type.enum';
