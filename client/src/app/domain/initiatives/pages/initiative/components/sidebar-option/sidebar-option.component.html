@@ -1,7 +1,8 @@
 <div #parent class="
   cursor-pointer text-white border-round-sm text-sm p-1 pl-2 mb-2
   flex justify-content-between	align-items-center
-  transition-all transition-duration-500 hover:surface-700 {{option?.expand && 'bg-black-alpha-30'}}"
+  transition-all transition-duration-500 hover:surface-700"
+  routerLinkActive="bg-primary-500 hover:bg-primary-500"
   [routerLink]="option?.children?.length ? undefined:['/'+option.route]" (click)="
   option.expand=!option.expand">
   {{option.label}}
