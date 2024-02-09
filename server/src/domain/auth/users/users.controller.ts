@@ -1,8 +1,14 @@
-import { Body, Controller, Get, Patch, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { ServiceResponseDto } from '../../shared/global-dto/service-response.dto';
-import { ApiBearerAuth, ApiBody, ApiQuery, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiParam,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
 
 @ApiTags('Users')
@@ -21,6 +27,18 @@ export class UsersController {
     @Query('active') active: string = '1',
   ): Promise<ServiceResponseDto<User[]>> {
     return this.usersService.find(+id, +active, email);
+  }
+
+  @ApiParam({
+    name: 'id',
+    required: true,
+    type: 'string',
+    description: 'Entity id',
+    example: '1',
+  })
+  @Get('entity/:id')
+  findEntityType(@Param('id') id: string) {
+    return this.usersService.findEntityType(+id);
   }
 
   @ApiBearerAuth()
