@@ -4,7 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { DataSource } from 'typeorm';
+import { DataSource, EntityManager } from 'typeorm';
 import { Entities } from './entities/entities.entity';
 import { ResponseUtils } from '../shared/utils/response.utils';
 import { QueryUtil } from '../shared/utils/query.util';
@@ -17,12 +17,15 @@ import { EntityImpactArea } from './entity-impact-areas/entities/entity-impact-a
 import { EntityCenter } from './entity-centers/entities/entity-center.entity';
 import { RegexUtil } from '../shared/utils/regex.utils';
 import { InitiativeDetail } from './initiative-details/entities/initiative-detail.entity';
+import { UserRoleEntitiesService } from './user-role-entities/user-role-entities.service';
+import { Role } from '../auth/roles/entities/role.entity';
 
 @Injectable()
 export class EntityService {
   constructor(
     private readonly dataSource: DataSource,
     private readonly _entitiesRepository: EntitiesRepository,
+    private readonly _userRoleEntitiesService: UserRoleEntitiesService,
   ) {}
 
   async findEntities(
@@ -69,6 +72,58 @@ export class EntityService {
     });
     return ResponseUtils.format<any>({
       message: `Success`,
+      status: HttpStatus.OK,
+      data: response,
+    });
+  }
+
+  async findInitiativeFull(id?: number, active: number = 1) {
+    const response = await this.dataSource.transaction(async (manager) => {
+      const config = QueryUtil.buildQueryWhere(
+        {
+          entities: {
+            is_active: active,
+            entity_id: id,
+            entity_type_id:
+              ClarisaCgiarEntityTypesEnum.getFromName('initiatives')?.value,
+          },
+        },
+        {
+          entities: ['parent_entity_id IS NULL'],
+        },
+      );
+
+      return manager
+        .getRepository(Entities)
+        .createQueryBuilder('entities')
+        .leftJoinAndSelect(
+          'entities.child_entity_array',
+          'childEntity',
+          'childEntity.is_active = true',
+        )
+        .leftJoinAndSelect(
+          'childEntity.child_entity_array',
+          'childEntity2',
+          'childEntity2.is_active = true',
+        )
+        .leftJoin('entities.initiative_detail_obj', 'initiativeDetail')
+        .leftJoinAndSelect(
+          'initiativeDetail.clarisa_primary_action_area_obj',
+          'cpaao',
+        )
+        .leftJoinAndSelect('initiativeDetail.status_obj', 'so')
+        .addSelect('initiativeDetail.entity_initiative_id')
+        .addSelect('initiativeDetail.clarisa_primary_action_area_id')
+        .addSelect('initiativeDetail.status_id')
+        .leftJoinAndSelect('entities.entity_type_obj', 'entityType')
+        .leftJoinAndSelect('childEntity.entity_type_obj', 'entityType2')
+        .leftJoinAndSelect('childEntity2.entity_type_obj', 'entityType3')
+        .where(config.where, config.attr)
+        .getMany()
+        .then((res) => res);
+    });
+    return ResponseUtils.format<any>({
+      message: `Initiative found successfully`,
       status: HttpStatus.OK,
       data: response,
     });
@@ -156,21 +211,23 @@ export class EntityService {
     if (!reqInitDetails?.entity_initiative_id)
       TEMP_InitiativeDetails.entity_initiative_id = entity_id;
 
-    TEMP_InitiativeDetails.lead_name = reqInitDetails?.lead_name;
-    TEMP_InitiativeDetails.lead_email = reqInitDetails?.lead_email;
-    TEMP_InitiativeDetails.co_lead_name = reqInitDetails?.co_lead_name;
-    TEMP_InitiativeDetails.co_lead_email = reqInitDetails?.co_lead_email;
+    TEMP_InitiativeDetails.user_lead_id = reqInitDetails?.user_lead_id;
+    TEMP_InitiativeDetails.user_co_lead_id = reqInitDetails?.user_co_lead_id;
     TEMP_InitiativeDetails.clarisa_primary_action_area_id =
       reqInitDetails?.clarisa_primary_action_area_id;
     TEMP_InitiativeDetails.budget = reqInitDetails?.budget;
 
     delete TEMP_InitiativeDetails.clarisa_primary_action_area_obj;
+    delete TEMP_InitiativeDetails.user_lead_obj;
+    delete TEMP_InitiativeDetails.user_co_lead_obj;
     delete TEMP_Entity.entity_impact_area_array;
     delete TEMP_Entity.entity_center_array;
     delete TEMP_Entity.initiative_detail_obj;
 
     await this.dataSource.transaction(async (manager) => {
-      await manager.getRepository(Entities).save(TEMP_Entity);
+      const saveEntity = await manager
+        .getRepository(Entities)
+        .save(TEMP_Entity);
       await manager
         .getRepository(EntityImpactArea)
         .save(TEMP_entity_impact_area_array);
@@ -178,6 +235,41 @@ export class EntityService {
       await manager
         .getRepository(InitiativeDetail)
         .save(TEMP_InitiativeDetails);
+
+      const roles = await manager.getRepository(Role).find({
+        where: {
+          clarisa_entity_type_id: entitytemp.entity_type_id,
+          is_active: true,
+        },
+      });
+
+      await this.changeOverviewUser(
+        manager,
+        {
+          user_id: TEMP_InitiativeDetails?.user_lead_id,
+          role: 'Lead',
+        },
+        {
+          user_id: entitytemp.initiative_detail_obj.user_lead_id,
+          role: 'Coordinator',
+        },
+        roles,
+        saveEntity,
+      );
+
+      await this.changeOverviewUser(
+        manager,
+        {
+          user_id: TEMP_InitiativeDetails?.user_co_lead_id,
+          role: 'Co-Lead',
+        },
+        {
+          user_id: entitytemp.initiative_detail_obj.user_co_lead_id,
+          role: 'Coordinator',
+        },
+        roles,
+        saveEntity,
+      );
     });
 
     const dataUpdate =
@@ -188,6 +280,37 @@ export class EntityService {
       status: HttpStatus.OK,
       data: dataUpdate,
     });
+  }
+
+  async changeOverviewUser(
+    manager: EntityManager,
+    new_user: {
+      user_id: number;
+      role: string;
+    },
+    old_user: {
+      user_id: number;
+      role: string;
+    },
+    roles: Role[],
+    saveEntity: Entities,
+  ) {
+    await this._userRoleEntitiesService
+      .updateRole(
+        manager,
+        new_user.user_id,
+        roles.find((r) => r.role_name === new_user.role)?.role_id,
+        saveEntity,
+      )
+      .then(async () => {
+        if (new_user.user_id === old_user.user_id) return;
+        await this._userRoleEntitiesService.updateRole(
+          manager,
+          old_user.user_id,
+          roles.find((r) => r.role_name === old_user.role)?.role_id,
+          saveEntity,
+        );
+      });
   }
 
   findOverviewSummary(
@@ -206,10 +329,8 @@ export class EntityService {
     entity_id: number,
     executive_summary: string,
   ): Promise<ServiceResponseDto<InitiativeDetail>> {
-    const TEMP_executive_summary_clean = executive_summary.replace(
-      RegexUtil.cleanHtmlTags,
-      '',
-    );
+    const TEMP_executive_summary_clean =
+      RegexUtil.f.processHtmlTag(executive_summary) ?? null;
 
     let TEMP_update: Partial<InitiativeDetail> = {
       executive_summary_html: executive_summary,
@@ -266,7 +387,7 @@ export class EntityService {
     return initiativeDetails.then((res) =>
       Promise.resolve({
         message: 'Success',
-        status: 200,
+        status: HttpStatus.OK,
         data: res,
       }),
     );

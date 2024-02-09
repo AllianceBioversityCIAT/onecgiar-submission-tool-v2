@@ -3,6 +3,8 @@ import { Entities } from '../../entities/entities.entity';
 import { AuditableEntity } from '../../../shared/global-dto/auditable.entity';
 import { ClarisaActionArea } from '../../../../tools/clarisa/clarisa-action-areas/entities/clarisa-action-area.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { Status } from '../../status/entities/status.entity';
+import { User } from '../../../auth/users/entities/user.entity';
 
 @Entity('initiative_details')
 export class InitiativeDetail extends AuditableEntity {
@@ -15,37 +17,19 @@ export class InitiativeDetail extends AuditableEntity {
   })
   entity_initiative_id: number;
 
-  @ApiProperty()
   @Column({
-    name: 'lead_name',
-    type: 'text',
+    name: 'user_lead_id',
+    type: 'bigint',
     nullable: true,
   })
-  lead_name!: string;
+  user_lead_id!: number;
 
-  @ApiProperty()
   @Column({
-    name: 'lead_email',
-    type: 'text',
+    name: 'user_co_lead_id',
+    type: 'bigint',
     nullable: true,
   })
-  lead_email!: string;
-
-  @ApiProperty()
-  @Column({
-    name: 'co_lead_name',
-    type: 'text',
-    nullable: true,
-  })
-  co_lead_name!: string;
-
-  @ApiProperty()
-  @Column({
-    name: 'co_lead_email',
-    type: 'text',
-    nullable: true,
-  })
-  co_lead_email!: string;
+  user_co_lead_id!: number;
 
   @ApiProperty()
   @Column({
@@ -226,7 +210,27 @@ export class InitiativeDetail extends AuditableEntity {
   })
   portfolio_linkages!: string;
 
+  @ApiProperty()
+  @Column({
+    name: 'status_id',
+    type: 'bigint',
+    nullable: true,
+  })
+  status_id!: number;
+
   //--- relations
+
+  @ManyToOne(() => User, (user) => user.co_lead_initiative_detail_array)
+  @JoinColumn({ name: 'user_co_lead_id' })
+  user_co_lead_obj!: User;
+
+  @ManyToOne(() => User, (user) => user.lead_initiative_detail_array)
+  @JoinColumn({ name: 'user_lead_id' })
+  user_lead_obj!: User;
+
+  @ManyToOne(() => Status, (status) => status.initiative_detail_array)
+  @JoinColumn({ name: 'status_id' })
+  status_obj!: Status;
 
   @OneToOne(() => Entities, (entity) => entity.initiative_detail_obj)
   @JoinColumn({ name: 'entity_initiative_id' })

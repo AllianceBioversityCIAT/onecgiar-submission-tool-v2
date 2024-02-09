@@ -4,8 +4,6 @@ import { ApiBody, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { saveOverviewDto } from './dto/save-overview.dto';
 import { ServiceResponseDto } from '../shared/global-dto/service-response.dto';
 import { Entities } from './entities/entities.entity';
-import { get } from 'http';
-import { InitiativeDetail } from './initiative-details/entities/initiative-detail.entity';
 import { BodySaveOverviewDoc } from './dto/body-save-overview.doc';
 
 @ApiTags('Entity')
@@ -30,6 +28,14 @@ export class EntityController {
       officialCode,
       +active,
     );
+  }
+
+  @ApiQuery({ name: 'id', required: false })
+  @Get('type/initiatives')
+  findInitiativeFull(
+    @Query('id') id: string,
+  ): Promise<ServiceResponseDto<Entities[]>> {
+    return this.initiativesService.findInitiativeFull(+id);
   }
 
   @ApiQuery({ name: 'type', required: false })

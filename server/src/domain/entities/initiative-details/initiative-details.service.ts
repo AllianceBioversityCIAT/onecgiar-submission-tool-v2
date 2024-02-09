@@ -32,7 +32,7 @@ export class InitiativeDetailsService {
   async saveContexData(
     entity_id: number,
     reqInitDetails: Partial<InitiativeDetail>,
-    keys: (keyof InitiativeDetail & string)[],
+    keys: (keyof InitiativeDetail)[],
   ): Promise<ServiceResponseDto<Partial<InitiativeDetail>>> {
     const challenge = await this._initiativeDetailRepository.findOne({
       where: {
@@ -59,7 +59,7 @@ export class InitiativeDetailsService {
     keys.forEach((el) => {
       const TEMP_key = el.replace(RegexUtil.attrIsHtml, '');
       NEW_obj[el] = cliReq[el] ?? null;
-      NEW_obj[TEMP_key] = RegexUtil.f_cleanHtmlTags(cliReq[el], '') ?? null;
+      NEW_obj[TEMP_key] = RegexUtil.f.processHtmlTag(cliReq[el]) ?? null;
     });
 
     return NEW_obj as Partial<T>;
