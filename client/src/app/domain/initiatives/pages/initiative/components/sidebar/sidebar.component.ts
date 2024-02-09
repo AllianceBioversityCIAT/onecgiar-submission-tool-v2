@@ -103,6 +103,11 @@ export class SidebarComponent {
           },
         ],
       },
+      {
+        label: '5. Gender research and impact of the P25 Initiative ',
+        route: 'gender-research-and-impact',
+        inUnderConstruction: false,
+      },
     ];
 
     // agrega el id de la iniciativa a las rutas al parametro route, pero si tine hijas pones el del padre y si tiene otro nivel haz lo mismo

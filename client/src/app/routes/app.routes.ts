@@ -158,6 +158,13 @@ export const routes: Routes = [
               },
             ],
           },
+          {
+            path: 'gender-research-and-impact',
+            loadComponent: () =>
+              import('../domain/initiatives/pages/initiative/pages/gender/gender.component').then(
+                (c) => c.GenderComponent,
+              ),
+          },
         ],
       },
       {

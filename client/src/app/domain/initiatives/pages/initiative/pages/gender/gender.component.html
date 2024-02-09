@@ -1,1 +1,21 @@
-<p>gender works!</p>
+<div class="p-5">
+  <div
+    fieldContainer
+    label="Gender research and impact of the P25 Initiative"
+    description="desc example"
+    [maxwords]="500">
+    <p-editor
+      [style]="{ height: '320px' }"
+      placeholder="Enter gender research and impact of the P25 Initiative..."
+      [(ngModel)]="genderResearchAndImpactBody().gender_research_and_impact_html">
+      <ng-template pTemplate="header">
+        <span class="ql-formats">
+          <button type="button" class="ql-bold" aria-label="Bold"></button>
+          <button type="button" class="ql-italic" aria-label="Italic"></button>
+          <button type="button" class="ql-underline" aria-label="Underline"></button>
+          <button type="button" class="ql-link" aria-label="Link"></button>
+        </span>
+      </ng-template>
+    </p-editor>
+  </div>
+</div>
