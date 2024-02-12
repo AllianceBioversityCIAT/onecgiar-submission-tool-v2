@@ -141,4 +141,30 @@ export class ApiService {
       `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/portfolio-linkage/save`;
     return this.TP.patch(url(), body);
   };
+
+  // Innovation Portfolio - Innovation Portfolio vision and management approach
+  GET_InnovationPortfolioVisionAndMA = (): Promise<MainResponse<any>> => {
+    const url = () =>
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/portfolio/vision-management-approach`;
+    return this.TP.get(url());
+  };
+
+  PATCH_InnovationPortfolioVisionAndMA = (body: any): Promise<MainResponse<any>> => {
+    const url = () =>
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/portfolio/vision-management-approach/save`;
+    return this.TP.patch(url(), body);
+  };
+
+  // Innovation Portfolio - Innovation packages and SRP
+  GET_InnovationPackagesAndSRP = (): Promise<MainResponse<any>> => {
+    const url = () =>
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/portfolio/scaling-readiness-implementation`;
+    return this.TP.get(url());
+  };
+
+  PATCH_InnovationPackagesAndSRP = (body: any): Promise<MainResponse<any>> => {
+    const url = () =>
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/portfolio/scaling-readiness-implementation/save`;
+    return this.TP.patch(url(), body);
+  };
 }

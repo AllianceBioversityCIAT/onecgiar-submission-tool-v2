@@ -8,13 +8,11 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import {
-  ActionAreasListService,
-  ApiService,
-  GlobalVariablesService,
-} from '../../../../../../shared/services';
+import { GlobalVariablesService } from '../../../../../../shared/services/global-variables.service';
+import { ApiService } from '../../../../../../shared/services/api.service';
+import { ActionAreasListService } from '../../../../../../shared/services/control-lists/action-areas-list.service';
+import { FieldContainerDirective } from '../../../../../../shared/directives/field-container.directive';
 import { OverviewBody } from '../../../../../../shared/models';
-import { FieldContainerDirective } from '../../../../../../shared/directives';
 
 @Component({
   selector: 'app-summary-table',
