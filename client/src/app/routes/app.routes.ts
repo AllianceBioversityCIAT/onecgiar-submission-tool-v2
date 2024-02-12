@@ -55,8 +55,15 @@ export const routes: Routes = [
                 path: 'summary-table',
                 loadComponent: () =>
                   import(
-                    '../domain/initiatives/pages/initiative/pages/overview/summary-table/summary-table.component'
+                    '../domain/initiatives/pages/initiative/pages/overview/pages/summary-table/summary-table.component'
                   ).then((c) => c.SummaryTableComponent),
+              },
+              {
+                path: 'executive-summary',
+                loadComponent: () =>
+                  import(
+                    '../domain/initiatives/pages/initiative/pages/overview/pages/executive-summary/executive-summary.component'
+                  ).then((c) => c.ExecutiveSummaryComponent),
               },
             ],
           },

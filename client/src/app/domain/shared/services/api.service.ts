@@ -49,6 +49,19 @@ export class ApiService {
     return this.TP.patch(url(), body);
   };
 
+  // Overview - Executive Summary
+  GET_ExecutiveSummary = (): Promise<MainResponse<any>> => {
+    const url = () =>
+      `api/entity/${this.globalVars.currentInitiativeId()}/overview/executive-summary`;
+    return this.TP.get(url());
+  };
+
+  PATCH_ExecutiveSummary = (body: any): Promise<MainResponse<any>> => {
+    const url = () =>
+      `api/entity/${this.globalVars.currentInitiativeId()}/overview/executive-summary/save`;
+    return this.TP.patch(url(), body);
+  };
+
   // Context - Challenge Statement
   GET_ChallengeStatement = (): Promise<MainResponse<any>> => {
     const url = () =>

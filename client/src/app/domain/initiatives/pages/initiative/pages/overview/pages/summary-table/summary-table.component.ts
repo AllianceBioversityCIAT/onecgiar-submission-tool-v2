@@ -8,16 +8,15 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { GlobalVariablesService } from '../../../../../../shared/services/global-variables.service';
-import { ApiService } from '../../../../../../shared/services/api.service';
-import { ActionAreasListService } from '../../../../../../shared/services/control-lists/action-areas-list.service';
-import { FieldContainerDirective } from '../../../../../../shared/directives/field-container.directive';
-import { OverviewBody } from '../../../../../../shared/models';
+import { GlobalVariablesService } from '../../../../../../../shared/services/global-variables.service';
+import { ApiService } from '../../../../../../../shared/services/api.service';
+import { ActionAreasListService } from '../../../../../../../shared/services/control-lists/action-areas-list.service';
+import { FieldContainerDirective } from '../../../../../../../shared/directives/field-container.directive';
+import { OverviewBody } from '../../../../../../../shared/models';
 
 @Component({
   selector: 'app-summary-table',
   standalone: true,
-  providers: [MessageService],
   imports: [
     InputTextModule,
     FieldContainerDirective,
@@ -29,6 +28,7 @@ import { OverviewBody } from '../../../../../../shared/models';
     MultiSelectModule,
     ToastModule,
   ],
+  providers: [MessageService],
   templateUrl: './summary-table.component.html',
   styleUrl: './summary-table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

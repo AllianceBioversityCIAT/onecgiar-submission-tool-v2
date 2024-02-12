@@ -28,6 +28,10 @@ export class SidebarComponent {
             label: '1.1 Summary Table',
             route: 'summary-table',
           },
+          {
+            label: '1.2 Executive Summary',
+            route: 'executive-summary',
+          },
         ],
       },
       {
