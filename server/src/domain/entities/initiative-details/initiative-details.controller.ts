@@ -289,7 +289,7 @@ export class InitiativeDetailsController {
     @Body() req: Partial<InitiativeDetail>,
   ) {
     return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
-      'scaling_readiness_implementation_html',
+      'gender_research_impact_p25_html',
     ]);
   }
 }
