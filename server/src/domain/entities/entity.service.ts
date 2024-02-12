@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConflictException,
   HttpStatus,
   Injectable,
   NotFoundException,
@@ -19,6 +20,7 @@ import { RegexUtil } from '../shared/utils/regex.utils';
 import { InitiativeDetail } from './initiative-details/entities/initiative-detail.entity';
 import { UserRoleEntitiesService } from './user-role-entities/user-role-entities.service';
 import { Role } from '../auth/roles/entities/role.entity';
+import { CreateBaseEntityDto } from './dto/create-base-entity.dto';
 
 @Injectable()
 export class EntityService {
@@ -391,5 +393,51 @@ export class EntityService {
         data: res,
       }),
     );
+  }
+
+  createInitiative(entity: CreateBaseEntityDto) {
+    return this.dataSource
+      .transaction(async (manager) => {
+        const requiredFields = {
+          name: 'Entity name is required!',
+          short_name: 'Entity short name is required!',
+          'initiative_detail_obj.clarisa_primary_action_area_id':
+            'Primary action area is required!',
+          official_code: 'Entity official code is required!',
+        };
+
+        for (const field in requiredFields) {
+          const value = field.split('.').reduce((o, i) => o[i], entity);
+          if (!value) {
+            throw new BadRequestException(requiredFields[field]);
+          }
+        }
+
+        const ifExists = await manager.getRepository(Entities).findOne({
+          where: {
+            official_code: entity.official_code,
+            is_active: true,
+          },
+        });
+
+        if (ifExists) {
+          throw new ConflictException('Entity already exists!');
+        }
+        entity.entity_type_id = ClarisaCgiarEntityTypesEnum.Initiatives.value;
+        const newEntity = await manager.getRepository(Entities).save(entity);
+        await manager.getRepository(InitiativeDetail).save({
+          entity_initiative_id: newEntity.entity_id,
+          clarisa_primary_action_area_id:
+            entity.initiative_detail_obj.clarisa_primary_action_area_id,
+        });
+        return newEntity;
+      })
+      .then((data) =>
+        ResponseUtils.format({
+          message: 'Entity created successfully!',
+          data,
+          status: HttpStatus.CREATED,
+        }),
+      );
   }
 }

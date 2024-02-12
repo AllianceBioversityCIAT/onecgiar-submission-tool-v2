@@ -97,4 +97,27 @@ export class UsersService {
         }),
       );
   }
+
+  findEntityType(entity_id: number): Promise<ServiceResponseDto<User[]>> {
+    const res = this.dataSource.transaction(async (manager) => {
+      const entity = await manager
+        .getRepository(User)
+        .createQueryBuilder('user')
+        .leftJoin('user.user_role_entity_array', 'urea')
+        .where('user.is_active = true AND urea.entity_id = :entity_id', {
+          entity_id,
+        })
+        .getMany();
+
+      return entity;
+    });
+
+    return res.then((data) =>
+      ResponseUtils.format({
+        message: 'Users found successfully!',
+        data,
+        status: HttpStatus.OK,
+      }),
+    );
+  }
 }
