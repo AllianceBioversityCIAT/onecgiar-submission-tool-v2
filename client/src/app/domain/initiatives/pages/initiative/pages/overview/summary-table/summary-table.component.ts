@@ -6,13 +6,15 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { FileUploadModule } from 'primeng/fileupload';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { FieldContainerDirective } from '../../../../../../shared/directives/field-container.directive';
-import { ApiService } from '../../../../../../shared/services/api.service';
-import { GlobalVariablesService } from '../../../../../../shared/services/global-variables.service';
-import { OverviewBody } from '../../../../../../shared/models/overview-body.class';
-import { ActionAreasListService } from '../../../../../../shared/services/control-lists/action-areas-list.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import {
+  ActionAreasListService,
+  ApiService,
+  GlobalVariablesService,
+} from '../../../../../../shared/services';
+import { OverviewBody } from '../../../../../../shared/models';
+import { FieldContainerDirective } from '../../../../../../shared/directives';
 
 @Component({
   selector: 'app-summary-table',
@@ -34,27 +36,27 @@ import { ToastModule } from 'primeng/toast';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SummaryTableComponent {
-  api = inject(ApiService);
-  actionAreasListSE = inject(ActionAreasListService);
-  globalVars = inject(GlobalVariablesService);
-  messageService = inject(MessageService);
+  public globalVars = inject(GlobalVariablesService);
+  public api = inject(ApiService);
+  public messageService = inject(MessageService);
+  public actionAreasListSE = inject(ActionAreasListService);
 
-  body = signal(new OverviewBody());
+  public summaryTableBody = signal(new OverviewBody());
 
   uploadedFiles: any[] = [];
 
   ngOnInit(): void {
-    this.getSectionData();
+    this.getSummaryTable();
   }
 
-  savePrioritySettingButtonEffect = effect(() => {
-    if (this.globalVars.isSavingSection()) {
-      this.saveSection();
-    }
-  });
+  async getSummaryTable() {
+    const response = await this.api.GET_SummaryTable();
+
+    response.success && this.api.updateSignalBody(this.summaryTableBody, response.data);
+  }
 
   updateSignal(e: any, pathString: keyof InstanceType<typeof OverviewBody> | string) {
-    this.body.update((prev: any) => {
+    this.summaryTableBody.update((prev: any) => {
       const editDataByPathString = (value: any) => {
         const path = pathString.split('.');
         const lastKey: any = path.pop();
@@ -65,21 +67,19 @@ export class SummaryTableComponent {
     });
   }
 
-  async getSectionData() {
-    const response = await this.api.GET_overview('1');
-    console.log(response.data);
-    this.api.updateSignalBody(this.body, response.data);
-  }
+  saveSummaryTableButtonEffect = effect(() => {
+    this.globalVars.isSavingSection() && this.saveSummaryTableSection();
+  });
 
-  async saveSection() {
-    console.log(this.body());
-    const response = await this.api.PATCH_overview('1', this.body());
-    this.globalVars.isSavingSection.set(false);
+  async saveSummaryTableSection() {
+    const response = await this.api.PATCH_SummaryTable(this.summaryTableBody());
+
     this.messageService.add({
       severity: response?.success ? 'success' : 'error',
       summary: 'Success',
       detail: response?.success ? 'Section saved' : 'Error',
     });
-    this.getSectionData();
+
+    this.globalVars.isSavingSection.set(false);
   }
 }

@@ -14,13 +14,13 @@ export class ApiService {
   cleanBody(body: any) {
     for (const key in body) {
       if (typeof body[key] === 'string') {
-        (body[key] as any) = '';
+        body[key] = '';
       } else if (typeof body[key] === 'number') {
-        (body[key] as any) = null;
+        body[key] = null;
       } else if (Array.isArray(body[key])) {
-        (body[key] as any) = [];
+        body[key] = [];
       } else {
-        (body[key] as any) = null;
+        body[key] = null;
       }
     }
   }
@@ -38,38 +38,40 @@ export class ApiService {
     return this.TP.post(url(), {}, awsToken);
   };
 
-  GET_overview = (id: string): Promise<MainResponse<OverviewBody>> => {
-    const url = () => `api/entity/${id}/overview-summary`;
+  // Overview - Summary
+  GET_SummaryTable = (): Promise<MainResponse<OverviewBody>> => {
+    const url = () => `api/entity/${this.globalVars.currentInitiativeId()}/overview/summary`;
     return this.TP.get(url(), { flatten: true });
   };
 
-  PATCH_overview = (id: string, body: OverviewBody): Promise<MainResponse<OverviewBody>> => {
-    const url = () => `api/entity/${id}/overview-summary/save`;
+  PATCH_SummaryTable = (body: OverviewBody): Promise<MainResponse<OverviewBody>> => {
+    const url = () => `api/entity/${this.globalVars.currentInitiativeId()}/overview/summary/save`;
     return this.TP.patch(url(), body);
   };
+
   // Context - Challenge Statement
   GET_ChallengeStatement = (): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/challenge-statement`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/challenge-statement`;
     return this.TP.get(url());
   };
 
   PATCH_ChallengeStatement = (body: any): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/challenge-statement/save`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/challenge-statement/save`;
     return this.TP.patch(url(), body);
   };
 
   // Context - Measurable Objectives
   GET_MeasurableObjectives = (): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/measurable-three-year-outcome`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/measurable-three-year-outcome`;
     return this.TP.get(url());
   };
 
   PATCH_MeasurableObjectives = (body: any): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/measurable-three-year-outcome/save`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/measurable-three-year-outcome/save`;
     return this.TP.patch(url(), body);
   };
 
@@ -78,65 +80,65 @@ export class ApiService {
   // Context - Partnerships
   GET_Partnerships = (): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/partnerships`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/partnerships`;
     return this.TP.get(url());
   };
 
   PATCH_Partnerships = (body: any): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/partnerships/save`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/partnerships/save`;
     return this.TP.patch(url(), body);
   };
 
   // Context - Learning FPE and IA
   GET_LearningFPEAndIA = (): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/prio-evaluation-impact-assessments`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/prio-evaluation-impact-assessments`;
     return this.TP.get(url());
   };
 
   PATCH_LearningFPEAndIA = (body: any): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/prio-evaluation-impact-assessments/save`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/prio-evaluation-impact-assessments/save`;
     return this.TP.patch(url(), body);
   };
 
   // Context - Priority Setting
   GET_PrioritySetting = (): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/priority-setting`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/priority-setting`;
     return this.TP.get(url());
   };
 
   PATCH_PrioritySetting = (body: any): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/priority-setting/save`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/priority-setting/save`;
     return this.TP.patch(url(), body);
   };
 
   // Context - Participatory Design Process
   GET_ParticipatoryDesignProcess = (): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/participatory-desing-process`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/participatory-desing-process`;
     return this.TP.get(url());
   };
 
   PATCH_ParticipatoryDesignProcess = (body: any): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/participatory-desing-process/save`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/participatory-desing-process/save`;
     return this.TP.patch(url(), body);
   };
 
   // Context - Portfolio Linkages
   GET_PortfolioLinkages = (): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/portfolio-linkage`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/portfolio-linkage`;
     return this.TP.get(url());
   };
 
   PATCH_PortfolioLinkages = (body: any): Promise<MainResponse<any>> => {
     const url = () =>
-      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/portfolio-linkage/save`;
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/context/portfolio-linkage/save`;
     return this.TP.patch(url(), body);
   };
 }

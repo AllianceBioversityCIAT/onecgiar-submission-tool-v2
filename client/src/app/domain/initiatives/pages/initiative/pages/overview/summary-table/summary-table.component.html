@@ -4,12 +4,12 @@
     fieldContainer
     label="Short name"
     bodyValue="short_name"
-    [signalBody]="this.body"
+    [signalBody]="this.summaryTableBody"
     [maxwords]="3">
     <input
       type="text"
       pInputText
-      [(ngModel)]="body().short_name"
+      [(ngModel)]="summaryTableBody().short_name"
       (ngModelChange)="updateSignal($event, 'short_name')" />
   </div>
 
@@ -18,14 +18,14 @@
     fieldContainer
     label="Short Initiative name"
     bodyValue="name"
-    [signalBody]="this.body"
+    [signalBody]="this.summaryTableBody"
     [maxwords]="50">
     <textarea
       rows="1"
       cols="30"
       pInputTextarea
       (ngModelChange)="updateSignal($event, 'name')"
-      [(ngModel)]="body().name"
+      [(ngModel)]="summaryTableBody().name"
       style="resize: vertical"></textarea>
   </div>
 
@@ -34,7 +34,7 @@
       [disabled]="true"
       type="text"
       pInputText
-      [(ngModel)]="body().initiative_detail_obj.lead_name" />
+      [(ngModel)]="summaryTableBody().initiative_detail_obj.lead_name" />
   </div>
 
   <div class="col-6" fieldContainer label="Lead email">
@@ -42,7 +42,7 @@
       [disabled]="true"
       type="text"
       pInputText
-      [(ngModel)]="body().initiative_detail_obj.lead_email" />
+      [(ngModel)]="summaryTableBody().initiative_detail_obj.lead_email" />
   </div>
 
   <div class="col-6" fieldContainer label="Co-Lead name">
@@ -50,7 +50,7 @@
       [disabled]="true"
       type="text"
       pInputText
-      [(ngModel)]="body().initiative_detail_obj.co_lead_name" />
+      [(ngModel)]="summaryTableBody().initiative_detail_obj.co_lead_name" />
   </div>
 
   <div class="col-6" fieldContainer label="Co-Lead email">
@@ -58,14 +58,14 @@
       [disabled]="true"
       type="text"
       pInputText
-      [(ngModel)]="body().initiative_detail_obj.co_lead_email" />
+      [(ngModel)]="summaryTableBody().initiative_detail_obj.co_lead_email" />
   </div>
 
   <div class="col-6" fieldContainer label="Primary CGIAR Action Area">
     <p-dropdown
       [options]="this.actionAreasListSE.list()"
       (ngModelChange)="updateSignal($event, 'initiative_detail_obj.clarisa_primary_action_area_id')"
-      [(ngModel)]="body().initiative_detail_obj.clarisa_primary_action_area_id"
+      [(ngModel)]="summaryTableBody().initiative_detail_obj.clarisa_primary_action_area_id"
       optionLabel="name"
       optionValue="id"
       [showClear]="true"
@@ -76,7 +76,7 @@
     <p-inputNumber
       [min]="0"
       mode="decimal"
-      [(ngModel)]="body().initiative_detail_obj.budget"
+      [(ngModel)]="summaryTableBody().initiative_detail_obj.budget"
       (ngModelChange)="updateSignal($event, 'initiative_detail_obj.budget')"
       [minFractionDigits]="0"
       [maxFractionDigits]="2"></p-inputNumber>
