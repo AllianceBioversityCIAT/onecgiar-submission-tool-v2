@@ -92,6 +92,15 @@ export class InitiativeDetailsController {
     ]);
   }
 
+  @ApiTags('Gender')
+  @Get('gender/research-impact-p25')
+  findGenderResearchImpactP25(@Param('id') entity_id: string) {
+    return this.initiativeDetailsService.findInitiativeText(+entity_id, [
+      'gender_research_impact_p25',
+      'gender_research_impact_p25_html',
+    ]);
+  }
+
   @ApiTags('Context')
   @ApiBody({
     schema: {
@@ -262,6 +271,25 @@ export class InitiativeDetailsController {
   ) {
     return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
       'scaling_readiness_implementation_html',
+    ]);
+  }
+
+  @ApiTags('Gender')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        gender_research_impact_p25_html: { type: 'string' },
+      },
+    },
+  })
+  @Patch('gender/research-impact-p25/save')
+  saveGenderResearchImpact(
+    @Param('id') entity_id: string,
+    @Body() req: Partial<InitiativeDetail>,
+  ) {
+    return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
+      'gender_research_impact_p25_html',
     ]);
   }
 }

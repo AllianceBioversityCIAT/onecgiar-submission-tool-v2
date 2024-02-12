@@ -1,8 +1,7 @@
-import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { InitiativeDetailRepository } from '../../../db/repositories/initiative-detail.repository';
 import { InitiativeDetail } from './entities/initiative-detail.entity';
 import { RegexUtil } from '../../shared/utils/regex.utils';
-import { UpdateInitiativeDetailDto } from './dto/update-initiative-detail.dto';
 import { ResponseUtils } from '../../shared/utils/response.utils';
 import { ServiceResponseDto } from '../../shared/global-dto/service-response.dto';
 
@@ -14,7 +13,7 @@ export class InitiativeDetailsService {
 
   findInitiativeText(
     entity_id: number,
-    select: (keyof InitiativeDetail & string)[] = [],
+    select: (keyof InitiativeDetail)[] = [],
   ) {
     const res = this._initiativeDetailRepository.findOneSelect(
       entity_id,

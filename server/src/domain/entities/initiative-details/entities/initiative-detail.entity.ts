@@ -244,6 +244,22 @@ export class InitiativeDetail extends AuditableEntity {
 
   @ApiProperty()
   @Column({
+    name: 'gender_research_impact_p25_html',
+    type: 'text',
+    nullable: true,
+  })
+  gender_research_impact_p25_html: string;
+
+  @ApiProperty()
+  @Column({
+    name: 'gender_research_impact_p25',
+    type: 'text',
+    nullable: true,
+  })
+  gender_research_impact_p25: string;
+
+  @ApiProperty()
+  @Column({
     name: 'status_id',
     type: 'bigint',
     nullable: true,
