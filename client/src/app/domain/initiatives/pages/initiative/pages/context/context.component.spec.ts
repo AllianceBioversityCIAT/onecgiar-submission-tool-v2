@@ -8,10 +8,9 @@ describe('ContextComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ContextComponent]
-    })
-    .compileComponents();
-    
+      imports: [ContextComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ContextComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

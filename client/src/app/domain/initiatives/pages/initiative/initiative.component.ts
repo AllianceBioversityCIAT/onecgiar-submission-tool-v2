@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { GlobalVariablesService } from '../../../shared/services/global-variables.service';
@@ -13,7 +13,7 @@ import { ButtonModule } from 'primeng/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InitiativeComponent {
-  private activatedRoute = inject(ActivatedRoute);
+  public activatedRoute = inject(ActivatedRoute);
   public globalVars = inject(GlobalVariablesService);
 
   ngOnInit(): void {
