@@ -180,4 +180,17 @@ export class ApiService {
       `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/portfolio/scaling-readiness-implementation/save`;
     return this.TP.patch(url(), body);
   };
+
+  // Gender Research and Impact
+  GET_GenderResearchAndImpact = (): Promise<MainResponse<any>> => {
+    const url = () =>
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/gender/research-impact-p25`;
+    return this.TP.get(url());
+  };
+
+  PATCH_GenderResearchAndImpact = (body: any): Promise<MainResponse<any>> => {
+    const url = () =>
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/gender/research-impact-p25/save`;
+    return this.TP.patch(url(), body);
+  };
 }
