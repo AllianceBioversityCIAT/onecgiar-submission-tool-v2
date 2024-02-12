@@ -4,6 +4,7 @@ import { EditorModule } from 'primeng/editor';
 import { ButtonModule } from 'primeng/button';
 import { FieldContainerDirective } from '../../../../../../../shared/directives/field-container.directive';
 import { InnovationPackagesAndSrpComponent } from './innovation-packages-and-srp.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('InnovationPackagesAndSrpComponent', () => {
   let component: InnovationPackagesAndSrpComponent;
@@ -17,6 +18,7 @@ describe('InnovationPackagesAndSrpComponent', () => {
         ButtonModule,
         FieldContainerDirective,
         InnovationPackagesAndSrpComponent,
+        HttpClientTestingModule,
       ],
       declarations: [],
       providers: [],
@@ -33,16 +35,79 @@ describe('InnovationPackagesAndSrpComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call saveInnoPackagesAndSRPSection after 1500ms', () => {
-    jest.useFakeTimers();
-    const saveInnoPackagesAndSRPSectionSpy = jest.spyOn(component, 'saveInnoPackagesAndSRPSection');
+  it('should initialize innoPackagesAndSRP with null value', () => {
+    expect(component.innoPackagesAndSRP().scaling_readiness_implementation_html).toBeNull();
+  });
 
-    expect(saveInnoPackagesAndSRPSectionSpy).not.toHaveBeenCalled();
+  it('should call getInnovationPackagesAndSRP on ngOnInit', () => {
+    jest.spyOn(component, 'getInnovationPackagesAndSRP');
+    component.ngOnInit();
+    expect(component.getInnovationPackagesAndSRP).toHaveBeenCalled();
+  });
 
-    component.saveInnoPackagesAndSRPSection();
+  it('should set scaling_readiness_implementation_html when getInnovationPackagesAndSRP is called and response is successful', async () => {
+    const mockResponse = {
+      success: true,
+      data: {
+        data: {
+          scaling_readiness_implementation_html: '<p>Challenge statement HTML</p>',
+        },
+      },
+    };
+    jest.spyOn(component.api, 'GET_InnovationPackagesAndSRP').mockResolvedValue(mockResponse);
+    await component.getInnovationPackagesAndSRP();
+    expect(component.innoPackagesAndSRP().scaling_readiness_implementation_html).toBe(
+      '<p>Challenge statement HTML</p>',
+    );
+  });
 
-    jest.advanceTimersByTime(1500);
+  it('should not set scaling_readiness_implementation_html when getInnovationPackagesAndSRP is called and response is not successful', async () => {
+    const mockResponse = {
+      data: null,
+      success: false,
+    };
+    jest.spyOn(component.api, 'GET_InnovationPackagesAndSRP').mockResolvedValue(mockResponse);
+    await component.getInnovationPackagesAndSRP();
+    expect(component.innoPackagesAndSRP().scaling_readiness_implementation_html).toBeNull();
+  });
 
-    expect(saveInnoPackagesAndSRPSectionSpy).toHaveBeenCalled();
+  it('should call PATCH_InnovationPackagesAndSRP and display success message when saveInnoPackagesAndSRPSection is called and response is successful', async () => {
+    const mockResponse = {
+      data: null,
+      success: true,
+    };
+    jest.spyOn(component.api, 'PATCH_InnovationPackagesAndSRP').mockResolvedValue(mockResponse);
+    jest.spyOn(component.messageService, 'add');
+    jest.spyOn(component.globalVars.isSavingSection, 'set');
+    await component.saveInnoPackagesAndSRPSection();
+    expect(component.api.PATCH_InnovationPackagesAndSRP).toHaveBeenCalledWith(
+      component.innoPackagesAndSRP(),
+    );
+    expect(component.messageService.add).toHaveBeenCalledWith({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Success',
+    });
+    expect(component.globalVars.isSavingSection.set).toHaveBeenCalledWith(false);
+  });
+
+  it('should call PATCH_InnovationPackagesAndSRP and display error message when saveInnoPackagesAndSRPSection is called and response is not successful', async () => {
+    const mockResponse = {
+      data: null,
+      success: false,
+    };
+    jest.spyOn(component.api, 'PATCH_InnovationPackagesAndSRP').mockResolvedValue(mockResponse);
+    jest.spyOn(component.messageService, 'add');
+    jest.spyOn(component.globalVars.isSavingSection, 'set');
+    await component.saveInnoPackagesAndSRPSection();
+    expect(component.api.PATCH_InnovationPackagesAndSRP).toHaveBeenCalledWith(
+      component.innoPackagesAndSRP(),
+    );
+    expect(component.messageService.add).toHaveBeenCalledWith({
+      severity: 'error',
+      summary: 'Success',
+      detail: 'Error',
+    });
+    expect(component.globalVars.isSavingSection.set).toHaveBeenCalledWith(false);
   });
 });
