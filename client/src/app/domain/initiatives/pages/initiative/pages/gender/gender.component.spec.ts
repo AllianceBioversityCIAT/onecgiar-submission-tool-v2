@@ -8,10 +8,11 @@ describe('GenderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GenderComponent]
-    })
-    .compileComponents();
-    
+      imports: [GenderComponent],
+    }).compileComponents();
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(GenderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -19,5 +20,21 @@ describe('GenderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call saveGenderResearchAndImpactSection after 1500ms', () => {
+    jest.useFakeTimers();
+    const saveGenderResearchAndImpactSectionSpy = jest.spyOn(
+      component,
+      'saveGenderResearchAndImpactSection',
+    );
+
+    expect(saveGenderResearchAndImpactSectionSpy).not.toHaveBeenCalled();
+
+    component.saveGenderResearchAndImpactSection();
+
+    jest.advanceTimersByTime(1500);
+
+    expect(saveGenderResearchAndImpactSectionSpy).toHaveBeenCalled();
   });
 });
