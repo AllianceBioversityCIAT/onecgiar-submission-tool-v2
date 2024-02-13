@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable, Res } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import { ClarisaCountry } from './entities/clarisa-country.entity';
 import { ServiceResponseDto } from '../../../domain/shared/global-dto/service-response.dto';

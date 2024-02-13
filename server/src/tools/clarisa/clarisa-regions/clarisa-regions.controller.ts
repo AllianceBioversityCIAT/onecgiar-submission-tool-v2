@@ -1,11 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ClarisaRegionsService } from './clarisa-regions.service';
-import {
-  ApiBearerAuth,
-  ApiCookieAuth,
-  ApiHeader,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiHeader, ApiTags } from '@nestjs/swagger';
 import { ServiceResponseDto } from '../../../domain/shared/global-dto/service-response.dto';
 import { ClarisaRegion } from './entities/clarisa-region.entity';
 

@@ -20,10 +20,10 @@ export class ArrayUtil {
       );
       if (clientArrayItemIndex !== -1) {
         const temp = clientArray[clientArrayItemIndex];
-        const { [key]: _, ...rest } = temp;
+        delete temp[key];
         clientArray[clientArrayItemIndex] = {
           ...bItem,
-          ...rest,
+          ...temp,
           [parent.key]: parent.value,
         };
       } else {

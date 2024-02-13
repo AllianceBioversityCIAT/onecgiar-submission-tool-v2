@@ -3,7 +3,7 @@ export class QueryUtil {
     params: Record<string, Record<string, any>>,
     customConditionals?: Record<string, string[]>,
   ): { where: string; attr: Record<string, any> } {
-    let config: any = {
+    const config: any = {
       where: '1 = 1 ',
       attr: {},
     };

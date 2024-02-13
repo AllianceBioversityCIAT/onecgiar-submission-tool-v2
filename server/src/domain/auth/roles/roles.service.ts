@@ -19,7 +19,7 @@ export class RolesService {
 
   find(type: string): Promise<ServiceResponseDto<Role[]>> {
     let custom: any = {};
-    let properties: any = {
+    const properties: any = {
       role: { is_active: 1 },
     };
 

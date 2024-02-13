@@ -3,7 +3,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Clarisa } from './clarisa.connection';
 import { ConfigService } from '@nestjs/config';
 import { ClarisaCgiarEntityType } from './clarisa-cgiar-entity-types/entities/clarisa-cgiar-entity-type.entity';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource } from 'typeorm';
 import { ResultsSdgTargetRepository } from '../../db/repositories/clarisa-cgiar-entity-type.repository';
 import { ClarisaActionArea } from './clarisa-action-areas/entities/clarisa-action-area.entity';
 import { ClarisaCountry } from './clarisa-countries/entities/clarisa-country.entity';
@@ -26,23 +26,23 @@ export class ClarisaTaskService {
       username: this._configService.get<string>('CLARISA_USERNAME'),
     });
   }
-  private ClarisaMessage(Entity: Function) {
+  private ClarisaMessage<C>(entityClass: new () => C) {
     return {
-      OK: `The data of ${Entity.name} was saved correctly`,
-      ERROR: `Error saving data of ${Entity.name}`,
-      START: `Start saving data of ${Entity.name}`,
-      FINALLY: `End saving data of ${Entity.name}`,
+      OK: `The data of ${entityClass.name} was saved correctly`,
+      ERROR: `Error saving data of ${entityClass.name}`,
+      START: `Start saving data of ${entityClass.name}`,
+      FINALLY: `End saving data of ${entityClass.name}`,
     };
   }
 
-  private cloneData(path: string, Entity: Function) {
-    const mss = this.ClarisaMessage(Entity);
+  private async cloneData<C>(path: string, entityClass: new () => C) {
+    const mss = this.ClarisaMessage(entityClass);
     this._logger.log(mss.START);
     this.clarisa.get(path).then((res) => {
       this.dataSource.transaction(async (manager) => {
         manager
-          .getRepository(Entity)
-          .save(res)
+          .getRepository(entityClass)
+          .save(res as C)
           .then(() => {
             this._logger.log(mss.OK);
           })
@@ -60,11 +60,12 @@ export class ClarisaTaskService {
   async bootstrap() {
     this._logger.verbose(`Start saving data of ${ClarisaTaskService.name}`);
 
-    await this.cloneData('cgiar-entity-types', ClarisaCgiarEntityType);
-    await this.cloneData('action-areas', ClarisaActionArea);
-    await this.cloneData('countries', ClarisaCountry);
-    await this.cloneData('un-regions', ClarisaRegion);
+    this.cloneData('un-regions', ClarisaRegion);
+    this.cloneData('countries', ClarisaCountry);
+
     await this.cloneData('cgiar-entities', ClarisaCgiarEntity);
+    await this.cloneData('cgiar-entity-types', ClarisaCgiarEntityType);
     await this.cloneData('impact-areas', ClarisaImpactArea);
+    await this.cloneData('action-areas', ClarisaActionArea);
   }
 }

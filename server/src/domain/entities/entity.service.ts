@@ -11,7 +11,7 @@ import { ResponseUtils } from '../shared/utils/response.utils';
 import { QueryUtil } from '../shared/utils/query.util';
 import { ClarisaCgiarEntityTypesEnum } from '../shared/enums/cgiar-entity-type.enum';
 import { ServiceResponseDto } from '../shared/global-dto/service-response.dto';
-import { saveOverviewDto } from './dto/save-overview.dto';
+import { SaveOverviewDto } from './dto/save-overview.dto';
 import { EntitiesRepository } from '../../db/repositories/entities.repository';
 import { ArrayUtil } from '../shared/utils/array-management.util';
 import { EntityImpactArea } from './entity-impact-areas/entities/entity-impact-area.entity';
@@ -166,7 +166,7 @@ export class EntityService {
 
   async saveOverviewSummary(
     entity_id: number,
-    reqSave: saveOverviewDto,
+    reqSave: SaveOverviewDto,
   ): Promise<ServiceResponseDto<Entities>> {
     if (!entity_id) {
       throw new BadRequestException('Entity ID is required');
@@ -334,7 +334,7 @@ export class EntityService {
     const TEMP_executive_summary_clean =
       RegexUtil.f.processHtmlTag(executive_summary) ?? null;
 
-    let TEMP_update: Partial<InitiativeDetail> = {
+    const TEMP_update: Partial<InitiativeDetail> = {
       executive_summary_html: executive_summary,
       executive_summary: TEMP_executive_summary_clean,
     };

@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { EntityService } from './entity.service';
 import { ApiBody, ApiQuery, ApiTags } from '@nestjs/swagger';
-import { saveOverviewDto } from './dto/save-overview.dto';
+import { SaveOverviewDto } from './dto/save-overview.dto';
 import { ServiceResponseDto } from '../shared/global-dto/service-response.dto';
 import { Entities } from './entities/entities.entity';
 import { BodySaveOverviewDoc } from './dto/body-save-overview.doc';
@@ -72,7 +72,7 @@ export class EntityController {
   @Patch(':id([0-9]+)/overview/summary/save')
   @ApiBody({ type: BodySaveOverviewDoc })
   saveOverviewSummary(
-    @Body() saveOverviewDto: saveOverviewDto,
+    @Body() saveOverviewDto: SaveOverviewDto,
     @Param('id') id: string,
   ): Promise<ServiceResponseDto<Entities>> {
     return this.initiativesService.saveOverviewSummary(+id, saveOverviewDto);

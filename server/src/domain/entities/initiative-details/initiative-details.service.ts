@@ -54,7 +54,7 @@ export class InitiativeDetailsService {
   }
 
   private updateObject<T>(cliReq: any, keys: (keyof T & string)[]): Partial<T> {
-    let NEW_obj: any = {};
+    const NEW_obj: any = {};
     keys.forEach((el) => {
       const TEMP_key = el.replace(RegexUtil.attrIsHtml, '');
       NEW_obj[el] = cliReq[el] ?? null;

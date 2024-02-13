@@ -3,7 +3,7 @@ import { ClarisaModule } from './tools/clarisa/clarisa.module';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from './db/config/orm.config';
 import { EntityModule } from './domain/entities/entity.module';
