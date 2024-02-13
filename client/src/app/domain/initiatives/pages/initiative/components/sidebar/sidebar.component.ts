@@ -108,8 +108,13 @@ export class SidebarComponent {
         ],
       },
       {
-        label: '5. Gender research and impact of the P25 Initiative ',
+        label: '5. Gender research and impact of the P25 Initiative',
         route: 'gender-research-and-impact',
+        inUnderConstruction: false,
+      },
+      {
+        label: '6. Climate change focus of the P25 Initiative',
+        route: 'climate-change-focus',
         inUnderConstruction: false,
       },
     ];

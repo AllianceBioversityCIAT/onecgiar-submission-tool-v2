@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { EditorModule } from 'primeng/editor';
@@ -15,6 +15,7 @@ import { ApiService } from '../../../../../shared/services/api.service';
   providers: [MessageService],
   templateUrl: './gender.component.html',
   styleUrl: './gender.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GenderComponent {
   public globalVars = inject(GlobalVariablesService);

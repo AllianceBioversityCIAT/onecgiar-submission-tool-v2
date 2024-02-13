@@ -172,6 +172,13 @@ export const routes: Routes = [
                 (c) => c.GenderComponent,
               ),
           },
+          {
+            path: 'climate-change-focus',
+            loadComponent: () =>
+              import('../domain/initiatives/pages/initiative/pages/climate/climate.component').then(
+                (c) => c.ClimateComponent,
+              ),
+          },
         ],
       },
       {
