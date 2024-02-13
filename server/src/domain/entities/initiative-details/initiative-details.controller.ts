@@ -101,6 +101,15 @@ export class InitiativeDetailsController {
     ]);
   }
 
+  @ApiTags('Climate')
+  @Get('climate/change-focus-p25')
+  findClimateChangeFocusP25(@Param('id') entity_id: string) {
+    return this.initiativeDetailsService.findInitiativeText(+entity_id, [
+      'climate_change_focus_p25',
+      'climate_change_focus_p25_html',
+    ]);
+  }
+
   @ApiTags('Context')
   @ApiBody({
     schema: {
@@ -290,6 +299,25 @@ export class InitiativeDetailsController {
   ) {
     return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
       'gender_research_impact_p25_html',
+    ]);
+  }
+
+  @ApiTags('Climate')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        gender_research_impact_p25_html: { type: 'string' },
+      },
+    },
+  })
+  @Patch('climate/change-focus-p25/save')
+  saveClimateChangeFocusP25(
+    @Param('id') entity_id: string,
+    @Body() req: Partial<InitiativeDetail>,
+  ) {
+    return this.initiativeDetailsService.saveInitiativeText(+entity_id, req, [
+      'climate_change_focus_p25_html',
     ]);
   }
 }
