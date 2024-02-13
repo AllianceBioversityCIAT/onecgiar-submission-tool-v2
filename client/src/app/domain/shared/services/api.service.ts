@@ -193,4 +193,17 @@ export class ApiService {
       `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/gender/research-impact-p25/save`;
     return this.TP.patch(url(), body);
   };
+
+  // Climate Change Focus
+  GET_ClimateChangeFocus = (): Promise<MainResponse<any>> => {
+    const url = () =>
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/climate/change-focus-p25`;
+    return this.TP.get(url());
+  };
+
+  PATCH_ClimateChangeFocus = (body: any): Promise<MainResponse<any>> => {
+    const url = () =>
+      `api/entity/${this.globalVars.currentInitiativeId()}/initiative-details/climate/change-focus-p25/save`;
+    return this.TP.patch(url(), body);
+  };
 }

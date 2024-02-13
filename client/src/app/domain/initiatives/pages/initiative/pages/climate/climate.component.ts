@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { EditorModule } from 'primeng/editor';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
+import { ApiService } from '../../../../../shared/services/api.service';
 import { GlobalVariablesService } from '../../../../../shared/services/global-variables.service';
 import { FieldContainerDirective } from '../../../../../shared/directives/field-container.directive';
 
@@ -18,44 +19,40 @@ import { FieldContainerDirective } from '../../../../../shared/directives/field-
 })
 export class ClimateComponent {
   public globalVars = inject(GlobalVariablesService);
-  // public api = inject(ApiService);
+  public api = inject(ApiService);
   public messageService = inject(MessageService);
 
   public climateChangeFocusBody = signal({
-    climate_change_focus_html: null,
+    climate_change_focus_p25_html: null,
   });
 
-  // ngOnInit(): void {
-  //   this.getClimateChangeFocus();
-  // }
+  ngOnInit(): void {
+    this.getClimateChangeFocus();
+  }
 
-  // async getClimateChangeFocus() {
-  // const response = await this.api.GET_GenderResearchAndImpact();
+  async getClimateChangeFocus() {
+    const response = await this.api.GET_ClimateChangeFocus();
 
-  //   response?.success &&
-  //     this.climateChangeFocusBody.set({
-  //       climate_change_focus_html: response.data?.data?.climate_change_focus_html,
-  //     });
-  // }
+    response?.success &&
+      this.climateChangeFocusBody.set({
+        climate_change_focus_p25_html: response.data?.data?.climate_change_focus_p25_html,
+      });
+  }
 
   saveClimateChangeFocusButtonEffect = effect(() => {
     this.globalVars.isSavingSection() && this.saveClimateChangeFocusSection();
   });
 
-  saveClimateChangeFocusSection() {
-    // const response = await this.api.PATCH_GenderResearchAndImpact(this.climateChangeFocusBody());
+  async saveClimateChangeFocusSection() {
+    const response = await this.api.PATCH_ClimateChangeFocus(this.climateChangeFocusBody());
 
-    setTimeout(() => {
-      this.messageService.add({
-        // severity: response?.success ? 'success' : 'error',
-        severity: 'success',
-        summary: 'Success',
-        // detail: response?.success ? 'Section saved' : 'Error',
-        detail: 'Section saved',
-      });
+    this.messageService.add({
+      severity: response?.success ? 'success' : 'error',
+      summary: 'Success',
+      detail: response?.success ? 'Section saved' : 'Error',
+    });
 
-      console.log(this.climateChangeFocusBody().climate_change_focus_html);
-      this.globalVars.isSavingSection.set(false);
-    }, 1500);
+    console.log(this.climateChangeFocusBody().climate_change_focus_p25_html);
+    this.globalVars.isSavingSection.set(false);
   }
 }
