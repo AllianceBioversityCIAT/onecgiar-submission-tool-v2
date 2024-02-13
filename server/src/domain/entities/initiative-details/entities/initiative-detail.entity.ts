@@ -260,6 +260,22 @@ export class InitiativeDetail extends AuditableEntity {
 
   @ApiProperty()
   @Column({
+    name: 'climate_change_focus_p25_html',
+    type: 'text',
+    nullable: true,
+  })
+  climate_change_focus_p25_html: string;
+
+  @ApiProperty()
+  @Column({
+    name: 'climate_change_focus_p25',
+    type: 'text',
+    nullable: true,
+  })
+  climate_change_focus_p25: string;
+
+  @ApiProperty()
+  @Column({
     name: 'status_id',
     type: 'bigint',
     nullable: true,
